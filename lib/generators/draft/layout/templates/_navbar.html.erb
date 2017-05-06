@@ -1,0 +1,61 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsible-nav-links">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a href="/" class="navbar-brand">
+        <%= Rails.application.class.parent_name %>
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="collapsible-nav-links">
+      <ul class="nav navbar-nav">
+<% app_resources.each do |resource| -%>
+        <li>
+          <a href="/<%= resource %>">
+            <%= resource.humanize.titleize %>
+          </a>
+        </li>
+<% end -%>
+      </ul>
+<% if devise_routes.any? -%>
+<% devise_routes.each do |devise_route| -%>
+      <ul class="nav navbar-nav navbar-right">
+        <%% if current_<%= devise_route[1]%>.blank? %>
+          <li>
+            <a href="/<%= devise_route[1].pluralize %>/sign_in">
+              Sign in
+            </a>
+          </li>
+
+          <li>
+            <a href="/<%= devise_route[1].pluralize %>/sign_up">
+              Sign up
+            </a>
+          </li>
+        <%% else %>
+          <li>
+            <a href="/<%= devise_route[1].pluralize %>/edit">
+              Edit profile
+            </a>
+          </li>
+
+          <li>
+            <a href="/<%= devise_route[1].pluralize %>/sign_out" data-method="delete">
+              Sign out
+            </a>
+          </li>
+        <%% end %>
+      </ul>
+<% end -%>
+<% end -%>
+    </div><!-- /.navbar-collapse -->
+  </div>
+</nav>

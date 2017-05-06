@@ -1,6 +1,6 @@
 # firstdraft_generators
 
-This is a set of generators that help beginners learn to program. Primarily, they generate code that is more explicit and verbose and less idiomatic and “magical” than the built-in scaffold generator, which is helpful for beginners while they are learning how exactly things are wired together.
+This is a set of generators that help beginners learn to program. Primarily, they generate code that is more explicit and verbose and less idiomatic and “magical” than the built-in scaffold generator. It is meant to be helpful for beginners while they are still learning how things are wired together.
 
 ## Contributing to firstdraft_generators
 

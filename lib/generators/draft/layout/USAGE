@@ -1,0 +1,49 @@
+Description:
+
+    Generates a layout file with some handy utilities:
+
+     - Bootstrap (or a Bootswatch)
+     - Font Awesome
+     - A navbar with
+        - links to all detected index pages
+        - links to all detected registration and sign in forms
+     - Components to display flash notices and alerts
+     - A sticky footer
+
+    Specify "none" as the THEME_NAME to use vanilla Bootstrap; or, choose a
+    Bootswatch. As of this writing, available Bootswatches are:
+
+      - cerulean
+      - cosmo
+      - cyborg
+      - darkly
+      - flatly
+      - journal
+      - lumen
+      - none
+      - paper
+      - readable
+      - sandstone
+      - simplex
+      - slate
+      - spacelab
+      - superhero
+      - united
+      - yeti
+
+    WARNING: You will lose any modifications you've made to your current layout
+    if you choose to overwrite it. You can also specify a different filename
+    other than "application" with the --layout-file option.
+
+    Examples:
+
+        rails generate draft:layout
+
+        rails generate draft:layout --theme=paper
+
+        rails generate draft:layout --layout-file=some_other_filename
+
+        rails generate draft:layout --skip-cdn
+
+    (The last one omits links to CDN-hosted Bootstrap CSS, JS, and Font Awesome,
+    in case you are e.g. bundling them yourself using gems.)

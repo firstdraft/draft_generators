@@ -1,0 +1,14 @@
+Description:
+
+    Generates the files you need to get started saving information to a
+    database table:
+
+     - A Ruby script that will create the database table (called a "migration")
+     - A Ruby class that will serve as a translator for talking to the table
+        (called a "model")
+     - A file that will make it easy to manage the table using the Active Admin
+        gem
+
+    Examples:
+
+        rails generate draft:model photo source:string caption:text

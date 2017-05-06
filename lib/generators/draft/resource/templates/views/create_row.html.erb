@@ -1,0 +1,13 @@
+<h1>You created <%= singular_table_name.humanize.downcase %> #<%%= @<%= singular_table_name %>.id %>!</h1>
+
+<p>
+  There are now <%%= @current_count %> <%= plural_table_name.humanize.downcase %>.
+</p>
+
+<p>
+  <a href="/<%= @plural_table_name.underscore %>">
+    Click here
+  </a>
+
+  to go back.
+</p>

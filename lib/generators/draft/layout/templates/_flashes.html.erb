@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-lg-12">
+    <%% if notice.present? %>
+      <div class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%%= notice %>
+      </div>
+    <%% end %>
+
+    <%% if alert.present? %>
+      <div class="alert alert-dismissable alert-warning">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%%= alert %>
+      </div>
+    <%% end %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+Description:
+
+    Generates an entire database-backed CRUD resource with a web interface:
+
+     - the database table (migration to create it)
+     - the model to interact with it
+     - routes, controller, and views for users to CRUD
+
+Examples:
+
+    rails generate draft:resource post title body:text published:boolean

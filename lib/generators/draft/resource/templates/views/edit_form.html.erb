@@ -1,0 +1,54 @@
+<% unless skip_validation_alerts? -%>
+<!-- Validation failure messages -->
+<%% if @<%= singular_table_name %>.errors.any? %>
+  <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+      <%%= message %>
+    </div>
+  <%% end %>
+<%% end %>
+
+<% end -%>
+<h1>
+  Edit <%= singular_table_name.humanize.downcase %> #<%%= @<%= singular_table_name %>.id %>
+</h1>
+
+<hr>
+
+<form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>"<% unless skip_post? -%> method="post"<% end -%>>
+<% attributes.each do |attribute| -%>
+  <!-- Label and input for <%= attribute.column_name %> -->
+<% if attribute.field_type == :check_box -%>
+  <div class="checkbox">
+    <label for="<%= attribute.column_name %>">
+      <input type="checkbox" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.column_name %> %>>
+      <%= attribute.column_name.humanize %>
+    </label>
+  </div>
+<% else -%>
+  <div class="form-group">
+    <label for="<%= attribute.column_name %>" class="control-label">
+      <%= attribute.column_name.humanize %>
+    </label>
+
+<% if attribute.field_type == :text_area -%>
+    <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
+<% else -%>
+    <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+<% end -%>
+  </div>
+<% end -%>
+
+<% end -%>
+  <button class="btn btn-default">
+    Update <%= singular_table_name.humanize.downcase %>
+  </button>
+</form>
+
+<hr>
+
+<a href="/<%= plural_table_name %>">
+  Go back
+</a>

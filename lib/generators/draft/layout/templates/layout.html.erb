@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    <%= Rails.application.class.parent_name %>
+  </title>
+
+<% unless skip_cdn? -%>
+  <%%= render "shared/bootstrapcdn_assets" %>
+
+<% end -%>
+  <%%= csrf_meta_tags %>
+  <%%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+
+<body>
+  <%%= render "shared/navbar" %>
+
+  <div class="container">
+    <%%= render "shared/flashes" %>
+
+    <%%= yield %>
+  </div>
+
+  <%%= render "shared/footer" %>
+</body>
+</html>
