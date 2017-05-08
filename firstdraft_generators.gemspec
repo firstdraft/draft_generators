@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Raghu Betina".freeze]
-  s.date = "2017-05-06"
+  s.date = "2017-05-08"
   s.description = "This is a set of generators that help beginners learn to program. Primarily, they generate code that is more explicit and verbose and less idiomatic and \u{201c}magical\u{201d} than the built-in scaffold generator, which is helpful for beginners while they are learning how exactly things are wired together.".freeze
   s.email = "raghu@firstdraft.com".freeze
   s.extra_rdoc_files = [
@@ -21,46 +21,37 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     ".rspec",
+    ".rubocop.yml",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
     "README.markdown",
     "Rakefile",
     "VERSION",
+    "firstdraft_generators.gemspec",
     "lib/firstdraft_generators.rb",
+    "lib/generators/draft/layout/USAGE",
+    "lib/generators/draft/layout/layout_generator.rb",
+    "lib/generators/draft/layout/templates/_bootstrapcdn_assets.html.erb",
+    "lib/generators/draft/layout/templates/_flashes.html.erb",
+    "lib/generators/draft/layout/templates/_footer.html.erb",
+    "lib/generators/draft/layout/templates/_navbar.html.erb",
+    "lib/generators/draft/layout/templates/layout.html.erb",
+    "lib/generators/draft/model/USAGE",
+    "lib/generators/draft/model/model_generator.rb",
     "lib/generators/draft/resource/USAGE",
-    "lib/generators/draft/resource/migration.rb",
     "lib/generators/draft/resource/resource_generator.rb",
-    "lib/generators/draft/resource/templates/bootstrapped/edit_form.html.erb",
-    "lib/generators/draft/resource/templates/bootstrapped/index.html.erb",
-    "lib/generators/draft/resource/templates/bootstrapped/new_form.html.erb",
-    "lib/generators/draft/resource/templates/bootstrapped/show.html.erb",
-    "lib/generators/draft/resource/templates/controller.rb",
-    "lib/generators/draft/resource/templates/crud_spec.rb",
-    "lib/generators/draft/resource/templates/dried/_form.html.erb",
-    "lib/generators/draft/resource/templates/dried/bootstrapped/_form.html.erb",
-    "lib/generators/draft/resource/templates/dried/bootstrapped/edit.html.erb",
-    "lib/generators/draft/resource/templates/dried/bootstrapped/index.html.erb",
-    "lib/generators/draft/resource/templates/dried/bootstrapped/new.html.erb",
-    "lib/generators/draft/resource/templates/dried/bootstrapped/show.html.erb",
-    "lib/generators/draft/resource/templates/dried/controller.rb",
-    "lib/generators/draft/resource/templates/dried/edit.html.erb",
-    "lib/generators/draft/resource/templates/dried/index.html.erb",
-    "lib/generators/draft/resource/templates/dried/new.html.erb",
-    "lib/generators/draft/resource/templates/dried/show.html.erb",
-    "lib/generators/draft/resource/templates/edit.html.erb",
-    "lib/generators/draft/resource/templates/factories.rb",
-    "lib/generators/draft/resource/templates/index.html.erb",
-    "lib/generators/draft/resource/templates/migration.rb",
-    "lib/generators/draft/resource/templates/model.rb",
-    "lib/generators/draft/resource/templates/new.html.erb",
-    "lib/generators/draft/resource/templates/read_only/controller.rb",
-    "lib/generators/draft/resource/templates/show.html.erb",
-    "lib/generators/draft/style/USAGE",
-    "lib/generators/draft/style/style_generator.rb",
-    "lib/generators/draft/style/templates/application.css",
-    "lib/generators/draft/style/templates/bootstrap-4-spacers.scss",
-    "lib/generators/draft/style/templates/layout.html.erb"
+    "lib/generators/draft/resource/templates/controllers/controller.rb",
+    "lib/generators/draft/resource/templates/controllers/read_only_controller.rb",
+    "lib/generators/draft/resource/templates/specs/crud_spec.rb",
+    "lib/generators/draft/resource/templates/specs/factories.rb",
+    "lib/generators/draft/resource/templates/views/create_row.html.erb",
+    "lib/generators/draft/resource/templates/views/destroy_row.html.erb",
+    "lib/generators/draft/resource/templates/views/edit_form.html.erb",
+    "lib/generators/draft/resource/templates/views/index.html.erb",
+    "lib/generators/draft/resource/templates/views/new_form.html.erb",
+    "lib/generators/draft/resource/templates/views/show.html.erb",
+    "lib/generators/draft/resource/templates/views/update_row.html.erb"
   ]
   s.homepage = "http://github.com/raghubetina/firstdraft_generators".freeze
   s.licenses = ["MIT".freeze]
