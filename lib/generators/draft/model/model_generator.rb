@@ -1,3 +1,4 @@
+require "rails/generators/rails/model/model_generator"
 module Draft
   class ModelGenerator < Rails::Generators::ModelGenerator
 
