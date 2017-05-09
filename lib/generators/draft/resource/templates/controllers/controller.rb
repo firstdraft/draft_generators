@@ -1,25 +1,25 @@
 class <%= plural_table_name.camelize %>Controller < ApplicationController
   def index
-    @<%= plural_table_name.underscore %> = <%= class_name %>.all
+    @<%= plural_table_name.underscore %> = <%= class_name.singularize %>.all
 
     render("<%= plural_table_name.underscore %>_templates/index.html.erb")
   end
 
   def show
-    @<%= singular_table_name.underscore %> = <%= class_name %>.find(params[:id_to_display])
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params[:id_to_display])
 
     render("<%= plural_table_name.underscore %>_templates/show.html.erb")
   end
 
   def new_form
 <% unless skip_validation_alerts? -%>
-    @<%= singular_table_name.underscore %> = <%= class_name %>.new
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 <% end -%>
     render("<%= plural_table_name.underscore %>_templates/new_form.html.erb")
   end
 
   def create_row
-    @<%= singular_table_name.underscore %> = <%= class_name %>.new
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 
 <% attributes.each do |attribute| -%>
     @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params[:<%= attribute.column_name %>]
@@ -39,7 +39,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% unless skip_redirect? -%>
     redirect_to("/<%= @plural_table_name.underscore %>")
 <% else -%>
-    @current_count = <%= class_name %>.count
+    @current_count = <%= class_name.singularize %>.count
 
     render("<%= plural_table_name.underscore %>_templates/create_row.html.erb")
 <% end -%>
@@ -47,13 +47,13 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def edit_form
-    @<%= singular_table_name.underscore %> = <%= class_name %>.find(params[:prefill_with_id])
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params[:prefill_with_id])
 
     render("<%= plural_table_name.underscore %>_templates/edit_form.html.erb")
   end
 
   def update_row
-    @<%= singular_table_name.underscore %> = <%= class_name %>.find(params[:id_to_modify])
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params[:id_to_modify])
 
 <% attributes.each do |attribute| -%>
     @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params[:<%= attribute.column_name %>]
@@ -79,7 +79,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def destroy_row
-    @<%= singular_table_name.underscore %> = <%= class_name %>.find(params[:id_to_remove])
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params[:id_to_remove])
 
     @<%= singular_table_name.underscore %>.destroy
 
@@ -89,7 +89,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% unless skip_redirect? -%>
     redirect_to("/<%= @plural_table_name.underscore %>")
 <% else -%>
-    @remaining_count = <%= class_name %>.count
+    @remaining_count = <%= class_name.singularize %>.count
 
     render("<%= plural_table_name.underscore %>_templates/destroy_row.html.erb")
 <% end -%>
