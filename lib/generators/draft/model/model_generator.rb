@@ -1,10 +1,6 @@
+require "rails/generators/rails/model/model_generator"
 module Draft
-  class ModelGenerator < Rails::Generators::NamedBase
-    argument :attributes, type: :array, default: [], banner: "field:type field:type"
-
-    def generate_model
-      invoke "active_record:model", ARGV
-    end
+  class ModelGenerator < Rails::Generators::ModelGenerator
 
     def generate_active_admin
       if Gem.loaded_specs.has_key? "activeadmin"

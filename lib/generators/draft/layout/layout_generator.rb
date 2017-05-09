@@ -52,9 +52,14 @@ module Draft
     end
 
     def app_resources
-      route_names.reject do |name|
-        /^rails_info.*/.match(name) || /^rails_mailers.*/.match(name) || name.pluralize != name
+      models = ApplicationRecord.descendants.reject do |klass|
+        if klass.name == "AdminUser"
+          true
+        else
+          false
+        end
       end
+      models.collect { |clazz| clazz.name.underscore.pluralize }
     end
 
     def devise_routes
