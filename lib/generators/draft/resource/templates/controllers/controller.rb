@@ -16,13 +16,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def new_form
-<% unless skip_validation_alerts? -%>
-    dummy_<%= singular_table_name %> = <%= class_name.singularize %>.new
-
-<% end -%>
-    render("<%= singular_table_name %>_templates/new_form.html.erb", :locals => {
-      :<%= singular_table_name %>_with_errors => dummy_<%= singular_table_name %>
-    })
+    render("<%= singular_table_name %>_templates/new_form.html.erb")
   end
 
   def create_row
@@ -38,7 +32,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     if save_status == true
       redirect_to("/<%= plural_table_name %>", :notice => "<%= singular_table_name.humanize %> created successfully.")
     else
-      render("<%= singular_table_name %>_templates/new_form.html.erb", :locals => {
+      render("<%= singular_table_name %>_templates/new_form_with_errors.html.erb", :locals => {
         :<%= singular_table_name %>_with_errors => <%= singular_table_name %>_to_add
       })
     end
