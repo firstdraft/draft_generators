@@ -1,8 +1,8 @@
 <h1>
-  <%= singular_table_name.humanize %> #<%%= @<%= singular_table_name %>.id %> details
+  <%= singular_table_name.humanize %> #<%%= the_<%= singular_table_name %>.id %> details
 </h1>
 
-<a href="/<%= plural_table_name %>/<%%= @<%= singular_table_name %>.id %>/edit">
+<a href="/<%= plural_table_name %>/<%%= the_<%= singular_table_name %>.id %>/edit">
   Edit <%= singular_table_name.humanize.downcase %>
 </a>
 
@@ -14,7 +14,7 @@
     <%= attribute.human_name %>
   </dt>
   <dd>
-    <%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>
+    <%%= the_<%= singular_table_name %>.<%= attribute.column_name %> %>
   </dd>
 
 <% end -%>
@@ -22,19 +22,19 @@
     Created at
   </dt>
   <dd>
-    <%%= time_ago_in_words(@<%= singular_table_name %>.created_at) %> ago
+    <%%= time_ago_in_words(the_<%= singular_table_name %>.created_at) %> ago
   </dd>
 
   <dt>
     Updated at
   </dt>
   <dd>
-    <%%= time_ago_in_words(@<%= singular_table_name %>.updated_at) %> ago
+    <%%= time_ago_in_words(the_<%= singular_table_name %>.updated_at) %> ago
   </dd>
 </dl>
 
 <% unless read_only? -%>
-<a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-default">
+<a href="/delete_<%= singular_table_name %>/<%%= the_<%= singular_table_name %>.id %>" class="btn btn-default">
   Delete <%= singular_table_name.humanize.downcase %>
 </a>
 <% end -%>

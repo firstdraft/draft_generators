@@ -1,7 +1,7 @@
 <% unless skip_validation_alerts? -%>
 <!-- Validation failure messages -->
-<%% if @<%= singular_table_name %>.errors.any? %>
-  <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
+<%% if <%= singular_table_name %>_with_errors.errors.any? %>
+  <%% <%= singular_table_name %>_with_errors.errors.full_messages.each do |message| %>
     <div class="alert alert-dismissable alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 
@@ -23,7 +23,7 @@
 <% if attribute.field_type == :check_box -%>
   <div class="checkbox">
     <label for="<%= attribute.column_name %>">
-      <input type="checkbox" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" <% unless skip_validation_alerts? -%><%%= "checked" if @<%= singular_table_name %>.<%= attribute.column_name %> %><% end -%>>
+      <input type="checkbox" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>_from_form" <% unless skip_validation_alerts? -%><%%= "checked" if <%= singular_table_name %>_with_errors.<%= attribute.column_name %> %><% end -%>>
       <%= attribute.column_name.humanize %>
     </label>
   </div>
@@ -34,9 +34,9 @@
     </label>
 
 <% if attribute.field_type == :text_area -%>
-    <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"><% unless skip_validation_alerts? -%><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %><% end -%></textarea>
+    <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>_from_form" class="form-control" rows="3"><% unless skip_validation_alerts? -%><%%= <%= singular_table_name %>_with_errors.<%= attribute.column_name %> %><% end -%></textarea>
 <% else -%>
-    <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control"<% unless skip_validation_alerts? -%> value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>"<% end -%>>
+    <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>_from_form" class="form-control"<% unless skip_validation_alerts? -%> value="<%%= <%= singular_table_name %>_with_errors.<%= attribute.column_name %> %>"<% end -%>>
 <% end -%>
   </div>
 <% end -%>

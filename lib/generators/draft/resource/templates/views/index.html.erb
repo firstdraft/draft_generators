@@ -32,28 +32,28 @@
     </th>
   </tr>
 
-  <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+  <%% list_of_<%= plural_table_name %>.each do |the_current_<%= singular_table_name %>| %>
   <tr>
     <td>
-      <%%= <%= singular_table_name %>.id %>
+      <%%= the_current_<%= singular_table_name %>.id %>
     </td>
 
 <% attributes.each do |attribute| -%>
     <td>
-      <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
+      <%%= the_current_<%= singular_table_name %>.<%= attribute.column_name %> %>
     </td>
 
 <% end -%>
     <td>
-      <%%= time_ago_in_words(<%= singular_table_name %>.created_at) %> ago
+      <%%= time_ago_in_words(the_current_<%= singular_table_name %>.created_at) %> ago
     </td>
 
     <td>
-      <%%= time_ago_in_words(<%= singular_table_name %>.updated_at) %> ago
+      <%%= time_ago_in_words(the_current_<%= singular_table_name %>.updated_at) %> ago
     </td>
 
     <td>
-      <a href="/<%= plural_table_name %>/<%%= <%= singular_table_name %>.id %>">
+      <a href="/<%= plural_table_name %>/<%%= the_current_<%= singular_table_name %>.id %>">
         Show details
       </a>
     </td>
