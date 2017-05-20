@@ -3,7 +3,7 @@
 <%% if <%= singular_table_name %>_with_errors.errors.any? %>
   <%% <%= singular_table_name %>_with_errors.errors.full_messages.each do |message| %>
     <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <button class="close" data-dismiss="alert">&times;</button>
 
       <%%= message %>
     </div>

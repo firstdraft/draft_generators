@@ -2,14 +2,14 @@
   <div class="col-lg-12">
     <%% if notice.present? %>
       <div class="alert alert-dismissable alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <button class="close" data-dismiss="alert">&times;</button>
         <%%= notice %>
       </div>
     <%% end %>
 
     <%% if alert.present? %>
       <div class="alert alert-dismissable alert-warning">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <button class="close" data-dismiss="alert">&times;</button>
         <%%= alert %>
       </div>
     <%% end %>
