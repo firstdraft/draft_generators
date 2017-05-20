@@ -14,9 +14,9 @@ module Draft
       return if skip_controller?
 
       if read_only?
-        template "controllers/read_only_controller.rb", "app/controllers/#{plural_table_name.underscore}_controller.rb"
+        template "controllers/read_only_controller.rb", "app/controllers/#{plural_table_name}_controller.rb"
       else
-        template "controllers/controller.rb", "app/controllers/#{plural_table_name.underscore}_controller.rb"
+        template "controllers/controller.rb", "app/controllers/#{plural_table_name}_controller.rb"
       end
     end
 
@@ -48,8 +48,8 @@ module Draft
       return
       # return if read_only? || skip_controller? || skip_model?
 
-      template "specs/crud_spec.rb", "spec/features/crud_#{plural_table_name.underscore}_spec.rb"
-      template "specs/factories.rb", "spec/factories/#{plural_table_name.underscore}.rb"
+      template "specs/crud_spec.rb", "spec/features/crud_#{plural_table_name}_spec.rb"
+      template "specs/factories.rb", "spec/factories/#{plural_table_name}.rb"
     end
 
   private
@@ -70,7 +70,7 @@ module Draft
         get("/#{plural_table_name}/:id_to_display", { :controller => "#{plural_table_name}", :action => "show" })
 
         # UPDATE
-        get("/#{plural_table_name}/:prefill_with_id/edit", { :controller => "#{plural_table_name}", :action => "edit_form" })
+        get("/#{plural_table_name}/:id_to_edit/edit", { :controller => "#{plural_table_name}", :action => "edit_form" })
         #{skip_post? ? "get" : "post"}("/update_#{singular_table_name}/:id_to_modify", { :controller => "#{plural_table_name}", :action => "update_row" })
 
         # DELETE
@@ -132,7 +132,7 @@ module Draft
       elsif skip_redirect?
         %w(index show new_form create_row edit_form update_row destroy_row)
       else
-        %w(index new_form edit_form show)
+        %w(index show new_form new_form_with_errors edit_form edit_form_with_errors)
       end
     end
 
