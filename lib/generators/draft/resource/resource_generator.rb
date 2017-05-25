@@ -135,8 +135,10 @@ module Draft
 
       inside "app" do
         inside "admin" do
-          insert_into_file "#{singular_table_name}.rb", after: sentinel do
-            "\n  permit_params #{attributes_names.map { |name| ":#{name}" }.join(", ")}\n"
+          if File.exist?("#{singular_table_name}.rb")
+            insert_into_file "#{singular_table_name}.rb", after: sentinel do
+              "\n  permit_params #{attributes_names.map { |name| ":#{name}" }.join(", ")}\n"
+            end
           end
         end
       end
