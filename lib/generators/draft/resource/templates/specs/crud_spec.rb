@@ -112,7 +112,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
     end
   end
 
-  context "edit form" do
+  context "new form" do
     it "redirects to the details page with a notice", points: 3, hint: h("copy_must_match") do
       visit "/<%= plural_table_name %>"
 
