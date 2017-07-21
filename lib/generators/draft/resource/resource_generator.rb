@@ -25,11 +25,6 @@ module Draft
 
       invoke "draft:model", ARGV
 
-      if Gem.loaded_specs.has_key? "activeadmin"
-        invoke "active_admin:resource", [singular_table_name]
-
-        permit_active_admin_params
-      end
     end
 
     def generate_view_files
@@ -127,20 +122,6 @@ module Draft
 
       inside "config" do
         insert_into_file "routes.rb", routing_code, after: sentinel
-      end
-    end
-
-    def permit_active_admin_params
-      sentinel = /.*ActiveAdmin.register.*do.*/
-
-      inside "app" do
-        inside "admin" do
-          if File.exist?("#{singular_table_name}.rb")
-            insert_into_file "#{singular_table_name}.rb", after: sentinel do
-              "\n  permit_params #{attributes_names.map { |name| ":#{name}" }.join(", ")}\n"
-            end
-          end
-        end
       end
     end
 
