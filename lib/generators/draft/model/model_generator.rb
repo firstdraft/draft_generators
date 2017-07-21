@@ -1,8 +1,8 @@
-require 'rails/generators/active_record/model/model_generator'
+# frozen_string_literal: true
+require "rails/generators/active_record/model/model_generator"
 
 module Draft
   class ModelGenerator < ActiveRecord::Generators::ModelGenerator
-
     source_root ActiveRecord::Generators::ModelGenerator.source_root
 
     def generate_active_admin
