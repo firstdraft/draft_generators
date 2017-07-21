@@ -14,9 +14,9 @@ module Draft
       return if skip_controller?
 
       if read_only?
-        template "controllers/read_only_controller.rb", "app/controllers/#{plural_table_name.underscore}_controller.rb"
+        template "controllers/read_only_controller.rb", "app/controllers/#{plural_table_name}_controller.rb"
       else
-        template "controllers/controller.rb", "app/controllers/#{plural_table_name.underscore}_controller.rb"
+        template "controllers/controller.rb", "app/controllers/#{plural_table_name}_controller.rb"
       end
     end
 
@@ -29,7 +29,7 @@ module Draft
     def generate_view_files
       available_views.each do |view|
         filename = view_filename_with_extensions(view)
-        template filename, File.join("app/views", "#{plural_table_name}_templates", File.basename(filename))
+        template filename, File.join("app/views", "#{singular_table_name}_templates", File.basename(filename))
       end
     end
 
@@ -46,8 +46,8 @@ module Draft
     def generate_specs
       return if read_only? || skip_controller? || skip_model?
 
-      template "specs/crud_spec.rb", "spec/features/crud_#{plural_table_name.underscore}_spec.rb"
-      template "specs/factories.rb", "spec/factories/#{plural_table_name.underscore}.rb"
+      template "specs/crud_spec.rb", "spec/features/crud_#{plural_table_name}_spec.rb"
+      template "specs/factories.rb", "spec/factories/#{plural_table_name}.rb"
     end
 
   private
@@ -130,7 +130,7 @@ module Draft
       elsif skip_redirect?
         %w(index show new_form create_row edit_form update_row destroy_row)
       else
-        %w(index new_form edit_form show)
+        %w(index new_form new_form_with_errors edit_form show)
       end
     end
 
