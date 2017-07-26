@@ -2,20 +2,20 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   def index
     @<%= plural_table_name.underscore %> = <%= class_name.singularize %>.all
 
-    render("<%= plural_table_name.underscore %>_templates/index.html.erb")
+    render("<%= singular_table_name.underscore %>_templates/index.html.erb")
   end
 
   def show
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params[:id_to_display])
 
-    render("<%= plural_table_name.underscore %>_templates/show.html.erb")
+    render("<%= singular_table_name.underscore %>_templates/show.html.erb")
   end
 
   def new_form
 <% unless skip_validation_alerts? -%>
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 <% end -%>
-    render("<%= plural_table_name.underscore %>_templates/new_form.html.erb")
+    render("<%= singular_table_name.underscore %>_templates/new_form.html.erb")
   end
 
   def create_row
@@ -31,7 +31,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     if save_status == true
       redirect_to("/<%= @plural_table_name.underscore %>", :notice => "<%= singular_table_name.humanize %> created successfully.")
     else
-      render("<%= plural_table_name.underscore %>_templates/new_form.html.erb")
+      render("<%= singular_table_name.underscore %>_templates/new_form.html.erb")
     end
 <% else -%>
     @<%= singular_table_name.underscore %>.save
@@ -41,7 +41,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% else -%>
     @current_count = <%= class_name.singularize %>.count
 
-    render("<%= plural_table_name.underscore %>_templates/create_row.html.erb")
+    render("<%= singular_table_name.underscore %>_templates/create_row.html.erb")
 <% end -%>
 <% end -%>
   end
@@ -49,7 +49,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   def edit_form
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params[:prefill_with_id])
 
-    render("<%= plural_table_name.underscore %>_templates/edit_form.html.erb")
+    render("<%= singular_table_name.underscore %>_templates/edit_form.html.erb")
   end
 
   def update_row
@@ -65,7 +65,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     if save_status == true
       redirect_to("/<%= @plural_table_name.underscore %>/#{@<%= singular_table_name.underscore %>.id}", :notice => "<%= singular_table_name.humanize %> updated successfully.")
     else
-      render("<%= plural_table_name.underscore %>_templates/edit_form.html.erb")
+      render("<%= singular_table_name.underscore %>_templates/edit_form.html.erb")
     end
 <% else -%>
     @<%= singular_table_name.underscore %>.save
@@ -73,7 +73,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% unless skip_redirect? -%>
     redirect_to("/<%= @plural_table_name.underscore %>/#{@<%= singular_table_name.underscore %>.id}")
 <% else -%>
-    render("<%= plural_table_name.underscore %>_templates/update_row.html.erb")
+    render("<%= singular_table_name.underscore %>_templates/update_row.html.erb")
 <% end -%>
 <% end -%>
   end
@@ -91,7 +91,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% else -%>
     @remaining_count = <%= class_name.singularize %>.count
 
-    render("<%= plural_table_name.underscore %>_templates/destroy_row.html.erb")
+    render("<%= singular_table_name.underscore %>_templates/destroy_row.html.erb")
 <% end -%>
 <% end -%>
   end
