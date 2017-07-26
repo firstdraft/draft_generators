@@ -29,7 +29,7 @@ module Draft
     def generate_view_files
       available_views.each do |view|
         filename = view_filename_with_extensions(view)
-        template filename, File.join("app/views", "#{plural_table_name}_templates", File.basename(filename))
+        template filename, File.join("app/views", "#{singular_table_name}_templates", File.basename(filename))
       end
     end
 
