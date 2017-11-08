@@ -1,7 +1,7 @@
-<h1>You updated <%= singular_table_name.humanize.downcase %> #<%%= <%= singular_table_name %>_to_prefill.id %>!</h1>
+<h1>You updated <%= singular_table_name.humanize.downcase %> #<%%= @<%= singular_table_name %>.id %>!</h1>
 
 <p>
-  <a href="/<%= plural_table_name %>/<%%= <%= singular_table_name %>_to_prefill.id %>">
+  <a href="/<%= plural_table_name %>/<%%= @<%= singular_table_name %>.id %>">
     Click here
   </a>
 

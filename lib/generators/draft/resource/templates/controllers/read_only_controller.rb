@@ -1,17 +1,15 @@
 class <%= plural_table_name.camelize %>Controller < ApplicationController
   def index
-    all_<%= plural_table_name %> = <%= class_name.singularize %>.all.order(:created_at => :desc)
+    @list_of_<%= plural_table_name %> = <%= class_name.singularize %>.all.order({ :created_at => :desc })
 
-    render("<%= plural_table_name %>_templates/index.html.erb", :locals => {
-      :list_of_<%= plural_table_name %> => all_<%= plural_table_name %>
-    })
+    render("<%= singular_table_name %>_templates/index.html.erb")
   end
 
   def show
-    <%= singular_table_name %>_to_show = <%= class_name.singularize %>.find(params[:id_to_display])
+    id_of_<%= singular_table_name %>_to_show = params.fetch("id_to_display")
 
-    render("<%= plural_table_name %>_templates/show.html.erb", :locals => {
-      :the_<%= singular_table_name %> => <%= singular_table_name %>_to_show
-    })
+    @<%= singular_table_name %>_to_show = <%= class_name.singularize %>.find(id_of_<%= singular_table_name %>_to_show)
+
+    render("<%= singular_table_name %>_templates/show.html.erb")
   end
 end

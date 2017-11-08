@@ -1,7 +1,7 @@
 <h1>You deleted a <%= singular_table_name.humanize.downcase %>!</h1>
 
 <p>
-  There are now <%%= remaining_count %> <%= plural_table_name.humanize.downcase %>.
+  There are now <%%= @remaining_<%= singular_table_name %>_count %> <%= plural_table_name.humanize.downcase %>.
 </p>
 
 <p>
