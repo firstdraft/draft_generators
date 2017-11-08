@@ -74,7 +74,7 @@ module Draft
         get("/#{plural_table_name}/:id_to_display", { :controller => "#{plural_table_name}", :action => "show" })
 
         # UPDATE
-        get("/#{plural_table_name}/:prefill_with_id/edit", { :controller => "#{plural_table_name}", :action => "edit_form" })
+        get("/#{plural_table_name}/:id_to_edit/edit", { :controller => "#{plural_table_name}", :action => "edit_form" })
         #{skip_post? ? "get" : "post"}("/update_#{singular_table_name}/:id_to_modify", { :controller => "#{plural_table_name}", :action => "update_row" })
 
         # DELETE
