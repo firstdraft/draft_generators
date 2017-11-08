@@ -148,7 +148,7 @@ module Draft
       elsif skip_redirect?
         %w(index show new_form create_row edit_form update_row destroy_row)
       else
-        %w(index new_form new_form_with_errors edit_form show)
+        %w(index show new_form new_form_with_errors edit_form edit_form_with_errors)
       end
     end
 

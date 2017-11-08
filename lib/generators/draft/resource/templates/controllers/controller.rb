@@ -18,14 +18,14 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def create_row
-    @<%= singular_table_name %>_to_add = <%= class_name.singularize %>.new
+    @<%= singular_table_name %> = <%= class_name.singularize %>.new
 
 <% attributes.each do |attribute| -%>
-    @<%= singular_table_name %>_to_add.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_form")
+    @<%= singular_table_name %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_form")
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
-    save_status = @<%= singular_table_name %>_to_add.save
+    save_status = @<%= singular_table_name %>.save
 
     if save_status == true
       redirect_to("/<%= plural_table_name %>", :notice => "<%= singular_table_name.humanize %> created successfully.")
@@ -33,24 +33,24 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
       render("<%= singular_table_name %>_templates/new_form_with_errors.html.erb")
     end
 <% else -%>
-    @<%= singular_table_name %>_to_add.save
+    @<%= singular_table_name %>.save
 
 <% unless skip_redirect? -%>
     redirect_to("/<%= plural_table_name %>")
 <% else -%>
     @current_<%= singular_table_name %>_count = <%= class_name.singularize %>.count
-    
+
     render("<%= singular_table_name %>_templates/create_row.html.erb")
 <% end -%>
 <% end -%>
   end
 
   def edit_form
-    existing_<%= singular_table_name %> = <%= class_name.singularize %>.find(params["prefill_with_id"])
+    existing_id = params.fetch("id_to_edit")
 
-    render("<%= singular_table_name %>_templates/edit_form.html.erb", :locals => {
-      :<%= singular_table_name %>_to_prefill => existing_<%= singular_table_name %>
-    })
+    @<%= singular_table_name %> = <%= class_name.singularize %>.find(existing_id)
+
+    render("<%= singular_table_name %>_templates/edit_form.html.erb")
   end
 
   def update_row
