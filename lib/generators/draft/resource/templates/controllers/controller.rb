@@ -7,7 +7,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 
   def show
     id_of_<%= singular_table_name %>_to_show = params.fetch("id_to_display")
-    
+
     @<%= singular_table_name %>_to_show = <%= class_name.singularize %>.find(id_of_<%= singular_table_name %>_to_show)
 
     render("<%= singular_table_name %>_templates/show.html.erb")
@@ -18,31 +18,29 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def create_row
-    <%= singular_table_name %>_to_add = <%= class_name.singularize %>.new
+    @<%= singular_table_name %>_to_add = <%= class_name.singularize %>.new
 
 <% attributes.each do |attribute| -%>
-    <%= singular_table_name %>_to_add.<%= attribute.column_name %> = params["<%= attribute.column_name %>_from_form"]
+    @<%= singular_table_name %>_to_add.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_form")
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
-    save_status = <%= singular_table_name %>_to_add.save
+    save_status = @<%= singular_table_name %>_to_add.save
 
     if save_status == true
       redirect_to("/<%= plural_table_name %>", :notice => "<%= singular_table_name.humanize %> created successfully.")
     else
-      render("<%= singular_table_name %>_templates/new_form_with_errors.html.erb", :locals => {
-        :<%= singular_table_name %>_with_errors => <%= singular_table_name %>_to_add
-      })
+      render("<%= singular_table_name %>_templates/new_form_with_errors.html.erb")
     end
 <% else -%>
-    <%= singular_table_name %>_to_add.save
+    @<%= singular_table_name %>_to_add.save
 
 <% unless skip_redirect? -%>
     redirect_to("/<%= plural_table_name %>")
 <% else -%>
-    render("<%= singular_table_name %>_templates/create_row.html.erb", :locals => {
-      :current_count => <%= class_name.singularize %>.count
-    })
+    @current_<%= singular_table_name %>_count = <%= class_name.singularize %>.count
+    
+    render("<%= singular_table_name %>_templates/create_row.html.erb")
 <% end -%>
 <% end -%>
   end
