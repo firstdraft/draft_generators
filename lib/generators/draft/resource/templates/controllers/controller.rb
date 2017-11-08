@@ -6,11 +6,11 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def show
-    <%= singular_table_name %>_to_show = <%= class_name.singularize %>.find(params["id_to_display"])
+    id_of_<%= singular_table_name %>_to_show = params.fetch("id_to_display")
+    
+    @<%= singular_table_name %>_to_show = <%= class_name.singularize %>.find(id_of_<%= singular_table_name %>_to_show)
 
-    render("<%= singular_table_name %>_templates/show.html.erb", :locals => {
-      :the_<%= singular_table_name %> => <%= singular_table_name %>_to_show
-    })
+    render("<%= singular_table_name %>_templates/show.html.erb")
   end
 
   def new_form
