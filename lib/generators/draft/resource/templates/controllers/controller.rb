@@ -1,10 +1,8 @@
 class <%= plural_table_name.camelize %>Controller < ApplicationController
   def index
-    all_<%= plural_table_name %> = <%= class_name.singularize %>.all.order(:created_at => :desc)
+    @list_of_<%= plural_table_name %> = <%= class_name.singularize %>.all.order({ :created_at => :desc })
 
-    render("<%= singular_table_name %>_templates/index.html.erb", :locals => {
-      :list_of_<%= plural_table_name %> => all_<%= plural_table_name %>
-    })
+    render("<%= singular_table_name %>_templates/index.html.erb")
   end
 
   def show
