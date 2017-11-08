@@ -1,17 +1,27 @@
-<div class="row">
-  <div class="col-lg-12">
-    <%% if notice.present? %>
-      <div class="alert alert-dismissable alert-success">
-        <button class="close" data-dismiss="alert">&times;</button>
-        <%%= notice %>
-      </div>
-    <%% end %>
+<%% if notice.present? %>
+  <div class="alert alert-dismissable alert-success">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <button class="close" data-dismiss="alert">&times;</button>
 
-    <%% if alert.present? %>
-      <div class="alert alert-dismissable alert-warning">
-        <button class="close" data-dismiss="alert">&times;</button>
-        <%%= alert %>
+          <%%= notice %>
+        </div>
       </div>
-    <%% end %>
+    </div>
   </div>
-</div>
+<%% end %>
+
+<%% if alert.present? %>
+  <div class="alert alert-dismissable alert-success">
+    <div class="container">
+      <div class="row">
+        <div class="alert alert-dismissable alert-warning">
+          <button class="close" data-dismiss="alert">&times;</button>
+
+          <%%= alert %>
+        </div>
+      </div>
+    </div>
+  </div>
+<%% end %>
