@@ -14,8 +14,8 @@ require 'rake'
 require 'juwelier'
 Juwelier::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
-  gem.name = "firstdraft_generators"
-  gem.homepage = "http://github.com/raghubetina/firstdraft_generators"
+  gem.name = "draft_generators"
+  gem.homepage = "http://github.com/raghubetina/draft_generators"
   gem.license = "MIT"
   gem.summary = %Q{Generators that help beginners learn to program.}
   gem.description = %Q{This is a set of generators that help beginners learn to program. Primarily, they generate code that is more explicit and verbose and less idiomatic and “magical” than the built-in scaffold generator, which is helpful for beginners while they are learning how exactly things are wired together.}
@@ -45,7 +45,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "firstdraft_generators #{version}"
+  rdoc.title = "draft_generators #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
