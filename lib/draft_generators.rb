@@ -1,0 +1,2 @@
+module DraftGenerators
+end
