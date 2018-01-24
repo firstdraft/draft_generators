@@ -5,15 +5,15 @@
 # stub: draft_generators 0.0.3 ruby lib
 
 Gem::Specification.new do |s|
-  s.name = "draft_generators".freeze
+  s.name = "draft_generators"
   s.version = "0.0.3"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
-  s.require_paths = ["lib".freeze]
-  s.authors = ["Raghu Betina".freeze]
-  s.date = "2017-05-20"
-  s.description = "This is a set of generators that help beginners learn to program. Primarily, they generate code that is more explicit and verbose and less idiomatic and \u{201c}magical\u{201d} than the built-in scaffold generator, which is helpful for beginners while they are learning how exactly things are wired together.".freeze
-  s.email = "raghu@firstdraft.com".freeze
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.require_paths = ["lib"]
+  s.authors = ["Raghu Betina"]
+  s.date = "2018-01-24"
+  s.description = "This is a set of generators that help beginners learn to program. Primarily, they generate code that is more explicit and verbose and less idiomatic and \u{201c}magical\u{201d} than the built-in scaffold generator, which is helpful for beginners while they are learning how exactly things are wired together."
+  s.email = "raghu@firstdraft.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.markdown"
@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
     ".rspec",
     ".rubocop.yml",
     "Gemfile",
-    "Gemfile.lock",
     "LICENSE.txt",
     "README.markdown",
     "Rakefile",
@@ -53,33 +52,33 @@ Gem::Specification.new do |s|
     "lib/generators/draft/resource/templates/views/show.html.erb",
     "lib/generators/draft/resource/templates/views/update_row.html.erb"
   ]
-  s.homepage = "http://github.com/raghubetina/draft_generators".freeze
-  s.licenses = ["MIT".freeze]
-  s.rubygems_version = "2.6.12".freeze
-  s.summary = "Generators that help beginners learn to program.".freeze
+  s.homepage = "http://github.com/raghubetina/draft_generators"
+  s.licenses = ["MIT"]
+  s.rubygems_version = "2.5.1"
+  s.summary = "Generators that help beginners learn to program."
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<rspec>.freeze, ["~> 3.5.0"])
-      s.add_development_dependency(%q<rdoc>.freeze, ["~> 3.12"])
-      s.add_development_dependency(%q<bundler>.freeze, ["~> 1.0"])
-      s.add_development_dependency(%q<juwelier>.freeze, ["~> 2.1.0"])
-      s.add_development_dependency(%q<simplecov>.freeze, [">= 0"])
+      s.add_development_dependency(%q<rspec>, ["~> 3.5.0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.0"])
+      s.add_development_dependency(%q<juwelier>, ["~> 2.1.0"])
+      s.add_development_dependency(%q<simplecov>, [">= 0"])
     else
-      s.add_dependency(%q<rspec>.freeze, ["~> 3.5.0"])
-      s.add_dependency(%q<rdoc>.freeze, ["~> 3.12"])
-      s.add_dependency(%q<bundler>.freeze, ["~> 1.0"])
-      s.add_dependency(%q<juwelier>.freeze, ["~> 2.1.0"])
-      s.add_dependency(%q<simplecov>.freeze, [">= 0"])
+      s.add_dependency(%q<rspec>, ["~> 3.5.0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, ["~> 1.0"])
+      s.add_dependency(%q<juwelier>, ["~> 2.1.0"])
+      s.add_dependency(%q<simplecov>, [">= 0"])
     end
   else
-    s.add_dependency(%q<rspec>.freeze, ["~> 3.5.0"])
-    s.add_dependency(%q<rdoc>.freeze, ["~> 3.12"])
-    s.add_dependency(%q<bundler>.freeze, ["~> 1.0"])
-    s.add_dependency(%q<juwelier>.freeze, ["~> 2.1.0"])
-    s.add_dependency(%q<simplecov>.freeze, [">= 0"])
+    s.add_dependency(%q<rspec>, ["~> 3.5.0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, ["~> 1.0"])
+    s.add_dependency(%q<juwelier>, ["~> 2.1.0"])
+    s.add_dependency(%q<simplecov>, [">= 0"])
   end
 end
 
