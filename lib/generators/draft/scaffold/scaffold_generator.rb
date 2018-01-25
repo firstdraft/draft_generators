@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'generators/draft/scaffold/scaffold_controller_generator'
-require 'rails/generators/rails/scaffold/scaffold_generator'
+require "generators/draft/scaffold/scaffold_controller_generator"
+require "rails/generators/rails/scaffold/scaffold_generator"
 
 module Draft
   class ScaffoldGenerator < ::Rails::Generators::ScaffoldGenerator
@@ -10,6 +10,5 @@ module Draft
     def generate_controller
       invoke Draft::ScaffoldControllerGenerator
     end
-
   end
 end

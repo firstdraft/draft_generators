@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails/generators/erb/scaffold/scaffold_generator'
+require "rails/generators/erb/scaffold/scaffold_generator"
 
 module Draft
   class ScaffoldErbGenerator < Erb::Generators::ScaffoldGenerator
