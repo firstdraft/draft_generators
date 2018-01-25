@@ -1,0 +1,27 @@
+<div class="card mb-3">
+  <h2 class="card-header h4">
+    <%= singular_table_name.titlecase %> #<%%= <%= singular_table_name %>.id %>
+  </h2>
+
+  <div class="card-body">
+    <dl class="mb-1">
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+      <dt><%= attribute.human_name %></dt>
+      <dd><%%= <%= singular_table_name %>.<%= attribute.name %> %></dd>
+
+<% end -%>
+    </dl>
+
+    <div class="btn-group btn-group-justified mt-auto">
+      <%%= link_to_show_or_back <%= singular_table_name %>, fa_icon("search-plus"), fa_icon("chevron-left"), class: "btn btn-outline-secondary" %>
+
+      <%%= link_to fa_icon("edit"), edit_<%= singular_table_name %>_url(<%= singular_table_name %>), class: "btn btn-outline-secondary" %>
+
+      <%%= link_to fa_icon("trash-o"), <%= singular_table_name %>, method: :delete, data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+
+  <div class="card-footer text-muted">
+    Last updated <%%= time_ago_in_words(<%= singular_table_name %>.updated_at) %> ago
+  </div>
+</div>
