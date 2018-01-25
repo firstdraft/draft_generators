@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Raghu Betina"]
-  s.date = "2018-01-24"
+  s.date = "2018-01-25"
   s.description = "This is a set of generators that help beginners learn to program. Primarily, they generate code that is more explicit and verbose and less idiomatic and \u{201c}magical\u{201d} than the built-in scaffold generator, which is helpful for beginners while they are learning how exactly things are wired together."
   s.email = "raghu@firstdraft.com"
   s.extra_rdoc_files = [
@@ -50,7 +50,16 @@ Gem::Specification.new do |s|
     "lib/generators/draft/resource/templates/views/index.html.erb",
     "lib/generators/draft/resource/templates/views/new_form.html.erb",
     "lib/generators/draft/resource/templates/views/show.html.erb",
-    "lib/generators/draft/resource/templates/views/update_row.html.erb"
+    "lib/generators/draft/resource/templates/views/update_row.html.erb",
+    "lib/generators/draft/scaffold/scaffold_generator.rb",
+    "lib/generators/draft/scaffold/templates/_card.html.erb",
+    "lib/generators/draft/scaffold/templates/_form.html.erb",
+    "lib/generators/draft/scaffold/templates/_list_item.html.erb",
+    "lib/generators/draft/scaffold/templates/_table_row.html.erb",
+    "lib/generators/draft/scaffold/templates/edit.html.erb",
+    "lib/generators/draft/scaffold/templates/index.html.erb",
+    "lib/generators/draft/scaffold/templates/new.html.erb",
+    "lib/generators/draft/scaffold/templates/show.html.erb"
   ]
   s.homepage = "http://github.com/raghubetina/draft_generators"
   s.licenses = ["MIT"]
