@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'generators/draft/scaffold/scaffold_controller_generator'
 require 'rails/generators/rails/scaffold/scaffold_generator'
 
