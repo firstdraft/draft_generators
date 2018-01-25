@@ -5,6 +5,8 @@ require "rails/generators/resource_helpers"
 
 module Draft
   class ScaffoldGenerator < Rails::Generators::NamedBase
+    include Rails::Generators::ResourceHelpers
+
     source_root File.expand_path("../templates", __FILE__)
 
     argument :attributes, type: :array, default: [],
@@ -24,7 +26,8 @@ module Draft
 
     def available_views
       base = self.class.source_root
-      base_len = base.length
+      base_len = base.length + 1
+      
       Dir[File.join(base, "**", "*")].
         select { |f| File.file?(f) }.
         map { |f| f[base_len..-1] }
