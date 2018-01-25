@@ -51,6 +51,8 @@ Gem::Specification.new do |s|
     "lib/generators/draft/resource/templates/views/new_form.html.erb",
     "lib/generators/draft/resource/templates/views/show.html.erb",
     "lib/generators/draft/resource/templates/views/update_row.html.erb",
+    "lib/generators/draft/scaffold/scaffold_controller_generator.rb",
+    "lib/generators/draft/scaffold/scaffold_erb_generator.rb",
     "lib/generators/draft/scaffold/scaffold_generator.rb",
     "lib/generators/draft/scaffold/templates/_card.html.erb",
     "lib/generators/draft/scaffold/templates/_form.html.erb",
