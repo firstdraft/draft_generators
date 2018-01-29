@@ -17,14 +17,19 @@ module Draft
   private
 
     def permit_active_admin_params
-      sentinel = /.*ActiveAdmin.register.*do.*/
-
       if File.exist?("app/admin/#{singular_table_name}.rb")
-        inside "app" do
-          inside "admin" do
-            insert_into_file "#{singular_table_name}.rb", after: sentinel do
-              "\n  permit_params #{attributes_names.map { |name| ":#{name}" }.join(", ")}\n"
-            end
+        insert_code(singular_table_name)
+      elsif File.exist?("app/admin/#{plural_table_name}.rb")
+        insert_code(plural_table_name)
+      end
+    end
+
+    def insert_code(file_name)
+      sentinel = /.*ActiveAdmin.register.*do.*/
+      inside "app" do
+        inside "admin" do
+          insert_into_file "#{file_name}.rb", after: sentinel do
+            "\n  permit_params #{attributes_names.map { |name| ":#{name}" }.join(", ")}\n"
           end
         end
       end
