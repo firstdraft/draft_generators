@@ -26,7 +26,6 @@ module Draft
 
     def insert_code(file_name)
       sentinel = /.*ActiveAdmin.register.*do.*/
-      
       inside "app" do
         inside "admin" do
           insert_into_file "#{file_name}.rb", after: sentinel do
