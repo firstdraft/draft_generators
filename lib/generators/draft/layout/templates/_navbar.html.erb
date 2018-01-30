@@ -1,25 +1,18 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsible-nav-links">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+    <a class="navbar-brand" href="/">
+      <%= Rails.application.class.parent_name %>
+    </a>
 
-      <a href="/" class="navbar-brand">
-        <%= Rails.application.class.parent_name %>
-      </a>
-    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-nav-links" aria-controls="collapsible-nav-links" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="collapsible-nav-links">
-      <ul class="nav navbar-nav">
+      <ul class="navbar-nav mr-auto">
 <% app_resources.each do |resource| -%>
-        <li>
-          <a href="/<%= resource %>">
+        <li class="nav-item">
+          <a href="/<%= resource %>" class="nav-link">
             <%= resource.humanize.titleize %>
           </a>
         </li>
@@ -27,28 +20,28 @@
       </ul>
 <% if devise_routes.any? -%>
 <% devise_routes.each do |devise_route| -%>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="navbar-nav">
         <%% if current_<%= devise_route[1]%>.blank? %>
-          <li>
-            <a href="/<%= devise_route[1].pluralize %>/sign_in">
+          <li class="nav-item">
+            <a href="/<%= devise_route[1].pluralize %>/sign_in" class="nav-link">
               Sign in
             </a>
           </li>
 
-          <li>
-            <a href="/<%= devise_route[1].pluralize %>/sign_up">
+          <li class="nav-item">
+            <a href="/<%= devise_route[1].pluralize %>/sign_up" class="nav-link">
               Sign up
             </a>
           </li>
         <%% else %>
-          <li>
-            <a href="/<%= devise_route[1].pluralize %>/edit">
+          <li class="nav-item">
+            <a href="/<%= devise_route[1].pluralize %>/edit" class="nav-link">
               Edit profile
             </a>
           </li>
 
-          <li>
-            <a href="/<%= devise_route[1].pluralize %>/sign_out" data-method="delete">
+          <li class="nav-item">
+            <a href="/<%= devise_route[1].pluralize %>/sign_out" data-method="delete" class="nav-link">
               Sign out
             </a>
           </li>
@@ -56,6 +49,6 @@
       </ul>
 <% end -%>
 <% end -%>
-    </div><!-- /.navbar-collapse -->
-  </div>
+    </div> <!-- .navbar-collapse -->
+  </div> <!-- .container -->
 </nav>
