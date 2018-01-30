@@ -24,9 +24,9 @@
   <!-- Label and input for <%= attribute.column_name %> -->
 <% if attribute.field_type == :check_box -%>
   <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" <% unless skip_validation_alerts? -%><%%= "checked" if @<%= singular_table_name %>.<%= attribute.column_name %> %><% end -%>>
+    <input id="<%= attribute.column_name %>" class="form-check-input" name="<%= attribute.column_name %>" type="checkbox" <% unless skip_validation_alerts? -%><%%= "checked" if @<%= singular_table_name %>.<%= attribute.column_name %> %><% end -%>>
 
-    <label class="form-check-label" for="<%= attribute.column_name %>">
+    <label for="<%= attribute.column_name %>" class="form-check-label">
       <%= attribute.column_name.humanize %>
     </label>
   </div>
