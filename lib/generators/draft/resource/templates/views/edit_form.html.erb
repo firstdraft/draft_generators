@@ -2,10 +2,12 @@
 <!-- Validation failure messages -->
 <%% if @<%= singular_table_name %>.errors.any? %>
   <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-
+    <div class="alert alert-danger alert-dismissable" role="alert">
       <%%= message %>
+
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
   <%% end %>
 <%% end %>
