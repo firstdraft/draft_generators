@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'generators/devise/devise_generator'
-require 'generators/active_record/devise_generator'
+require "generators/devise/devise_generator"
+require "generators/active_record/devise_generator"
 
 module Draft
   class DeviseGenerator < Devise::Generators::DeviseGenerator
@@ -13,8 +13,8 @@ module Draft
     class_option :routes, desc: "Generate routes", type: :boolean, default: true
 
     def add_devise_routes
-      unless model_exists?
-        devise_route  = "devise_for :#{plural_name}".dup
+      if !model_exists?
+        devise_route = "devise_for :#{plural_name}".dup
         devise_route << %Q(, class_name: "#{class_name}") if class_name.include?("::")
         devise_route << %Q(, skip: :all) unless options.routes?
         route devise_route
@@ -26,7 +26,7 @@ module Draft
     def enable_scoped_views
       unless model_exists?
         uncomment_lines("config/initializers/devise.rb",
-            /.*config.scoped_views = false/)
+          /.*config.scoped_views = false/)
         end
     end
 
@@ -43,6 +43,5 @@ module Draft
     def model_path
       @model_path ||= File.join("app", "models", "#{file_path}.rb")
     end
-
   end
 end
