@@ -1,0 +1,67 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1 class="display-4">
+      <%= plural_table_name.titlecase %>
+
+      <%%= link_to fa_icon("plus"), new_<%= singular_table_name %>_path, class: "btn btn-lg btn-outline-secondary" %>
+    </h1>
+  </div>
+</div>
+
+<!-- Table example -->
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+            <th>
+              <%= attribute.human_name %>
+            </th>
+
+<% end -%>
+            <th>
+              Actions
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%%= render collection: @<%= plural_table_name %>, partial: "table_row", as: :<%= singular_table_name %> %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Card deck example -->
+
+<%% @<%= plural_table_name %>.each_slice(3) do |slice| %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-deck">
+      <%%= render collection: slice, partial: "card", as: :<%= singular_table_name %> %>
+    </div>
+  </div>
+</div>
+<%% end %>
+
+<!-- List group example -->
+
+<div class="row justify-content-center mb-3">
+  <div class="col-md-8">
+    <div class="card">
+      <h1 class="card-header h4 d-flex align-items-center justify-content-between">
+        <%= plural_table_name.titlecase %>
+
+        <%%= link_to fa_icon("plus fw"), new_<%= singular_table_name %>_path, class: "btn btn-sm btn-outline-secondary" %>
+      </h1>
+
+      <div class="list-group list-group-flush">
+        <%%= render collection: @<%= plural_table_name %>, partial: "list_item", as: :<%= singular_table_name %> %>
+      </div>
+    </div>
+  </div>
+</div>

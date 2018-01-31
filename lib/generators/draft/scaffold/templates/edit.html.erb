@@ -1,0 +1,15 @@
+<div class="row justify-content-center mb-3">
+  <div class="col-md-8">
+    <div class="card">
+      <h2 class="card-header h4">
+        Edit <%= singular_table_name.titlecase %> #<%%= @<%= singular_table_name %>.id %>
+      </h2>
+
+      <div class="card-body">
+        <%%= render "form", <%= singular_table_name %>: @<%= singular_table_name %> %>
+
+        <%%= link_to fa_icon("chevron-left"), :back, class: "btn btn-block btn-outline-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>

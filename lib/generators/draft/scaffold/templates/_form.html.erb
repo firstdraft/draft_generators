@@ -1,0 +1,44 @@
+<%% was_validated = <%= singular_table_name %>.errors.any? %>
+
+<%% form_html_options = { novalidate: true, class: "mb-3" } %>
+
+<%%= form_for(<%= singular_table_name %>, html: form_html_options) do |f| %>
+<% attributes.each do |attribute| -%>
+<% if attribute.field_type == :check_box -%>
+  <div class="form-check">
+    <%% <%= attribute.name %>_class = "form-check-input" %>
+<% else -%>
+  <div class="form-group">
+    <%% <%= attribute.name %>_class = "form-control" %>
+<% end -%>
+    <%% <%= attribute.name %>_was_invalid = <%= singular_table_name %>.errors.include?(:<%= attribute.name %>) %>
+
+    <%% if was_validated %>
+      <%% if <%= attribute.name %>_was_invalid %>
+        <%% <%= attribute.name %>_class << " is-invalid" %>
+      <%% else %>
+        <%% <%= attribute.name %>_class << " is-valid" %>
+      <%% end %>
+    <%% end %>
+
+<% if attribute.field_type == :check_box -%>
+    <%%= f.label :<%= attribute.name %>, class: "form-check-label" do %>
+      <%%= f.check_box :<%= attribute.name %>, class: <%= attribute.name %>_class %> <%= attribute.name.humanize %>
+    <%% end %>
+<% else -%>
+    <%%= f.label :<%= attribute.name %> %>
+
+    <%%= f.<%= attribute.field_type %> :<%= attribute.name %>, class: <%= attribute.name %>_class, placeholder: "Enter <%= attribute.name.humanize.downcase %>" %>
+<% end -%>
+    <%% if <%= attribute.name %>_was_invalid %>
+      <%% <%= singular_table_name %>.errors.full_messages_for(:<%= attribute.name %>).each do |message| %>
+        <div class="invalid-feedback">
+          <%%= message %>
+        </div>
+      <%% end %>
+    <%% end %>
+  </div>
+
+<% end -%>
+  <%%= f.button class: "btn btn-outline-secondary btn-block" %>
+<%% end %>
