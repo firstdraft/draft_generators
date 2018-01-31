@@ -62,7 +62,16 @@ Gem::Specification.new do |s|
     "lib/generators/draft/scaffold/templates/edit.html.erb",
     "lib/generators/draft/scaffold/templates/index.html.erb",
     "lib/generators/draft/scaffold/templates/new.html.erb",
-    "lib/generators/draft/scaffold/templates/show.html.erb"
+    "lib/generators/draft/scaffold/templates/show.html.erb",
+    "lib/generators/draft/views/templates/confirmations/new.html.erb",
+    "lib/generators/draft/views/templates/passwords/edit.html.erb",
+    "lib/generators/draft/views/templates/passwords/new.html.erb",
+    "lib/generators/draft/views/templates/registrations/edit.html.erb",
+    "lib/generators/draft/views/templates/registrations/new.html.erb",
+    "lib/generators/draft/views/templates/sessions/new.html.erb",
+    "lib/generators/draft/views/templates/shared/_links.html.erb",
+    "lib/generators/draft/views/templates/unlocks/new.html.erb",
+    "lib/generators/draft/views/views_generator.rb"
   ]
   s.homepage = "http://github.com/raghubetina/draft_generators"
   s.licenses = ["MIT"]
