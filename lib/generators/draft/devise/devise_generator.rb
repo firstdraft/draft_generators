@@ -14,9 +14,6 @@ module Draft
 
     def add_devise_routes
       if !model_exists?
-        devise_route = "devise_for :#{plural_name}".dup
-        devise_route << %Q(, class_name: "#{class_name}") if class_name.include?("::")
-        devise_route << %Q(, skip: :all) unless options.routes?
         route devise_route
       else
         say "\nThis model(#{class_name}) is already registered with devise\n"
@@ -35,6 +32,13 @@ module Draft
     end
 
     private
+
+    def devise_route
+      code = "devise_for :#{plural_name}".dup
+      code << %Q(, class_name: "#{class_name}") if class_name.include?("::")
+      code << %Q(, skip: :all) unless options.routes?
+      code
+    end
 
     def model_exists?
       File.exist?(File.join(destination_root, model_path))
