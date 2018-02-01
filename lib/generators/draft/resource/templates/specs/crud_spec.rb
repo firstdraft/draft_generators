@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "<%= plural_table_name.humanize.upcase %>" do
 <% attributes.each do |attribute| -%>
-  context "index" do
+  describe "/<%= plural_table_name %>" do
     it "has the <%= attribute.human_name.downcase %> of every row", points: 5 do
       test_<%= plural_table_name %> = create_list(:<%= singular_table_name %>, 5)
 
@@ -15,7 +15,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
   end
 
 <% end -%>
-  context "index" do
+  describe "/<%= plural_table_name %>" do
     it "has a link to the details page of every row", points: 5 do
       test_<%= plural_table_name %> = create_list(:<%= singular_table_name %>, 5)
 
@@ -28,7 +28,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
   end
 
 <% attributes.each do |attribute| -%>
-  context "details page" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]" do
     it "has the correct <%= attribute.human_name.downcase %>", points: 3 do
       <%= singular_table_name %>_to_show = create(:<%= singular_table_name %>)
 
@@ -40,7 +40,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
   end
 
 <% end -%>
-  context "index" do
+  describe "/<%= plural_table_name %>" do
     it "has a link to the new <%= singular_table_name.humanize.downcase %> page", points: 2 do
       visit "/<%= plural_table_name %>"
 
@@ -49,7 +49,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
   end
 
 <% attributes.each do |attribute| -%>
-  context "new form" do
+  describe "/<%= plural_table_name %>/new" do
     it "saves the <%= attribute.human_name.downcase %> when submitted", points: 2, hint: h("label_for_input") do
       visit "/<%= plural_table_name %>"
       click_on "Add a new <%= singular_table_name.humanize.downcase %>"
@@ -101,7 +101,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
 
 <% end -%>
 <% unless skip_redirect? -%>
-  context "new form" do
+  describe "/<%= plural_table_name %>/new" do
     it "redirects to the index when submitted", points: 2, hint: h("redirect_vs_render") do
       visit "/<%= plural_table_name %>"
       click_on "Add a new <%= singular_table_name.humanize.downcase %>"
@@ -112,7 +112,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
     end
   end
 
-  context "new form" do
+  describe "/<%= plural_table_name %>/new" do
     it "redirects to the details page with a notice", points: 3, hint: h("copy_must_match") do
       visit "/<%= plural_table_name %>"
 
@@ -126,7 +126,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
   end
 
 <% end -%>
-  context "details page" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]" do
     it "has a 'Delete <%= singular_table_name.humanize.downcase %>' link", points: 2 do
       <%= singular_table_name %>_to_delete = create(:<%= singular_table_name %>)
 
@@ -137,7 +137,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
     end
   end
 
-  context "delete link" do
+  describe "/delete_<%= singular_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]" do
     it "removes a row from the table", points: 5 do
       <%= singular_table_name %>_to_delete = create(:<%= singular_table_name %>)
 
@@ -150,7 +150,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
   end
 
 <% unless skip_redirect? -%>
-  context "delete link" do
+  describe "/delete_<%= singular_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]" do
     it "redirects to the index", points: 3, hint: h("redirect_vs_render") do
       <%= singular_table_name %>_to_delete = create(:<%= singular_table_name %>)
 
@@ -162,7 +162,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
     end
   end
 
-  context "delete link" do
+  describe "/delete_<%= singular_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]" do
     it "redirects to the index with a notice", points: 3, hint: h("copy_must_match") do
       <%= singular_table_name %>_to_delete = create(:<%= singular_table_name %>)
 
@@ -178,7 +178,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
   end
 
 <% end -%>
-  context "details page" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]" do
     it "has an 'Edit <%= singular_table_name.humanize.downcase %>' link", points: 5 do
       <%= singular_table_name %>_to_edit = create(:<%= singular_table_name %>)
 
@@ -190,7 +190,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
   end
 
 <% attributes.each do |attribute| -%>
-  context "edit form" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]/edit" do
     it "has <%= attribute.human_name.downcase %> pre-populated", points: 3, hint: h("value_attribute") do
       <%= singular_table_name %>_to_edit = create(:<%= singular_table_name %>)
 
@@ -210,7 +210,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
 
 <% end -%>
 <% attributes.each do |attribute| -%>
-  context "edit form" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]/edit" do
     it "updates <%= attribute.human_name.downcase %> when submitted", points: 5, hint: h("label_for_input button_type") do
       <%= singular_table_name %>_to_edit = create(:<%= singular_table_name %>, <%= attribute.column_name %>: "Boring old <%= attribute.human_name.downcase %>")
 
@@ -266,7 +266,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
 
 <% end -%>
 <% unless skip_redirect? -%>
-  context "edit form" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]/edit" do
     it "redirects to the details page", points: 3, hint: h("embed_vs_interpolate redirect_vs_render") do
       <%= singular_table_name %>_to_edit = create(:<%= singular_table_name %>)
 
@@ -281,7 +281,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
     end
   end
 
-  context "edit form" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]/edit" do
     it "redirects to the details page with a notice", points: 3, hint: h("copy_must_match") do
       <%= singular_table_name %>_to_edit = create(:<%= singular_table_name %>)
 
