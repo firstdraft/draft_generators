@@ -3,7 +3,7 @@
 
 require Rails.root.join("spec", "support", "increasing_random.rb")
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :<%= singular_table_name %> do
     sequence(:id, IncreasingRandom.new) { |n| n.value }
 <% attributes.each do |attribute| -%>
