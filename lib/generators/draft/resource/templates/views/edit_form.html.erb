@@ -21,8 +21,9 @@
 <% if attribute.field_type == :check_box -%>
   <div class="form-check">
     <input type="hidden" value="0" name="<%= attribute.column_name %>">
+    <!-- Input for <%= attribute.column_name %> start-->
     <input id="<%= attribute.column_name %>" class="form-check-input" name="<%= attribute.column_name %>" type="checkbox" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.column_name %> %>>
-
+    <!-- Input for <%= attribute.column_name %> end-->
     <label for="<%= attribute.column_name %>" class="form-check-label">
       <%= attribute.column_name.humanize %>
     </label>
@@ -34,9 +35,13 @@
     </label>
 
 <% if attribute.field_type == :text_area -%>
+    <!-- Input for <%= attribute.column_name %> start-->
     <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
+    <!-- Input for <%= attribute.column_name %> end-->
 <% else -%>
+    <!-- Input for <%= attribute.column_name %> start-->
     <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+    <!-- Input for <%= attribute.column_name %> end-->
 <% end -%>
   </div>
 <% end -%>
