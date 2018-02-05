@@ -17,9 +17,9 @@ module Draft
     def devise_install
       unless initializer_exists?
         invoke 'devise:install'
-        uncomment_lines("config/initializers/devise.rb",
-          /.*config.scoped_views = false/)
       end
+      uncomment_lines("config/initializers/devise.rb",
+          /.*config.scoped_views = false/)
     end
 
     def generate_devise_model
