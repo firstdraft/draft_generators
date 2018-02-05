@@ -32,8 +32,6 @@ module Draft
 
       template "_flashes.html.erb", "app/views/shared/_flashes.html.erb"
 
-      template "_footer.html.erb", "app/views/shared/_footer.html.erb"
-
       unless skip_cdn?
         template "_bootstrapcdn_assets.html.erb", "app/views/shared/_bootstrapcdn_assets.html.erb"
       end
