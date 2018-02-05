@@ -4,7 +4,6 @@
 
 FactoryBot.define do
   factory :<%= singular_table_name %> do
-    sequence(:id) { |n| n }
 <% attributes.each do |attribute| -%>
 <% case attribute.type -%>
 <% when :belongs_to, :references -%>
@@ -17,7 +16,7 @@ FactoryBot.define do
     <%= attribute.column_name %> Time.now
 <% when :decimal -%>
     <%= attribute.column_name %> 42.42
-<% when :integer, :primary_key -%>
+<% when :integer -%>
     sequence(:<%= attribute.column_name %>) { |n| n }
 <% when :string, :text -%>
     sequence(:<%= attribute.column_name %>) { |n| "Some fake <%= attribute.human_name.downcase %> #{n}" }
