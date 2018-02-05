@@ -42,15 +42,19 @@ module DraftGenerators
     end
 
     def update_resource_button_block
-      %Q{<div class="form-actions">
-            <%= f.button :submit, "Update" %>
+      %Q{<div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+              <%= f.submit "Update", class: "btn btn-success btn-block" %>
+            </div>
           </div>}
     end
 
     def sign_in_resource_button_block
-      %Q{<div class="form-actions">
-            <%= f.button :submit, "Sign up" %>
-          </div>}
+      %Q{<div class="form-group">
+          <div class="col-sm-10 col-sm-offset-2">
+            <%= f.submit "Sign up", class: "btn btn-success btn-block" %>
+          </div>
+        </div>}
     end
 
     def column_names
