@@ -28,7 +28,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
   end
 
 <% attributes.each do |attribute| -%>
-  describe "/<%= plural_table_name %>/[<%= singular_table_name.upcase %> ID]" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]" do
     it "has the correct <%= attribute.human_name.downcase %>", points: 3 do
       <%= singular_table_name %>_to_show = create(:<%= singular_table_name %>)
 
@@ -126,7 +126,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
   end
 
 <% end -%>
-  describe "/<%= plural_table_name %>/[<%= singular_table_name.upcase %> ID]" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]" do
     it "has a 'Delete <%= singular_table_name.humanize.downcase %>' link", points: 2 do
       <%= singular_table_name %>_to_delete = create(:<%= singular_table_name %>)
 
@@ -137,7 +137,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
     end
   end
 
-  describe "/delete_<%= singular_table_name %>/[<%= singular_table_name.upcase %> ID]" do
+  describe "/delete_<%= singular_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]" do
     it "removes a row from the table", points: 5 do
       <%= singular_table_name %>_to_delete = create(:<%= singular_table_name %>)
 
@@ -150,7 +150,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
   end
 
 <% unless skip_redirect? -%>
-  describe "/delete_<%= singular_table_name %>/[<%= singular_table_name.upcase %> ID]" do
+  describe "/delete_<%= singular_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]" do
     it "redirects to the index", points: 3, hint: h("redirect_vs_render") do
       <%= singular_table_name %>_to_delete = create(:<%= singular_table_name %>)
 
@@ -162,7 +162,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
     end
   end
 
-  describe "/delete_<%= singular_table_name %>/[<%= singular_table_name.upcase %> ID]" do
+  describe "/delete_<%= singular_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]" do
     it "redirects to the index with a notice", points: 3, hint: h("copy_must_match") do
       <%= singular_table_name %>_to_delete = create(:<%= singular_table_name %>)
 
@@ -178,7 +178,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
   end
 
 <% end -%>
-  describe "/<%= plural_table_name %>/[<%= singular_table_name.upcase %> ID]" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]" do
     it "has an 'Edit <%= singular_table_name.humanize.downcase %>' link", points: 5 do
       <%= singular_table_name %>_to_edit = create(:<%= singular_table_name %>)
 
@@ -190,7 +190,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
   end
 
 <% attributes.each do |attribute| -%>
-  describe "/<%= plural_table_name %>/[<%= singular_table_name.upcase %> ID]/edit" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]/edit" do
     it "has <%= attribute.human_name.downcase %> pre-populated", points: 3, hint: h("value_attribute") do
       <%= singular_table_name %>_to_edit = create(:<%= singular_table_name %>)
 
@@ -210,7 +210,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
 
 <% end -%>
 <% attributes.each do |attribute| -%>
-  describe "/<%= plural_table_name %>/[<%= singular_table_name.upcase %> ID]/edit" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]/edit" do
     it "updates <%= attribute.human_name.downcase %> when submitted", points: 5, hint: h("label_for_input button_type") do
       <%= singular_table_name %>_to_edit = create(:<%= singular_table_name %>, <%= attribute.column_name %>: "Boring old <%= attribute.human_name.downcase %>")
 
@@ -266,7 +266,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
 
 <% end -%>
 <% unless skip_redirect? -%>
-  describe "/<%= plural_table_name %>/[<%= singular_table_name.upcase %> ID]/edit" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]/edit" do
     it "redirects to the details page", points: 3, hint: h("embed_vs_interpolate redirect_vs_render") do
       <%= singular_table_name %>_to_edit = create(:<%= singular_table_name %>)
 
@@ -281,7 +281,7 @@ feature "<%= plural_table_name.humanize.upcase %>" do
     end
   end
 
-  describe "/<%= plural_table_name %>/[<%= singular_table_name.upcase %> ID]/edit" do
+  describe "/<%= plural_table_name %>/[<%= singular_table_name.humanize.upcase %> ID]/edit" do
     it "redirects to the details page with a notice", points: 3, hint: h("copy_must_match") do
       <%= singular_table_name %>_to_edit = create(:<%= singular_table_name %>)
 
