@@ -1,11 +1,9 @@
 # Copy this file into your spec/support folder; create one if you don't have it.
 # https://github.com/firstdraft/increasing_random/blob/master/increasing_random.rb
 
-require Rails.root.join("spec", "support", "increasing_random.rb")
 
 FactoryBot.define do
   factory :<%= singular_table_name %> do
-    sequence(:id, IncreasingRandom.new) { |n| n.value }
 <% attributes.each do |attribute| -%>
 <% case attribute.type -%>
 <% when :belongs_to, :references -%>
@@ -18,16 +16,14 @@ FactoryBot.define do
     <%= attribute.column_name %> Time.now
 <% when :decimal -%>
     <%= attribute.column_name %> 42.42
-<% when :integer, :primary_key -%>
-    sequence(:<%= attribute.column_name %>, IncreasingRandom.new) { |n| n.value }
 <% when :string, :text -%>
-    sequence(:<%= attribute.column_name %>, IncreasingRandom.new) { |n| "Some fake <%= attribute.human_name.downcase %> #{n}" }
+    <%= attribute.column_name %> "Some fake <%= attribute.human_name.downcase %>"
 <% when :time -%>
     <%= attribute.column_name %> Time.now.beginning_of_day
 <% when :timestamp -%>
     <%= attribute.column_name %> Time.now
 <% else -%>
-    sequence(:<%= attribute.column_name %>, IncreasingRandom.new) { |n| "Some fake <%= attribute.human_name.downcase %> #{n}" }
+    <%= attribute.column_name %> "Some fake <%= attribute.human_name.downcase %>"
 <% end -%>
 <% end -%>
   end
