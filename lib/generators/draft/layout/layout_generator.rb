@@ -6,6 +6,10 @@ module Draft
     class_option :layout_file, type: :string, default: "application", desc: "Layout filename"
     class_option :skip_cdn, type: :boolean, default: false, desc: "Skip connecting CDN assets"
 
+    def eager_load_app
+      Rails.application.eager_load!
+    end
+
     def generate_layout
       if bootswatch?
         log :insert, "Adding #{theme_name.capitalize} Bootswatch"
