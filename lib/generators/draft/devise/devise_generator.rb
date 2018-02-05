@@ -9,7 +9,7 @@ module Draft
 
     def check_for_existing_devise_model
       if model_exists?
-        say "\nThis model(#{class_name}) is already registered with devise\n"
+        say "\nYou already have a model called #{class_name}! Halting generator.\n"
         abort
       end
     end
