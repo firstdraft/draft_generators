@@ -24,13 +24,21 @@
         <%% if current_<%= devise_route[1]%>.blank? %>
           <li class="nav-item">
             <a href="/<%= devise_route[1].pluralize %>/sign_in" class="nav-link">
+              <% if devise_routes.size > 1 %>
+              <%= devise_route[1].classify %> Sign in
+              <% else %>
               Sign in
+              <% end %>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="/<%= devise_route[1].pluralize %>/sign_up" class="nav-link">
+              <% if devise_routes.size > 1 %>
+              <%= devise_route[1].classify %> Sign up
+              <% else %>
               Sign up
+              <% end %>
             </a>
           </li>
         <%% else %>
