@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails/generators/named_base'
+require "rails/generators/named_base"
 
 module Draft
   class DeviseGenerator < Rails::Generators::NamedBase
@@ -16,18 +16,18 @@ module Draft
 
     def devise_install
       unless initializer_exists?
-        invoke 'devise:install'
+        invoke "devise:install"
       end
       uncomment_lines("config/initializers/devise.rb",
           /.*config.scoped_views = false/)
     end
 
     def generate_devise_model
-      invoke 'devise'
+      invoke "devise"
     end
 
     def generate_devise_views
-      invoke 'draft:devise:views'
+      invoke "draft:devise:views"
       devise_service = ::DraftGenerators::DeviseCustomizationService.new(attributes)
       add_additional_views_through_security(devise_service)
       add_additional_fields_for_registration(devise_service)
@@ -47,7 +47,7 @@ module Draft
       inject_into_file("app/views/#{scope}/registrations/new.html.erb",
                        devise_service.form_fields_to_add,
                        before: devise_service.sign_in_resource_button_block)
-      
+
       inject_into_file("app/views/#{scope}/registrations/edit.html.erb",
                        devise_service.form_fields_to_add,
                        before: devise_service.update_resource_button_block)

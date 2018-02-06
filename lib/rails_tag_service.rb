@@ -31,15 +31,15 @@ module DraftGenerators
     end
 
     def self.input_tag(column)
-      return case column.type.to_s
-      when "datetime" ; datetime_select(column.name)
-      when "date" ; date_select(column.name)
-      when "time" ; time_select(column.name)
-      when "boolean" ; check_box(column.name)
-      when "string" ; text_input(column.name)
-      when "text" ; text_area_input(column.name)
-      when "decimal" ; number_field(column.name)
-      when "integer" ; number_field(column.name)
+      case column.type.to_s
+      when "datetime"; datetime_select(column.name)
+      when "date"; date_select(column.name)
+      when "time"; time_select(column.name)
+      when "boolean"; check_box(column.name)
+      when "string"; text_input(column.name)
+      when "text"; text_area_input(column.name)
+      when "decimal"; number_field(column.name)
+      when "integer"; number_field(column.name)
       else
         text_input(column.name)
       end
