@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "rails/generators/named_base"
-
 module Draft
   class ModelGenerator < Rails::Generators::NamedBase
     argument :attributes, type: :array, default: [],
