@@ -2,7 +2,6 @@
 
 module DraftGenerators
   class DeviseCustomizationService
-    
     def initialize(attributes)
       @attributes = attributes
     end
@@ -58,7 +57,7 @@ module DraftGenerators
     end
 
     def column_names
-      columns.collect {|column| column.name }
+      columns.map { |column| column.name }
     end
 
     def column_names_string
@@ -78,6 +77,5 @@ module DraftGenerators
         %w(id created_at updated_at email password).include?(attribute.name)
       end
     end
-
   end
 end

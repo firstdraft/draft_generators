@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "generators/devise/views_generator"
 
 module Draft
