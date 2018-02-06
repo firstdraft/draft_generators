@@ -6,7 +6,7 @@ module Draft
     argument :attributes, type: :array, default: [], banner: "field[:type][:index] field[:type][:index]"
     
     def generate_model
-      invoke 'model'
+      invoke "model"
     end
 
     def generate_active_admin
