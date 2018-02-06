@@ -4,7 +4,7 @@ require "rails/generators/named_base"
 module Draft
   class ModelGenerator < Rails::Generators::NamedBase
     argument :attributes, type: :array, default: [],
-              banner: "field[:type][:index] field[:type][:index]"
+                          banner: "field[:type][:index] field[:type][:index]"
     def generate_model
       invoke "model"
     end
@@ -32,7 +32,7 @@ module Draft
       inside "app" do
         inside "admin" do
           insert_into_file "#{file_name}.rb", after: sentinel do
-            "\n  permit_params #{attributes_names.map { |name| ":#{name}" }.join(", ")}\n"
+            "\n  permit_params #{attributes_names.map { |name| ":#{name}" }.join(', ')}\n"
           end
         end
       end
