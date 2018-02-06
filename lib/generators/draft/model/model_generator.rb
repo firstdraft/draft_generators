@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
-require "rails/generators/active_record/model/model_generator"
+require "rails/generators/named_base"
 
 module Draft
-  class ModelGenerator < ActiveRecord::Generators::ModelGenerator
-    source_root ActiveRecord::Generators::ModelGenerator.source_root
+  class ModelGenerator < Rails::Generators::NamedBase
+    argument :attributes, type: :array, default: [],
+                          banner: "field[:type][:index] field[:type][:index]"
+    def generate_model
+      invoke "model"
+    end
 
     def generate_active_admin
       if Gem.loaded_specs.has_key? "activeadmin"
@@ -14,7 +18,7 @@ module Draft
       end
     end
 
-  private
+    private
 
     def permit_active_admin_params
       if File.exist?("app/admin/#{singular_table_name}.rb")
@@ -29,7 +33,7 @@ module Draft
       inside "app" do
         inside "admin" do
           insert_into_file "#{file_name}.rb", after: sentinel do
-            "\n  permit_params #{attributes_names.map { |name| ":#{name}" }.join(", ")}\n"
+            "\n  permit_params #{attributes_names.map { |name| ":#{name}" }.join(', ')}\n"
           end
         end
       end
