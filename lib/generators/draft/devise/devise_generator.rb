@@ -18,8 +18,11 @@ module Draft
       unless initializer_exists?
         invoke "devise:install"
       end
-      uncomment_lines("config/initializers/devise.rb",
-          /.*config.scoped_views = false/)
+      path = "config/initializers/devise.rb"
+      uncomment_lines(path, /.*config.scoped_views = false/)
+      code_to_replace = "config.scoped_views = false"
+      replace_with = "config.scoped_views = true"
+      gsub_file(path, code_to_replace, replace_with)
     end
 
     def generate_devise_model
