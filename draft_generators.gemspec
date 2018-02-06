@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Raghu Betina"]
-  s.date = "2018-01-31"
+  s.date = "2018-02-06"
   s.description = "This is a set of generators that help beginners learn to program. Primarily, they generate code that is more explicit and verbose and less idiomatic and \u{201c}magical\u{201d} than the built-in scaffold generator, which is helpful for beginners while they are learning how exactly things are wired together."
   s.email = "raghu@firstdraft.com"
   s.extra_rdoc_files = [

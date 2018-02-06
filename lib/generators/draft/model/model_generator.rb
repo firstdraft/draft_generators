@@ -1,10 +1,11 @@
 # frozen_string_literal: true
-require 'rails/generators/named_base'
+
+require "rails/generators/named_base"
 
 module Draft
   class ModelGenerator < Rails::Generators::NamedBase
-    argument :attributes, type: :array, default: [], banner: "field[:type][:index] field[:type][:index]"
-    
+    argument :attributes, type: :array, default: [],
+              banner: "field[:type][:index] field[:type][:index]"
     def generate_model
       invoke "model"
     end
@@ -17,7 +18,7 @@ module Draft
       end
     end
 
-  private
+    private
 
     def permit_active_admin_params
       if File.exist?("app/admin/#{singular_table_name}.rb")

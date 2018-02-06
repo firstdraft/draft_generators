@@ -24,7 +24,7 @@ module Draft
       unless model_exists?
         uncomment_lines("config/initializers/devise.rb",
           /.*config.scoped_views = false/)
-        end
+      end
     end
 
     def orm
