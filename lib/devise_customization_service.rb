@@ -57,11 +57,11 @@ module DraftGenerators
     end
 
     def column_names
-      columns.map { |column| column.name }
+      columns.map(&:name)
     end
 
     def column_names_string
-      ":" + "#{column_names.join(", :")}"
+      ':' + column_names.join(', :').to_s
     end
 
     def protect_from_forgery_code
