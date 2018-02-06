@@ -41,7 +41,7 @@ module DraftGenerators
     end
 
     def update_resource_button_block
-      %Q{<div class="form-group">
+      %{<div class="form-group">
             <div class="col-sm-10 col-sm-offset-2">
               <%= f.submit "Update", class: "btn btn-success btn-block" %>
             </div>
@@ -49,7 +49,7 @@ module DraftGenerators
     end
 
     def sign_in_resource_button_block
-      %Q{<div class="form-group">
+      %{<div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
             <%= f.submit "Sign up", class: "btn btn-success btn-block" %>
           </div>
