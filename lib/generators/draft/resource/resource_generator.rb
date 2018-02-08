@@ -9,6 +9,7 @@ module Draft
     class_option :skip_validation_alerts, type: :boolean, default: false, desc: "Skip validation failure alerts"
     class_option :skip_post, type: :boolean, default: false, desc: "Skip HTTP POST verb"
     class_option :skip_redirect, type: :boolean, default: false, desc: "Skip redirecting after create, update, and destroy"
+    class_option :buggy, type: :boolean, default: false, desc: "Creates buggy resources for RCAV and Golden Seven practice"
 
     def generate_controller
       return if skip_controller?
@@ -78,6 +79,32 @@ module Draft
       RUBY
     end
 
+    def buggy_routes
+      log :route, "Buggy routes"
+
+      route <<-RUBY.gsub(/^      /, "")
+
+        # Routes for the #{singular_table_name.humanize} resource:
+
+        # CREATE
+        get("/#{plural_table_name}/new", { :controller => "#{plural_table_name}", :action => "new_form" })
+        #{skip_post? ? "get" : "post"}("/create_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create_row" })
+
+        # READ
+        get("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index" })
+        get("/#{plural_table_name}/:id_to_display", { :controller => "#{plural_table_name}", :action => "show" })
+
+        # UPDATE
+        get("/#{plural_table_name}/:prefill_with_id/edit", { :controller => "#{plural_table_name}", :action => "edit_form" })
+        #{skip_post? ? "get" : "post"}("/update_#{singular_table_name}/:id_to_modify", { :controller => "#{plural_table_name}", :action => "update_row" })
+
+        # DELETE
+        get("/delete_#{singular_table_name}/:id_to_remove", { :controller => "#{plural_table_name}", :action => "destroy_row" })
+
+        #------------------------------
+      RUBY
+    end
+
     def read_only_routes
       log :route, "Index and show routes"
 
@@ -105,7 +132,7 @@ module Draft
     end
 
     def skip_validation_alerts?
-      options[:skip_validation_alerts]
+      options[:skip_validation_alerts] || options[:skip_redirect]
     end
 
     def skip_post?
@@ -114,6 +141,10 @@ module Draft
 
     def skip_redirect?
       options[:skip_redirect]
+    end
+
+    def buggy?
+      options[:buggy]
     end
 
     def route(routing_code)
@@ -139,6 +170,20 @@ module Draft
       folders = ["views"]
       filename = File.join(folders, filename) if folders.any?
       filename
+    end
+
+    def create_bug?(likelihood_hash)
+      if likelihood_hash.fetch(:likelihood) == :high
+        return rand(10) > 3
+      elsif likelihood_hash.fetch(:likelihood) == :low
+        return rand(10) > 7
+      elsif likelihood_hash.fetch(:likelihood) == :none
+        return false
+      elsif likelihood_hash.fetch(:likelihood) == :total
+        return true
+      else
+        return rand(10) > 5
+      end
     end
   end
 end
