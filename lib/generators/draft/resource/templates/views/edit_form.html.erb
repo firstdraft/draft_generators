@@ -15,7 +15,10 @@
 
 <hr>
 
+<!-- Form <%= singular_table_name %> start -->
 <form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>"<% unless skip_post? -%> method="post"<% end -%>>
+<!-- Form <%= singular_table_name %> end -->
+
 <% attributes.each do |attribute| -%>
   <!-- Label and input for <%= attribute.column_name %> -->
 <% if attribute.field_type == :check_box -%>
