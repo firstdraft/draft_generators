@@ -13,24 +13,30 @@
   <dt>
     <%= attribute.human_name %>
   </dt>
+  <!-- Display <%= attribute.column_name %> start -->
   <dd>
     <%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>
   </dd>
+  <!-- Display <%= attribute.column_name %> end -->
 
 <% end -%>
   <dt>
     Created at
   </dt>
+  <!-- Display created_at start -->
   <dd>
     <%%= time_ago_in_words(@<%= singular_table_name %>.created_at) %> ago
   </dd>
+  <!-- Display created_at end -->
 
   <dt>
     Updated at
   </dt>
+  <!-- Display updated_at start -->
   <dd>
     <%%= time_ago_in_words(@<%= singular_table_name %>.updated_at) %> ago
   </dd>
+  <!-- Display updated_at end -->
 </dl>
 
 <% unless read_only? -%>
