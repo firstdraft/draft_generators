@@ -81,10 +81,10 @@ module Draft
 
     def buggy_golden_seven_routes
       log :route, "Buggy Golden Seven routes"
-      total_bugs = rand(2) + 4
+      max_route_bugs = rand(2) + 4
       bug_count = 0
 
-      if create_bug(likelihood: :high) && bug_count < total_bugs
+      if create_bug?(likelihood: :high) && bug_count < max_route_bugs
         new_form_route = buggy_new_form_route
         bug_count += 1
       else
@@ -93,7 +93,7 @@ module Draft
         RUBY
       end
 
-      if create_bug(likelihood: :high) && bug_count < total_bugs
+      if create_bug?(likelihood: :high) && bug_count < max_route_bugs
         create_row_route = buggy_create_row_route
         bug_count += 1
       else
@@ -102,7 +102,7 @@ module Draft
         RUBY
       end
 
-      if create_bug(likelihood: :high) && bug_count < total_bugs
+      if create_bug?(likelihood: :high) && bug_count < max_route_bugs
         index_route = buggy_index_route
         bug_count += 1
       else
@@ -111,7 +111,7 @@ module Draft
         RUBY
       end
 
-      if create_bug(likelihood: :high) && bug_count < total_bugs
+      if create_bug?(likelihood: :high) && bug_count < max_route_bugs
         show_route = buggy_show_route
         bug_count += 1
       else
@@ -120,7 +120,7 @@ module Draft
         RUBY
       end
 
-      if create_bug(likelihood: :high) && bug_count < total_bugs
+      if create_bug?(likelihood: :high) && bug_count < max_route_bugs
         edit_form_route = buggy_edit_form_route
         bug_count += 1
       else
@@ -129,7 +129,7 @@ module Draft
         RUBY
       end
 
-      if create_bug(likelihood: :high) && bug_count < total_bugs
+      if create_bug?(likelihood: :high) && bug_count < max_route_bugs
         update_route = buggy_update_route
         bug_count += 1
       else
@@ -138,7 +138,7 @@ module Draft
         RUBY
       end
 
-      if create_bug(likelihood: :high) && bug_count < total_bugs
+      if create_bug?(likelihood: :high) && bug_count < max_route_bugs
         destroy_row_route = buggy_destroy_row_route
         bug_count += 1
       else
@@ -166,10 +166,10 @@ module Draft
     def buggy_read_only_routes
       log :route, "Buggy index and show routes"
 
-      total_bugs = 2
+      max_route_bugs = 2
       bug_count = 0
 
-      if create_bug(likelihood: :high) && bug_count < total_bugs
+      if create_bug?(likelihood: :high) && bug_count < max_route_bugs
         index_route = buggy_index_route
         bug_count += 1
       else
@@ -178,7 +178,7 @@ module Draft
         RUBY
       end
 
-      if create_bug(likelihood: :high) && bug_count < total_bugs
+      if create_bug?(likelihood: :high) && bug_count < max_route_bugs
         show_route = buggy_show_route
         bug_count += 1
       else
