@@ -1,3 +1,5 @@
+<% total_bugs = rand(3) -%>
+<% max_index_form_bugs = 0 -%>
 <h1>
   All <%= plural_table_name.humanize.downcase %>
 </h1>
@@ -31,16 +33,27 @@
     <th>
     </th>
   </tr>
-
+<% if buggy? && max_index_form_bugs < total_bugs && create_bug?(likelihood: :high) -%>
+  <%% <%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+<% else -%>
   <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+<% end -%>
   <tr>
     <td>
+<% if buggy? && max_index_form_bugs < total_bugs && create_bug?(likelihood: :high) -%>
+      <%%= @<%= singular_table_name %>.id %>
+<% else -%>
       <%%= <%= singular_table_name %>.id %>
+<% end -%>
     </td>
 
 <% attributes.each do |attribute| -%>
     <td>
+<% if buggy? && max_index_form_bugs < total_bugs && create_bug?(likelihood: :high) -%>
+      <%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>
+<% else -%>
       <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
+<% end -%>
     </td>
 
 <% end -%>
@@ -60,3 +73,6 @@
   </tr>
   <%% end %>
 </table>
+<% if buggy? -%>
+  <% puts "#{max_index_form_bugs} index page bugs created" -%>
+<% end -%>

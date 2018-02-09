@@ -1,10 +1,18 @@
+<% total_bugs = rand(2) + 4 -%>
+<% max_show_bugs = 0 -%>
 <h1>
   <%= singular_table_name.humanize %> #<%%= @<%= singular_table_name %>.id %> details
 </h1>
-
+<% if buggy? && max_show_bugs < total_bugs && create_bug?(likelihood: :high) -%>
+<a href="/<%= plural_table_name %>/:prefill_with_id/edit">
+  Edit <%= singular_table_name.humanize.downcase %>
+</a>
+<% max_show_bugs += 1 -%>
+<% else -%>
 <a href="/<%= plural_table_name %>/<%%= @<%= singular_table_name %>.id %>/edit">
   Edit <%= singular_table_name.humanize.downcase %>
 </a>
+<% end -%>
 
 <hr>
 
@@ -34,9 +42,16 @@
 </dl>
 
 <% unless read_only? -%>
+<% if buggy? && max_show_bugs < total_bugs && create_bug?(likelihood: :high) -%>
+<a href="<%= plural_table_name %>/<%%= <%= singular_table_name %>.id %>" class="btn btn-default">
+  Delete <%= singular_table_name.humanize.downcase %>
+</a>
+<% max_show_bugs += 1 -%>
+<% else -%>
 <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-default">
   Delete <%= singular_table_name.humanize.downcase %>
 </a>
+<% end -%>
 <% end -%>
 
 <hr>
@@ -44,3 +59,6 @@
 <a href="/<%= plural_table_name %>">
   Go back
 </a>
+<% if buggy? -%>
+  <% puts "#{max_show_bugs} show page bugs created" -%>
+<% end -%>

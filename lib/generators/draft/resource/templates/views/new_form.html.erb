@@ -1,3 +1,5 @@
+<% total_bugs = rand(2) + 4 -%>
+<% max_new_form_bugs = 0 -%>
 <% unless skip_validation_alerts? -%>
 <!-- Validation failure messages -->
 <%% if @<%= singular_table_name %>.errors.any? %>
@@ -18,8 +20,12 @@
 </h1>
 
 <hr>
-
+<% if buggy? && max_new_form_bugs < total_bugs && create_bug?(likelihood: :high) -%>
+<form action=""<% unless skip_post? -%> method="post"<% end -%>>
+<% max_new_form_bugs += 1 -%>
+<% else -%>
 <form action="/create_<%= singular_table_name %>"<% unless skip_post? -%> method="post"<% end -%>>
+<% end -%>
 <% attributes.each do |attribute| -%>
   <!-- Label and input for <%= attribute.column_name %> -->
 <% if attribute.field_type == :check_box -%>
@@ -37,9 +43,19 @@
     </label>
 
 <% if attribute.field_type == :text_area -%>
+<% if buggy? && max_new_form_bugs < total_bugs && create_bug?(likelihood: :high) -%>
+    <textarea id="<%= attribute.column_name %>" name="a_<%= attribute.column_name %>" class="form-control" rows="3"><% unless skip_validation_alerts? -%><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %><% end -%></textarea>
+<% max_new_form_bugs += 1 -%>
+<% else -%>
     <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"><% unless skip_validation_alerts? -%><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %><% end -%></textarea>
+<% end -%>
+<% else -%>
+<% if buggy? && max_new_form_bugs < total_bugs && create_bug?(likelihood: :high) -%>
+    <input type="text" id="<%= attribute.column_name %>" name="a_<%= attribute.column_name %>" class="form-control"<% unless skip_validation_alerts? -%> value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>"<% end -%>>
+<% max_new_form_bugs += 1 -%>
 <% else -%>
     <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control"<% unless skip_validation_alerts? -%> value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>"<% end -%>>
+<% end -%>
 <% end -%>
   </div>
 <% end -%>
@@ -55,3 +71,6 @@
 <a href="/<%= plural_table_name %>">
   Go back
 </a>
+<% if buggy? -%>
+  <% puts "#{max_new_form_bugs} new_form bugs created" -%>
+<% end -%>

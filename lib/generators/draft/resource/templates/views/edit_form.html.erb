@@ -1,3 +1,5 @@
+<% total_bugs = rand(2) + 4 -%>
+<% max_edit_form_bugs = 0 -%>
 <% unless skip_validation_alerts? -%>
 <!-- Validation failure messages -->
 <%% if @<%= singular_table_name %>.errors.any? %>
@@ -18,8 +20,17 @@
 </h1>
 
 <hr>
-
+<% if buggy? && max_edit_form_bugs < total_bugs && create_bug?(likelihood: :high) -%>
+<% max_edit_form_bugs += 1 -%>
+<% bug_option = rand(2) + 1 -%>
+<% if bug_option == 1 -%>
+<form action="/update_<%= singular_table_name %>/:id_to_display %>"<% unless skip_post? -%> method="post"<% end -%>>
+<% elsif bug_option == 2 -%>
+<form action="/create_<%= singular_table_name %> %>"<% unless skip_post? -%> method="post"<% end -%>>
+<% end -%>
+<% else -%>
 <form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>"<% unless skip_post? -%> method="post"<% end -%>>
+<% end -%>
 <% attributes.each do |attribute| -%>
   <!-- Label and input for <%= attribute.column_name %> -->
 <% if attribute.field_type == :check_box -%>
@@ -37,9 +48,19 @@
     </label>
 
 <% if attribute.field_type == :text_area -%>
+<% if buggy? && max_edit_form_bugs < total_bugs && create_bug?(likelihood: :high) -%>
+    <textarea id="<%= attribute.column_name %>" name="some_<%= attribute.column_name %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
+<% max_edit_form_bugs += 1 -%>
+<% else -%>
     <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
+<% end -%>
+<% else -%>
+<% if buggy? && max_edit_form_bugs < total_bugs && create_bug?(likelihood: :high) -%>
+    <input type="text" id="<%= attribute.column_name %>" name="some_<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+<% max_edit_form_bugs += 1 -%>
 <% else -%>
     <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+<% end -%>
 <% end -%>
   </div>
 <% end -%>
@@ -55,3 +76,6 @@
 <a href="/<%= plural_table_name %>">
   Go back
 </a>
+<% if buggy? -%>
+  <% puts "#{max_edit_form_bugs} edit_form bugs created" -%>
+<% end -%>
