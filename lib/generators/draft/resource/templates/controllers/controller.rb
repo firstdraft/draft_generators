@@ -1,12 +1,36 @@
+<% max_controller_bugs = rand(2) + 4 -%>
+<% controller_bugs = 0 -%>
 class <%= plural_table_name.camelize %>Controller < ApplicationController
   def index
+<% if buggy? && controller_bugs < max_controller_bugs && create_bug?(likelihood: :high) -%>
+  <% bug_option = rand(2) + 1 -%>
+  <% if bug_option == 1 -%>
+@<%= plural_table_name.underscore %> = <%= class_name.singularize.downcase %>.all
+  <% elsif bug_option == 2 -%>
+<%= plural_table_name.underscore %> = <%= class_name.singularize %>.all
+  <% end -%>
+  <% controller_bugs += 1 -%>
+<% else -%>
     @<%= plural_table_name.underscore %> = <%= class_name.singularize %>.all
+<% end -%>
 
     render("<%= singular_table_name.underscore %>_templates/index.html.erb")
   end
 
   def show
-    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params[:id_to_display])
+<% if buggy? && controller_bugs < max_controller_bugs && create_bug?(likelihood: :high) -%>
+<% bug_option = rand(3) + 1 -%>
+<% if bug_option == 1 -%>
+    <%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch("id_to_display"))
+<% elsif bug_option == 2 -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize.downcase %>.find(params.fetch("id_to_display"))
+<% elsif bug_option == 3 -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch(id_to_display))
+<% end -%>
+<% controller_bugs += 1 -%>
+<% else -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch("id_to_display"))
+<% end -%>
 
     render("<%= singular_table_name.underscore %>_templates/show.html.erb")
   end
@@ -15,14 +39,35 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% unless skip_validation_alerts? -%>
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 <% end -%>
+
     render("<%= singular_table_name.underscore %>_templates/new_form.html.erb")
   end
 
   def create_row
-    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
-
+<% if buggy? && controller_bugs < max_controller_bugs && create_bug?(likelihood: :high) -%>
+<% bug_option = rand(3) + 1 -%>
+<% if bug_option == 1 -%>
+    <%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 <% attributes.each do |attribute| -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params[:<%= attribute.column_name %>]
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>")
+<% end -%>
+<% elsif bug_option == 2 -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
+<% attributes.each do |attribute| -%>
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("the_<%= attribute.column_name %>")
+<% end -%>
+<% elsif bug_option == 3 -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
+<% attributes.each do |attribute| -%>
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch(<%= attribute.column_name %>)
+<% end -%>
+<% end -%>
+<% controller_bugs += 1 -%>
+<% else -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
+<% attributes.each do |attribute| -%>
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>")
+<% end -%>
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
@@ -47,16 +92,40 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def edit_form
-    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params[:prefill_with_id])
+<% if buggy? && controller_bugs < max_controller_bugs && create_bug?(likelihood: :high) -%>
+<% bug_option = rand(3) + 1 -%>
+<% if bug_option == 1 -%>
+    <%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch("prefill_with_id"))
+<% elsif bug_option == 2 -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize.downcase %>.find(params.fetch("prefill_with_id"))
+<% elsif bug_option == 3 -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch(prefill_with_id))
+<% end -%>
+<% controller_bugs += 1 -%>
+<% else -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch("prefill_with_id"))
+<% end -%>
 
     render("<%= singular_table_name.underscore %>_templates/edit_form.html.erb")
   end
 
   def update_row
-    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params[:id_to_modify])
+<% if buggy? && controller_bugs < max_controller_bugs && create_bug?(likelihood: :high) -%>
+<% bug_option = rand(3) + 1 -%>
+<% if bug_option == 1 -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
+<% elsif bug_option == 2 -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize.downcase %>.find(params.fetch("id_to_modify"))
+<% elsif bug_option == 3 -%>
+    <%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch(id_to_modify))
+<% end -%>
+<% controller_bugs += 1 -%>
+<% else -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch("id_to_modify"))
+<% end -%>
 
 <% attributes.each do |attribute| -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params[:<%= attribute.column_name %>]
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>")
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
@@ -79,9 +148,21 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def destroy_row
-    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params[:id_to_remove])
+<% if buggy? && controller_bugs < max_controller_bugs && create_bug?(likelihood: :high) -%>
+<% bug_option = rand(2) + 1 -%>
+<% if bug_option == 1 -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch("id_to_remove"))
+<% elsif bug_option == 2 -%>
+    <%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch("id_to_remove"))
+
+    <%= singular_table_name.underscore %>.destroy
+<% end -%>
+<% controller_bugs += 1 -%>
+<% else -%>
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch("id_to_remove"))
 
     @<%= singular_table_name.underscore %>.destroy
+<% end -%>
 
 <% unless skip_validation_alerts? -%>
     redirect_to("/<%= @plural_table_name.underscore %>", :notice => "<%= singular_table_name.humanize %> deleted successfully.")
@@ -96,3 +177,6 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% end -%>
   end
 end
+<% if buggy? -%>
+  <% puts "#{controller_bugs} controller bugs created" -%>
+<% end -%>
