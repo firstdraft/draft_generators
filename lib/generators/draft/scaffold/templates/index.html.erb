@@ -3,7 +3,9 @@
     <h1 class="display-4">
       <%= plural_table_name.titlecase %>
 
-      <%%= link_to fa_icon("plus"), new_<%= singular_table_name %>_path, class: "btn btn-lg btn-outline-secondary" %>
+      <%%= link_to new_<%= singular_table_name %>_path, class: "btn btn-lg btn-outline-secondary" do %>
+        <i class="fas fa-plus fa-fw"></i>
+      <%% end %>
     </h1>
   </div>
 </div>
@@ -56,7 +58,9 @@
       <h1 class="card-header h4 d-flex align-items-center justify-content-between">
         <%= plural_table_name.titlecase %>
 
-        <%%= link_to fa_icon("plus fw"), new_<%= singular_table_name %>_path, class: "btn btn-sm btn-outline-secondary" %>
+        <%%= link_to new_<%= singular_table_name %>_path, class: "btn btn-sm btn-outline-secondary" do %>
+          <i class="fas fa-plus fa-fw"></i>
+        <%% end %>
       </h1>
 
       <div class="list-group list-group-flush">
