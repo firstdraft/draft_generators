@@ -15,14 +15,35 @@ module DraftGenerators
     end
 
     def input_field_block(column)
-      "<div class=\"form-group\">
-          <\%= f.label :#{column.name}, class: \"col-sm-2 control-label\" \%>
-          <div class=\"col-sm-10\">
-            #{DraftGenerators::RailsTagService.input_tag(column)}
-          </div>
-        </div>
+      %{          
+          <!-- Devise Input for #{column.name} start -->
+          <div class="form-group">
+            <% #{column.name}_was_invalid = resource.errors.include?(:#{column.name}) %>
 
-        "
+            <% #{column.name}_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if #{column.name}_was_invalid %>
+                <% #{column.name}_class << " is-invalid" %>
+              <% else %>
+                <% #{column.name}_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :#{column.name} %>
+
+            #{DraftGenerators::RailsTagService.input_tag(column)}
+
+            <% if #{column.name}_was_invalid %>
+              <% resource.errors.full_messages_for(:#{column.name}).each do |message| %>
+                <div class="invalid-feedback">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- Devise Input for #{column.name} end -->
+}
     end
 
     def security_field_block
@@ -41,19 +62,11 @@ module DraftGenerators
     end
 
     def update_resource_button_block
-      %{<div class="form-group">
-            <div class="col-sm-10 col-sm-offset-2">
-              <%= f.submit "Update", class: "btn btn-success btn-block" %>
-            </div>
-          </div>}
+      %{          <%= f.submit "Update", class: "btn btn-block btn-outline-primary" %>}
     end
 
     def sign_in_resource_button_block
-      %{<div class="form-group">
-          <div class="col-sm-10 col-sm-offset-2">
-            <%= f.submit "Sign up", class: "btn btn-success btn-block" %>
-          </div>
-        </div>}
+      %{          <%= f.button class: "btn btn-outline-primary btn-block" %>}
     end
 
     def column_names

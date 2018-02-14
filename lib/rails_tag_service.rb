@@ -3,31 +3,31 @@
 module DraftGenerators
   class RailsTagService
     def self.text_input(field_name)
-      %{<%= f.text_field :#{field_name}, :class => "form-control", :placeholder => "Enter #{field_name.gsub("_", " ")}" %>}
+      %{<%= f.text_field :#{field_name}, :class => #{field_name}_class, :placeholder => "Enter #{field_name.gsub("_", " ")}" %>}
     end
 
     def self.text_area_input(field_name)
-      %{<%= f.text_area :#{field_name}, :class => "form-control", :placeholder => "Enter #{field_name.gsub("_", " ")}" %>}
+      %{<%= f.text_area :#{field_name}, :class => #{field_name}_class, :placeholder => "Enter #{field_name.gsub("_", " ")}" %>}
     end
 
     def self.number_field(field_name)
-      %{<%= f.number_field :#{field_name}, :class => "form-control", :placeholder => "Enter #{field_name.gsub("_", " ")}" %>}
+      %{<%= f.number_field :#{field_name}, :class => #{field_name}_class, :placeholder => "Enter #{field_name.gsub("_", " ")}" %>}
     end
 
     def self.date_select(field_name)
-      %{<%= f.date_select :#{field_name}, class: "col-sm-2 control-label" %>}
+      %{<%= f.date_select :#{field_name}, class: \#\{#{field_name}_class\} col-sm-2 control-label" %>}
     end
 
     def self.datetime_select(field_name)
-      %{<%= f.datetime_select :#{field_name}, class: "col-sm-2 control-label" %>}
+      %{<%= f.datetime_select :#{field_name}, class: "\#\{#{field_name}_class\} col-sm-2 control-label" %>}
     end
 
     def self.check_box(field_name)
-      %{<%= f.check_box :#{field_name}, class: "col-sm-2 control-label" %>}
+      %{<%= f.check_box :#{field_name}, class: "\#\{#{field_name}_class\} col-sm-2 control-label" %>}
     end
 
     def self.time_select(field_name)
-      %{<%= f.time_select :#{field_name}, class: "col-sm-2 control-label" %>}
+      %{<%= f.time_select :#{field_name}, class: "\#\{#{field_name}_class\} col-sm-2 control-label" %>}
     end
 
     def self.input_tag(column)
