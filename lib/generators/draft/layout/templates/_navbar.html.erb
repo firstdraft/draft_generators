@@ -44,13 +44,21 @@
         <%% else %>
           <li class="nav-item">
             <a href="/<%= devise_route[1].pluralize %>/edit" class="nav-link">
+              <% if devise_routes.size > 1 %>
+              <%= devise_route[1].classify %> edit profile
+              <% else %>
               Edit profile
+              <% end %>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="/<%= devise_route[1].pluralize %>/sign_out" data-method="delete" class="nav-link">
+              <% if devise_routes.size > 1 %>
+              <%= devise_route[1].classify %> sign out
+              <% else %>
               Sign out
+              <% end %>
             </a>
           </li>
         <%% end %>
