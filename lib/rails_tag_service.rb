@@ -36,7 +36,6 @@ module DraftGenerators
       when "date"; date_select(column.name)
       when "time"; time_select(column.name)
       when "boolean"; check_box(column.name)
-      when "string"; text_input(column.name)
       when "text"; text_area_input(column.name)
       when "decimal", "integer"; number_field(column.name)
       else
