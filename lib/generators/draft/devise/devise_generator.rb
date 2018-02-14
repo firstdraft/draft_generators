@@ -4,7 +4,9 @@ require "rails/generators/named_base"
 
 module Draft
   class DeviseGenerator < Rails::Generators::NamedBase
-    argument :attributes, type: :array, default: [], banner: "field:type field:type"
+    argument :attributes, type: :array, default: [],
+                          banner: "field:type field:type"
+
     include Rails::Generators::ResourceHelpers
 
     def check_for_existing_devise_model
@@ -18,6 +20,9 @@ module Draft
       unless initializer_exists?
         invoke "devise:install"
       end
+    end
+
+    def enable_scoped_views
       path = "config/initializers/devise.rb"
       uncomment_lines(path, /.*config.scoped_views = false/)
       code_to_replace = "config.scoped_views = false"
