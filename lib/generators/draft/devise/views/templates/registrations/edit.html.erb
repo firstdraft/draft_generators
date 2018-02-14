@@ -1,86 +1,207 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2 class="panel-title">Edit <%= resource_name.to_s.humanize %></h2>
-      </div>
+  <div class="offset-md-3 col-md-6">
+    <div class="card mb-3">
+      <h5 class="card-header">
+        Edit <%= resource_name.to_s.titleize %>
+      </h5>
 
-      <div class="panel-body">
+      <div class="card-body">
+        <% was_validated = resource.errors.any? %>
 
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form-horizontal", role: "form" }) do |f| %>
-          <%= devise_error_messages! %>
+        <% form_html_options = { method: :put, novalidate: true, class: "mb-3" } %>
 
-          <div class="form-group">
-            <%= f.label :email, class: "col-sm-2 control-label" %>
-            <div class="col-sm-10">
-              <%= f.email_field :email, autofocus: true, class: "form-control" %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: form_html_options) do |f| %>
+          <% if flash[:notice].present? %>
+            <div class="alert alert-info" role="alert">
+              <%= flash[:notice] %>
             </div>
-          </div>
+          <% end %>
 
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <div class="form-group">
-              <div class="col-sm-10 col-sm-offset-2">
-                <p class="help-block">
-                  Currently waiting confirmation for: <%= resource.unconfirmed_email %>
-                </p>
-              </div>
+          <% if flash[:alert].present? %>
+            <div class="alert alert-danger" role="alert">
+              <%= flash[:alert] %>
             </div>
           <% end %>
 
           <div class="form-group">
-            <%= f.label :password, class: "col-sm-2 control-label" %>
-            <div class="col-sm-10">
-              <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-              <p class="help-block">
-                Leave blank if you don't want to change it.
-              </p>
-            </div>
+            <% email_was_invalid = resource.errors.include?(:email) %>
+
+            <% email_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if email_was_invalid %>
+                <% email_class << " is-invalid" %>
+              <% else %>
+                <% email_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :email %>
+
+            <%= f.email_field :email, autofocus: true, class: email_class %>
+
+            <% if email_was_invalid %>
+              <% resource.errors.full_messages_for(:email).each do |message| %>
+                <div class="invalid-feedback">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <small class="form-text text-muted">
+                Currently awaiting confirmation for <%= resource.unconfirmed_email %>.
+              </small>
+            <% end %>
           </div>
 
           <div class="form-group">
-            <%= f.label :password_confirmation, class: "col-sm-2 control-label" %>
-            <div class="col-sm-10">
-              <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
-            </div>
+            <% password_was_invalid = resource.errors.include?(:password) %>
+
+            <% password_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if password_was_invalid %>
+                <% password_class << " is-invalid" %>
+              <% else %>
+                <% password_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :password %>
+
+            <%= f.password_field :password, class: password_class, autocomplete: "off" %>
+
+            <% if password_was_invalid %>
+              <% resource.errors.full_messages_for(:password).each do |message| %>
+                <div class="invalid-feedback">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+
+            <small class="form-text text-muted">
+              Leave blank if you don't want to change it.
+
+              <% if @minimum_password_length %>
+                <%= @minimum_password_length %> characters minimum.
+              <% end %>
+            </small>
           </div>
 
           <div class="form-group">
-            <%= f.label :current_password, class: "col-sm-2 control-label" %>
-            <div class="col-sm-10">
-              <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
-              <p class="help-block">
-                We need your current password to confirm your changes.
-              </p>
-            </div>
+            <% password_confirmation_was_invalid = resource.errors.include?(:password_confirmation) %>
+
+            <% password_confirmation_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if password_confirmation_was_invalid %>
+                <% password_confirmation_class << " is-invalid" %>
+              <% else %>
+                <% password_confirmation_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :password_confirmation %>
+
+            <%= f.password_field :password_confirmation, class: password_confirmation_class, autocomplete: "off" %>
+
+            <% if password_confirmation_was_invalid %>
+              <% resource.errors.full_messages_for(:password_confirmation).each do |message| %>
+                <div class="invalid-feedback">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
           </div>
 
           <div class="form-group">
-            <div class="col-sm-10 col-sm-offset-2">
-              <%= f.submit "Update", class: "btn btn-success btn-block" %>
-            </div>
+            <% current_password_was_invalid = resource.errors.include?(:current_password) %>
+
+            <% current_password_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if current_password_was_invalid %>
+                <% current_password_class << " is-invalid" %>
+              <% else %>
+                <% current_password_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :current_password %>
+
+            <%= f.password_field :current_password, class: current_password_class, autocomplete: "off" %>
+
+            <% if current_password_was_invalid %>
+              <% resource.errors.full_messages_for(:current_password).each do |message| %>
+                <div class="invalid-feedback">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+
+            <small class="form-text text-muted">
+              We need your current password to confirm your changes.
+            </small>
           </div>
 
           <div class="form-group">
-            <div class="col-sm-10 col-sm-offset-2">
-              <%= link_to "Back", :back, class: "btn btn-link btn-block" %>
-            </div>
+            <% first_name_class = "form-control" %>
+            <% first_name_was_invalid = resource.errors.include?(:first_name) %>
+
+            <% if was_validated %>
+              <% if first_name_was_invalid %>
+                <% first_name_class << " is-invalid" %>
+              <% else %>
+                <% first_name_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :first_name %>
+
+            <%= f.text_field :first_name, class: first_name_class, placeholder: "Enter first name" %>
+            <% if first_name_was_invalid %>
+              <% resource.errors.full_messages_for(:first_name).each do |message| %>
+                <div class="invalid-feedback">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
           </div>
+
+          <div class="form-group">
+            <% last_name_class = "form-control" %>
+            <% last_name_was_invalid = resource.errors.include?(:last_name) %>
+
+            <% if was_validated %>
+              <% if last_name_was_invalid %>
+                <% last_name_class << " is-invalid" %>
+              <% else %>
+                <% last_name_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :last_name %>
+
+            <%= f.text_field :last_name, class: last_name_class, placeholder: "Enter last name" %>
+            <% if last_name_was_invalid %>
+              <% resource.errors.full_messages_for(:last_name).each do |message| %>
+                <div class="invalid-feedback">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          <%= f.submit "Update", class: "btn btn-block btn-outline-primary" %>
         <% end %>
 
+        <%= link_to "Back", :back, class: "btn btn-block btn-outline-secondary" %>
       </div>
 
-      <div class="panel-footer">
-        <div class="row">
-          <div class="col-sm-2">
-            Unhappy?
-          </div>
-
-          <div class="col-sm-10">
-            <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger btn-block" %>
-          </div>
-        </div>
+      <div class="card-footer">
+        <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, class: "btn btn-block btn-link", method: :delete %>
       </div>
-
     </div>
   </div>
 </div>
