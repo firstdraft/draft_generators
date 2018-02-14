@@ -7,11 +7,11 @@
 
       <div class="card-body">
         <% was_validated = resource.errors.any? %>
-
+        <!-- Form html options start -->
         <% form_html_options = { method: :put, novalidate: true, class: "mb-3" } %>
-        <!-- Form for start -->
+        <!-- Form html options end -->
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: form_html_options) do |f| %>
-        <!-- Form for end -->
+
           <% if flash[:notice].present? %>
             <div class="alert alert-info" role="alert">
               <%= flash[:notice] %>
