@@ -10,13 +10,18 @@
 
     <div class="collapse navbar-collapse" id="collapsible-nav-links">
       <ul class="navbar-nav mr-auto">
-<% app_resources.each do |resource| -%>
-        <li class="nav-item">
-          <a href="/<%= resource %>" class="nav-link">
-            <%= resource.humanize.titleize %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Resources
           </a>
-        </li>
+<% app_resources.each do |resource| -%>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a href="/<%= resource %>" class="dropdown-item">
+              <%= resource.humanize.titleize %>
+            </a>
+          </div>
 <% end -%>
+        </li>
       </ul>
 <% if devise_routes.any? -%>
 <% devise_routes.each do |devise_route| -%>
