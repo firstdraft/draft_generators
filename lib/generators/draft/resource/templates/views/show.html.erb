@@ -1,11 +1,11 @@
 <h1>
   <%= singular_table_name.humanize %> #<%%= @<%= singular_table_name %>.id %> details
 </h1>
-
+<!-- Edit link <%= singular_table_name %> start -->
 <a href="/<%= plural_table_name %>/<%%= @<%= singular_table_name %>.id %>/edit">
   Edit <%= singular_table_name.humanize.downcase %>
 </a>
-
+<!-- Edit link <%= singular_table_name %> end -->
 <hr>
 
 <dl>
