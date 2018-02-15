@@ -44,9 +44,7 @@ module Draft
     end
 
     def generate_specs
-      # Hotfix to prevent specs during MSM Associations
-      return
-      # return if read_only? || skip_controller? || skip_model?
+      return if read_only? || skip_controller? || skip_model?
 
       template "specs/crud_spec.rb", "spec/features/crud_#{plural_table_name}_spec.rb"
       template "specs/factories.rb", "spec/factories/#{plural_table_name}.rb"
