@@ -40,9 +40,11 @@
 </dl>
 
 <% unless read_only? -%>
+<!-- Delete link <%= singular_table_name %> start -->
 <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>">
   Delete <%= singular_table_name.humanize.downcase %>
 </a>
+<!-- Delete link <%= singular_table_name %> end -->
 <% end -%>
 
 <hr>
