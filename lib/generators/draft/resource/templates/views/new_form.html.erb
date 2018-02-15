@@ -22,7 +22,7 @@
 <!-- Form <%= singular_table_name %> end -->
 
 <% attributes.each do |attribute| -%>
-  <!-- Label and input for <%= attribute.column_name %> -->
+  <!-- Label and input for <%= attribute.column_name %> start -->
 <% if attribute.field_type == :check_box -%>
   <div class="form-check">
     <input type="hidden" value="0" name="<%= attribute.column_name %>">
@@ -49,6 +49,7 @@
     <!-- Input for <%= attribute.column_name %> end -->
 <% end -%>
   </div>
+  <!-- Label and input for <%= attribute.column_name %> end -->
 <% end -%>
 
 <% end -%>
