@@ -27,9 +27,9 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
-    save_status = @<%= singular_table_name.underscore %>.save
+    if @<%= singular_table_name.underscore %>.valid?
+      @<%= singular_table_name.underscore %>.save
 
-    if save_status == true
       redirect_to("/<%= @plural_table_name.underscore %>", :notice => "<%= singular_table_name.humanize %> created successfully.")
     else
       render("<%= singular_table_name.underscore %>_templates/new_form.html.erb")
@@ -61,9 +61,9 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
-    save_status = @<%= singular_table_name.underscore %>.save
+    if @<%= singular_table_name.underscore %>.valid?
+      @<%= singular_table_name.underscore %>.save
 
-    if save_status == true
       redirect_to("/<%= @plural_table_name.underscore %>/#{@<%= singular_table_name.underscore %>.id}", :notice => "<%= singular_table_name.humanize %> updated successfully.")
     else
       render("<%= singular_table_name.underscore %>_templates/edit_form.html.erb")
