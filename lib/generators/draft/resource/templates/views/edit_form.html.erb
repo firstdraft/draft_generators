@@ -20,6 +20,7 @@
   <!-- Label and input for <%= attribute.column_name %> -->
 <% if attribute.field_type == :check_box -%>
   <div class="form-check">
+    <input type="hidden" value="0" name="<%= attribute.column_name %>">
     <input id="<%= attribute.column_name %>" class="form-check-input" name="<%= attribute.column_name %>" type="checkbox" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.column_name %> %>>
 
     <label for="<%= attribute.column_name %>" class="form-check-label">
