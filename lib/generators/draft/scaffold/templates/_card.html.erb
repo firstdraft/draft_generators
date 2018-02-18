@@ -13,11 +13,15 @@
     </dl>
 
     <div class="btn-group btn-group-justified mt-auto">
-      <%%= link_to_show_or_back <%= singular_table_name %>, fa_icon("search-plus"), fa_icon("chevron-left"), class: "btn btn-outline-secondary" %>
+      <%%= link_to_show_or_back <%= singular_table_name %>, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-outline-secondary" %>
 
-      <%%= link_to fa_icon("edit"), edit_<%= singular_table_name %>_url(<%= singular_table_name %>), class: "btn btn-outline-secondary" %>
+      <%%= link_to edit_<%= singular_table_name %>_url(<%= singular_table_name %>), class: "btn btn-outline-secondary" do %>
+        <i class="fas fa-edit"></i>
+      <%% end %>
 
-      <%%= link_to fa_icon("trash-o"), <%= singular_table_name %>, method: :delete, data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: "btn btn-outline-secondary" %>
+      <%%= link_to <%= singular_table_name %>, method: :delete, data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: "btn btn-outline-secondary" do %>
+        <i class="fas fa-trash-alt"></i>
+      <%% end %>
     </div>
   </div>
 
