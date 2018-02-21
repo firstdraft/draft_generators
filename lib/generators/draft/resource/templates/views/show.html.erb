@@ -34,7 +34,7 @@
 </dl>
 
 <% unless read_only? -%>
-<a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-default">
+<a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>">
   Delete <%= singular_table_name.humanize.downcase %>
 </a>
 <% end -%>
