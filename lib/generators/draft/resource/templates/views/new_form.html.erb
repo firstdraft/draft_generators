@@ -27,7 +27,7 @@
   <div class="form-check">
     <input type="hidden" value="0" name="<%= attribute.column_name %>">
     <!-- Input for <%= attribute.column_name %> start -->
-    <input id="<%= attribute.column_name %>" class="form-check-input" name="<%= attribute.column_name %>" type="checkbox" <% unless skip_validation_alerts? -%><%%= "checked" if @<%= singular_table_name %>.<%= attribute.column_name %> %><% end -%>>
+    <input id="<%= attribute.column_name %>" class="form-check-input" name="<%= attribute.column_name %>" type="checkbox" <% unless skip_validation_alerts? -%><%%= "checked" if @<%= singular_table_name %>.try(:<%= attribute.column_name %>) %><% end -%>>
     <!-- Input for <%= attribute.column_name %> end -->
     <label for="<%= attribute.column_name %>" class="form-check-label">
       <%= attribute.column_name.humanize %>
