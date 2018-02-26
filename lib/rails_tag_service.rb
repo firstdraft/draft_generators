@@ -15,19 +15,19 @@ module DraftGenerators
     end
 
     def self.date_select(field_name)
-      %{<%= f.date_select :#{field_name}, class: \#\{#{field_name}_class\} col-sm-2 control-label" %>}
+      %{<%= f.date_select :#{field_name}, class: "\#\{#{field_name}_class\} col-sm-2" %>}
     end
 
     def self.datetime_select(field_name)
-      %{<%= f.datetime_select :#{field_name}, class: "\#\{#{field_name}_class\} col-sm-2 control-label" %>}
+      %{<%= f.datetime_select :#{field_name}, class: "\#\{#{field_name}_class\} col-sm-2" %>}
     end
 
     def self.check_box(field_name)
-      %{<%= f.check_box :#{field_name}, class: "\#\{#{field_name}_class\} col-sm-2 control-label" %>}
+      %{<%= f.check_box :#{field_name}, class: "\#\{#{field_name}_class\} col-sm-2" %>}
     end
 
     def self.time_select(field_name)
-      %{<%= f.time_select :#{field_name}, class: "\#\{#{field_name}_class\} col-sm-2 control-label" %>}
+      %{<%= f.time_select :#{field_name}, class: "\#\{#{field_name}_class\} col-sm-2" %>}
     end
 
     def self.input_tag(column)
