@@ -10,6 +10,7 @@ module Draft
     include Rails::Generators::ResourceHelpers
 
     def check_for_existing_devise_model
+      return if behavior != :invoke
       if model_exists?
         say "\nYou already have a model called #{class_name}! Halting generator.\n"
         abort
