@@ -14,13 +14,13 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Resources
           </a>
-<% app_resources.each do |resource| -%>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<% app_resources.each do |resource| -%>
             <a href="/<%= resource %>" class="dropdown-item">
               <%= resource.humanize.titleize %>
             </a>
-          </div>
 <% end -%>
+        </div>
         </li>
       </ul>
 <% if devise_routes.any? -%>
