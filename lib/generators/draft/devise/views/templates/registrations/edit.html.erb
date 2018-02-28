@@ -42,7 +42,7 @@
 
             <% if email_was_invalid %>
               <% resource.errors.full_messages_for(:email).each do |message| %>
-                <div class="invalid-feedback">
+                <div class="invalid-feedback d-flex">
                   <%= message %>
                 </div>
               <% end %>
@@ -74,7 +74,7 @@
 
             <% if password_was_invalid %>
               <% resource.errors.full_messages_for(:password).each do |message| %>
-                <div class="invalid-feedback">
+                <div class="invalid-feedback d-flex">
                   <%= message %>
                 </div>
               <% end %>
@@ -108,7 +108,7 @@
 
             <% if password_confirmation_was_invalid %>
               <% resource.errors.full_messages_for(:password_confirmation).each do |message| %>
-                <div class="invalid-feedback">
+                <div class="invalid-feedback d-flex">
                   <%= message %>
                 </div>
               <% end %>
@@ -134,7 +134,7 @@
 
             <% if current_password_was_invalid %>
               <% resource.errors.full_messages_for(:current_password).each do |message| %>
-                <div class="invalid-feedback">
+                <div class="invalid-feedback d-flex">
                   <%= message %>
                 </div>
               <% end %>

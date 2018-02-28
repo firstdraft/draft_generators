@@ -36,7 +36,7 @@ module DraftGenerators
 
             <% if #{column.name}_was_invalid %>
               <% resource.errors.full_messages_for(:#{column.name}).each do |message| %>
-                <div class="invalid-feedback">
+                <div class="invalid-feedback d-flex">
                   <%= message %>
                 </div>
               <% end %>
