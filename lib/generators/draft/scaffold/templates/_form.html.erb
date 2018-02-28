@@ -32,7 +32,7 @@
 <% end -%>
     <%% if <%= attribute.name %>_was_invalid %>
       <%% <%= singular_table_name %>.errors.full_messages_for(:<%= attribute.name %>).each do |message| %>
-        <div class="invalid-feedback">
+        <div class="invalid-feedback d-flex">
           <%%= message %>
         </div>
       <%% end %>
