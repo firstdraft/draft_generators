@@ -15,34 +15,35 @@ module DraftGenerators
     end
 
     def input_field_block(column)
+      column_name = column.name
       %{          
-          <!-- Devise Input for #{column.name} start -->
+          <!-- Devise Input for #{column_name} start -->
           <div class="form-group">
-            <% #{column.name}_was_invalid = resource.errors.include?(:#{column.name}) %>
+            <% #{column_name}_was_invalid = resource.errors.include?(:#{column_name}) %>
 
-            <% #{column.name}_class = "form-control" %>
+            <% #{column_name}_class = "form-control" %>
 
             <% if was_validated %>
-              <% if #{column.name}_was_invalid %>
-                <% #{column.name}_class << " is-invalid" %>
+              <% if #{column_name}_was_invalid %>
+                <% #{column_name}_class << " is-invalid" %>
               <% else %>
-                <% #{column.name}_class << " is-valid" %>
+                <% #{column_name}_class << " is-valid" %>
               <% end %>
             <% end %>
 
-            <%= f.label :#{column.name} %>
+            <%= f.label :#{column_name} %>
 
             #{DraftGenerators::RailsTagService.input_tag(column)}
 
-            <% if #{column.name}_was_invalid %>
-              <% resource.errors.full_messages_for(:#{column.name}).each do |message| %>
+            <% if #{column_name}_was_invalid %>
+              <% resource.errors.full_messages_for(:#{column_name}).each do |message| %>
                 <div class="invalid-feedback d-flex">
                   <%= message %>
                 </div>
               <% end %>
             <% end %>
           </div>
-          <!-- Devise Input for #{column.name} end -->
+          <!-- Devise Input for #{column_name} end -->
 }
     end
 
