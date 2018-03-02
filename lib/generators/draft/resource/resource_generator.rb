@@ -22,8 +22,7 @@ module Draft
 
     def generate_model
       return if skip_model?
-
-      invoke "draft:model", ARGV
+      invoke "draft:model", [name]
     end
 
     def generate_view_files
