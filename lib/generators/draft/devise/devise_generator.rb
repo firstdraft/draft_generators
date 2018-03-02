@@ -52,16 +52,17 @@ module Draft
 
     def add_additional_fields_for_registration(devise_service)
       scope = name.underscore.pluralize
+      form_fields_to_add = devise_service.form_fields_to_add
       
       if File.exist?("app/views/#{scope}/registrations/new.html.erb")
         inject_into_file("app/views/#{scope}/registrations/new.html.erb",
-                         devise_service.form_fields_to_add,
+                         form_fields_to_add,
                          before: devise_service.sign_in_resource_button_block)
       end
 
       if File.exist?("app/views/#{scope}/registrations/edit.html.erb")
         inject_into_file("app/views/#{scope}/registrations/edit.html.erb",
-                         devise_service.form_fields_to_add,
+                         form_fields_to_add,
                          before: devise_service.update_resource_button_block)
       end
     end
