@@ -22,8 +22,11 @@ module Draft
 
     def generate_model
       return if skip_model?
+      invoke "draft:model", [name]
+    end
 
-      invoke "draft:model", ARGV
+    def create_root_folder
+      empty_directory File.join("app/views", "#{singular_table_name}_templates")
     end
 
     def generate_view_files
