@@ -10,13 +10,18 @@
 
     <div class="collapse navbar-collapse" id="collapsible-nav-links">
       <ul class="navbar-nav mr-auto">
-<% app_resources.each do |resource| -%>
-        <li class="nav-item">
-          <a href="/<%= resource %>" class="nav-link">
-            <%= resource.humanize.titleize %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Resources
           </a>
-        </li>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<% app_resources.each do |resource| -%>
+            <a href="/<%= resource %>" class="dropdown-item">
+              <%= resource.humanize.titleize %>
+            </a>
 <% end -%>
+          </div>
+        </li>
       </ul>
 <% if devise_routes.any? -%>
 <% devise_routes.each do |devise_route| -%>
@@ -24,25 +29,41 @@
         <%% if current_<%= devise_route[1]%>.blank? %>
           <li class="nav-item">
             <a href="/<%= devise_route[1].pluralize %>/sign_in" class="nav-link">
+              <% if devise_routes.size > 1 %>
+              <%= devise_route[1].classify %> sign in
+              <% else %>
               Sign in
+              <% end %>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="/<%= devise_route[1].pluralize %>/sign_up" class="nav-link">
+              <% if devise_routes.size > 1 %>
+              <%= devise_route[1].classify %> sign up
+              <% else %>
               Sign up
+              <% end %>
             </a>
           </li>
         <%% else %>
           <li class="nav-item">
             <a href="/<%= devise_route[1].pluralize %>/edit" class="nav-link">
+              <% if devise_routes.size > 1 %>
+              <%= devise_route[1].classify %> edit profile
+              <% else %>
               Edit profile
+              <% end %>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="/<%= devise_route[1].pluralize %>/sign_out" data-method="delete" class="nav-link">
+              <% if devise_routes.size > 1 %>
+              <%= devise_route[1].classify %> sign out
+              <% else %>
               Sign out
+              <% end %>
             </a>
           </li>
         <%% end %>

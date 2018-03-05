@@ -2,7 +2,7 @@
   <div class="offset-md-3 col-md-6">
     <div class="card mb-3">
       <h5 class="card-header">
-        Sign In
+        <%= resource_name != "user" ? resource_name.to_s.titleize : "" %> Sign In
       </h5>
 
       <div class="card-body">
@@ -18,7 +18,9 @@
           </div>
         <% end %>
 
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-horizontal", role: "form" }) do |f| %>
+        <% form_html_options = { novalidate: true, class: "mb-3" } %>
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: form_html_options) do |f| %>
           <div class="form-group">
             <%= f.label :email %>
             <%= f.email_field :email, autofocus: true, class: "form-control" %>
@@ -29,15 +31,17 @@
             <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
           </div>
 
-          <div class="form-check">
-            <% if devise_mapping.rememberable? -%>
+          <% if devise_mapping.rememberable? -%>
+            <div class="form-check mb-3">
               <%= f.label :remember_me, class: "form-check-label" do %>
                 <%= f.check_box :remember_me, class: "form-check-input" %> Remember me
               <% end %>
-            <% end -%>
-          </div>
+            </div>
+          <% end -%>
 
           <%= f.submit "Sign in", class: "btn btn-outline-primary btn-block" %>
+
+          <hr>
 
           <%= render "devise/shared/links" %>
         <% end %>

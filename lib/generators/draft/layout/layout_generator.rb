@@ -28,8 +28,6 @@ module Draft
 
       template "_flashes.html.erb", "app/views/shared/_flashes.html.erb"
 
-      template "_footer.html.erb", "app/views/shared/_footer.html.erb"
-
       unless skip_cdn?
         template "_bootstrapcdn_assets.html.erb", "app/views/shared/_bootstrapcdn_assets.html.erb"
       end
@@ -52,14 +50,7 @@ module Draft
     end
 
     def app_resources
-      models = ApplicationRecord.descendants.reject do |klass|
-        if klass.name == "AdminUser"
-          true
-        else
-          false
-        end
-      end
-      models.collect { |clazz| clazz.name.underscore.pluralize }
+      route_names.reject { |name| /^rails_info.*/.match(name) || /^rails_mailers.*/.match(name) || name.pluralize != name }
     end
 
     def devise_routes
