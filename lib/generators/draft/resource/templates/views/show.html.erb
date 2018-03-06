@@ -1,11 +1,11 @@
 <h1>
   <%= singular_table_name.humanize %> #<%%= @<%= singular_table_name %>.id %> details
 </h1>
-
+<!-- Edit link <%= singular_table_name %> start -->
 <a href="/<%= plural_table_name %>/<%%= @<%= singular_table_name %>.id %>/edit">
   Edit <%= singular_table_name.humanize.downcase %>
 </a>
-
+<!-- Edit link <%= singular_table_name %> end -->
 <hr>
 
 <dl>
@@ -13,30 +13,38 @@
   <dt>
     <%= attribute.human_name %>
   </dt>
+  <!-- Display <%= attribute.column_name %> start -->
   <dd>
     <%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>
   </dd>
+  <!-- Display <%= attribute.column_name %> end -->
 
 <% end -%>
   <dt>
     Created at
   </dt>
+  <!-- Display created_at start -->
   <dd>
     <%%= time_ago_in_words(@<%= singular_table_name %>.created_at) %> ago
   </dd>
+  <!-- Display created_at end -->
 
   <dt>
     Updated at
   </dt>
+  <!-- Display updated_at start -->
   <dd>
     <%%= time_ago_in_words(@<%= singular_table_name %>.updated_at) %> ago
   </dd>
+  <!-- Display updated_at end -->
 </dl>
 
 <% unless read_only? -%>
+<!-- Delete link <%= singular_table_name %> start -->
 <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>">
   Delete <%= singular_table_name.humanize.downcase %>
 </a>
+<!-- Delete link <%= singular_table_name %> end -->
 <% end -%>
 
 <hr>
@@ -44,3 +52,7 @@
 <a href="/<%= plural_table_name %>">
   Go back
 </a>
+
+<!-- Show Page Customization starts -->
+
+<!-- Show Page Customization end -->
