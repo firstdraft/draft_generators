@@ -63,11 +63,11 @@ module DraftGenerators
     end
 
     def update_resource_button_block
-      %{          <%= f.submit "Update", class: "btn col btn-outline-primary" %>}
+      %{          <%= f.submit "Update", class: "btn btn-block btn-outline-primary" %>}
     end
 
     def sign_in_resource_button_block
-      %{          <%= f.button class: "btn btn-outline-primary col" %>}
+      %{          <%= f.button class: "btn btn-outline-primary btn-block" %>}
     end
 
     def column_names

@@ -145,14 +145,14 @@
             </small>
           </div>
 
-          <%= f.submit "Update", class: "btn col btn-outline-primary" %>
+          <%= f.submit "Update", class: "btn btn-block btn-outline-primary" %>
         <% end %>
 
-        <%= link_to "Back", :back, class: "btn col btn-outline-secondary" %>
+        <%= link_to "Back", :back, class: "btn btn-block btn-outline-secondary" %>
       </div>
 
       <div class="card-footer">
-        <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, class: "btn col btn-link", method: :delete %>
+        <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, class: "btn btn-block btn-link", method: :delete %>
       </div>
     </div>
   </div>
