@@ -22,7 +22,7 @@ module Draft
 
     def generate_model
       return if skip_model?
-      invoke "draft:model", [name]
+      invoke "draft:model"
     end
 
     def create_root_folder
