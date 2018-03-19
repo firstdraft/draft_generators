@@ -89,6 +89,7 @@ module Draft
       log :route, "Index and show routes"
 
       route <<-RUBY.gsub(/^      /, "")
+      
         # Routes for the #{singular_table_name.humanize} resource:
 
         # READ
