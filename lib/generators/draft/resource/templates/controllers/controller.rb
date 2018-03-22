@@ -12,6 +12,8 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def new_form
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
+    
     render("<%= singular_table_name.underscore %>_templates/new_form.html.erb")
   end
 
