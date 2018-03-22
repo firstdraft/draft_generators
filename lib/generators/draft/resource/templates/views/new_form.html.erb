@@ -22,6 +22,8 @@
 <form action="/create_<%= singular_table_name %>"<% unless skip_post? -%> method="post"<% end -%>>
 <!-- Form <%= singular_table_name %> end -->
 
+  <!-- Hidden input for authenticity token to protect from forgery -->
+  <input name="authenticity_token" type="hidden" value="<%%= form_authenticity_token %>">
 <% attributes.each do |attribute| -%>
   <!-- Label and input for <%= attribute.column_name %> start -->
 <% if attribute.field_type == :check_box -%>
