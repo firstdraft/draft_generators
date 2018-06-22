@@ -23,12 +23,12 @@
           ID
         </th>
 
-    <% attributes.each do |attribute| -%>
+<% attributes.each do |attribute| -%>
         <th>
           <%= attribute.human_name %>
         </th>
 
-    <% end -%>
+<% end -%>
         <th>
           Created at
         </th>
@@ -49,14 +49,14 @@
         </td>
         <!-- Display <%= singular_table_name %>.id end -->
 
-    <% attributes.each do |attribute| -%>
+<% attributes.each do |attribute| -%>
         <!-- Display <%= singular_table_name %>.<%= attribute.column_name %> start -->
         <td>
           <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
         </td>
         <!-- Display <%= singular_table_name %>.<%= attribute.column_name %> end -->
 
-    <% end -%>
+<% end -%>
         <!-- Display <%= singular_table_name %>.created_at start -->
         <td>
           <%%= time_ago_in_words(<%= singular_table_name %>.created_at) %> ago
