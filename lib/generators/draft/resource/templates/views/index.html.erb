@@ -15,64 +15,67 @@
 <!-- Location Map Code end -->
 
 <hr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+          ID
+        </th>
 
-<table class="table">
-  <tr>
-    <th>
-      ID
-    </th>
+    <% attributes.each do |attribute| -%>
+        <th>
+          <%= attribute.human_name %>
+        </th>
 
-<% attributes.each do |attribute| -%>
-    <th>
-      <%= attribute.human_name %>
-    </th>
+    <% end -%>
+        <th>
+          Created at
+        </th>
 
-<% end -%>
-    <th>
-      Created at
-    </th>
+        <th>
+          Updated at
+        </th>
 
-    <th>
-      Updated at
-    </th>
+        <th>
+        </th>
+      </tr>
 
-    <th>
-    </th>
-  </tr>
+      <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+      <tr>
+        <!-- Display <%= singular_table_name %>.id start -->
+        <td>
+          <%%= <%= singular_table_name %>.id %>
+        </td>
+        <!-- Display <%= singular_table_name %>.id end -->
 
-  <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
-  <tr>
-    <!-- Display <%= singular_table_name %>.id start -->
-    <td>
-      <%%= <%= singular_table_name %>.id %>
-    </td>
-    <!-- Display <%= singular_table_name %>.id end -->
+    <% attributes.each do |attribute| -%>
+        <!-- Display <%= singular_table_name %>.<%= attribute.column_name %> start -->
+        <td>
+          <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
+        </td>
+        <!-- Display <%= singular_table_name %>.<%= attribute.column_name %> end -->
 
-<% attributes.each do |attribute| -%>
-    <!-- Display <%= singular_table_name %>.<%= attribute.column_name %> start -->
-    <td>
-      <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
-    </td>
-    <!-- Display <%= singular_table_name %>.<%= attribute.column_name %> end -->
+    <% end -%>
+        <!-- Display <%= singular_table_name %>.created_at start -->
+        <td>
+          <%%= time_ago_in_words(<%= singular_table_name %>.created_at) %> ago
+        </td>
+        <!-- Display <%= singular_table_name %>.created_at end -->
 
-<% end -%>
-    <!-- Display <%= singular_table_name %>.created_at start -->
-    <td>
-      <%%= time_ago_in_words(<%= singular_table_name %>.created_at) %> ago
-    </td>
-    <!-- Display <%= singular_table_name %>.created_at end -->
+        <!-- Display <%= singular_table_name %>.updated_at start -->
+        <td>
+          <%%= time_ago_in_words(<%= singular_table_name %>.updated_at) %> ago
+        </td>
+        <!-- Display <%= singular_table_name %>.updated_at end -->
 
-    <!-- Display <%= singular_table_name %>.updated_at start -->
-    <td>
-      <%%= time_ago_in_words(<%= singular_table_name %>.updated_at) %> ago
-    </td>
-    <!-- Display <%= singular_table_name %>.updated_at end -->
-
-    <td>
-      <a href="/<%= plural_table_name %>/<%%= <%= singular_table_name %>.id %>">
-        Show details
-      </a>
-    </td>
-  </tr>
-  <%% end %>
-</table>
+        <td>
+          <a href="/<%= plural_table_name %>/<%%= <%= singular_table_name %>.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <%% end %>
+    </table>
+  </div>
+</div>
