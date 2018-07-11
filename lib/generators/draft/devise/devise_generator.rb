@@ -6,6 +6,7 @@ module Draft
   class DeviseGenerator < Rails::Generators::NamedBase
     argument :attributes, type: :array, default: [],
                           banner: "field:type field:type"
+    class_option :with_sentinels, type: :boolean, default: false, desc: "Skip adding comments to generated files"
 
     include Rails::Generators::ResourceHelpers
 
@@ -65,6 +66,10 @@ module Draft
                          form_fields_to_add,
                          before: devise_service.update_resource_button_block)
       end
+    end
+    
+    def with_sentinels?
+      options[:with_sentinels]
     end
 
     def model_exists?

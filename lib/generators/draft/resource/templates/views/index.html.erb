@@ -6,6 +6,7 @@
   Add a new <%= singular_table_name.humanize.downcase %>
 </a>
 
+<% if with_sentinels? -%>
 <!-- Ransack Code start -->
 
 <!-- Ransack Code end -->
@@ -13,6 +14,7 @@
 <!-- Location Map Code start -->
 
 <!-- Location Map Code end -->
+<% end %>
 
 <hr>
 <div class="row mb-3">
@@ -43,31 +45,45 @@
 
       <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
       <tr>
+<% if with_sentinels? -%>
         <!-- Display <%= singular_table_name %>.id start -->
+<% end %>
         <td>
           <%%= <%= singular_table_name %>.id %>
         </td>
+<% if with_sentinels? -%>
         <!-- Display <%= singular_table_name %>.id end -->
+<% end %>
 
 <% attributes.each do |attribute| -%>
+<% if with_sentinels? -%>
         <!-- Display <%= singular_table_name %>.<%= attribute.column_name %> start -->
+<% end %>
         <td>
           <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
         </td>
+<% if with_sentinels? -%>
         <!-- Display <%= singular_table_name %>.<%= attribute.column_name %> end -->
+<% end %>
 
 <% end -%>
+<% if with_sentinels? -%>
         <!-- Display <%= singular_table_name %>.created_at start -->
+<% end %>
         <td>
           <%%= time_ago_in_words(<%= singular_table_name %>.created_at) %> ago
         </td>
+<% if with_sentinels? -%>
         <!-- Display <%= singular_table_name %>.created_at end -->
 
         <!-- Display <%= singular_table_name %>.updated_at start -->
+<% end %>
         <td>
           <%%= time_ago_in_words(<%= singular_table_name %>.updated_at) %> ago
         </td>
+<% if with_sentinels? -%>
         <!-- Display <%= singular_table_name %>.updated_at end -->
+<% end %>
 
         <td>
           <a href="/<%= plural_table_name %>/<%%= <%= singular_table_name %>.id %>">

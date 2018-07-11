@@ -7,9 +7,13 @@
 
       <div class="card-body">
         <% was_validated = resource.errors.any? %>
+<% if with_sentinels? -%>
         <!-- Form html options start -->
+<% end %>
         <% form_html_options = { novalidate: true, class: "mb-3" } %>
+<% if with_sentinels? -%>
         <!-- Form html options end -->
+<% end %>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: form_html_options) do |f| %>
 
           <div class="form-group">

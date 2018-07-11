@@ -3,11 +3,15 @@
     <h1>
       <%= singular_table_name.humanize %> #<%%= @<%= singular_table_name %>.id %> details
     </h1>
+<% if with_sentinels? -%>
     <!-- Edit link <%= singular_table_name %> start -->
+<% end %>
     <a href="/<%= plural_table_name %>/<%%= @<%= singular_table_name %>.id %>/edit">
       Edit <%= singular_table_name.humanize.downcase %>
     </a>
+<% if with_sentinels? -%>
     <!-- Edit link <%= singular_table_name %> end -->
+<% end %>
     <hr>
 
     <dl>
@@ -15,38 +19,54 @@
       <dt>
         <%= attribute.human_name %>
       </dt>
+<% if with_sentinels? -%>
       <!-- Display <%= attribute.column_name %> start -->
+<% end %>
       <dd>
         <%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>
       </dd>
+<% if with_sentinels? -%>
       <!-- Display <%= attribute.column_name %> end -->
+<% end %>
 
 <% end -%>
       <dt>
         Created at
       </dt>
+<% if with_sentinels? -%>
       <!-- Display created_at start -->
+<% end %>
       <dd>
         <%%= time_ago_in_words(@<%= singular_table_name %>.created_at) %> ago
       </dd>
+<% if with_sentinels? -%>
       <!-- Display created_at end -->
+<% end %>
 
       <dt>
         Updated at
       </dt>
+<% if with_sentinels? -%>
       <!-- Display updated_at start -->
+<% end %>
       <dd>
         <%%= time_ago_in_words(@<%= singular_table_name %>.updated_at) %> ago
       </dd>
+<% if with_sentinels? -%>
       <!-- Display updated_at end -->
+<% end %>
     </dl>
 
     <% unless read_only? -%>
+<% if with_sentinels? -%>
     <!-- Delete link <%= singular_table_name %> start -->
+<% end %>
     <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>">
       Delete <%= singular_table_name.humanize.downcase %>
     </a>
+<% if with_sentinels? -%>
     <!-- Delete link <%= singular_table_name %> end -->
+<% end %>
     <% end -%>
 
     <hr>
@@ -57,6 +77,8 @@
   </div>
 </div>
 
+<% if with_sentinels? -%>
 <!-- Show Page Customization starts -->
 
 <!-- Show Page Customization end -->
+<% end %>
