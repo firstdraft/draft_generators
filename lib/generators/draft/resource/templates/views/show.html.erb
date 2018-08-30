@@ -5,13 +5,13 @@
     </h1>
 <% if with_sentinels? -%>
     <!-- Edit link <%= singular_table_name %> start -->
-<% end %>
+<% end -%>
     <a href="/<%= plural_table_name %>/<%%= @<%= singular_table_name %>.id %>/edit">
       Edit <%= singular_table_name.humanize.downcase %>
     </a>
 <% if with_sentinels? -%>
     <!-- Edit link <%= singular_table_name %> end -->
-<% end %>
+<% end -%>
     <hr>
 
     <dl>
@@ -21,13 +21,13 @@
       </dt>
 <% if with_sentinels? -%>
       <!-- Display <%= attribute.column_name %> start -->
-<% end %>
+<% end -%>
       <dd>
         <%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>
       </dd>
 <% if with_sentinels? -%>
       <!-- Display <%= attribute.column_name %> end -->
-<% end %>
+<% end -%>
 
 <% end -%>
       <dt>
@@ -35,38 +35,38 @@
       </dt>
 <% if with_sentinels? -%>
       <!-- Display created_at start -->
-<% end %>
+<% end -%>
       <dd>
         <%%= time_ago_in_words(@<%= singular_table_name %>.created_at) %> ago
       </dd>
 <% if with_sentinels? -%>
       <!-- Display created_at end -->
-<% end %>
+<% end -%>
 
       <dt>
         Updated at
       </dt>
 <% if with_sentinels? -%>
       <!-- Display updated_at start -->
-<% end %>
+<% end -%>
       <dd>
         <%%= time_ago_in_words(@<%= singular_table_name %>.updated_at) %> ago
       </dd>
 <% if with_sentinels? -%>
       <!-- Display updated_at end -->
-<% end %>
+<% end -%>
     </dl>
 
     <% unless read_only? -%>
 <% if with_sentinels? -%>
     <!-- Delete link <%= singular_table_name %> start -->
-<% end %>
+<% end -%>
     <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>">
       Delete <%= singular_table_name.humanize.downcase %>
     </a>
 <% if with_sentinels? -%>
     <!-- Delete link <%= singular_table_name %> end -->
-<% end %>
+<% end -%>
     <% end -%>
 
     <hr>
@@ -81,4 +81,4 @@
 <!-- Show Page Customization starts -->
 
 <!-- Show Page Customization end -->
-<% end %>
+<% end -%>

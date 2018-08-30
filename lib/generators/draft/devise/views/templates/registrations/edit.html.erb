@@ -9,11 +9,11 @@
         <% was_validated = resource.errors.any? %>
 <% if with_sentinels? -%>
         <!-- Form html options start -->
-<% end %>
+<% end -%>
         <% form_html_options = { method: :put, novalidate: true, class: "mb-3" } %>
 <% if with_sentinels? -%>
         <!-- Form html options end -->
-<% end %>
+<% end -%>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: form_html_options) do |f| %>
 
           <% if flash[:notice].present? %>
