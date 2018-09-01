@@ -11,6 +11,7 @@ module Draft
       def generate_registrations
         if with_sentinels?
           view_directory :registrations_with_sentinels, "app/views/#{plural_scope}/registrations"
+          view_directory :mailer, "app/views/#{plural_scope}/mailer"
         else
           view_directory :registrations
         end
