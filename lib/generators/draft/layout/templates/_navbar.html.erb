@@ -29,41 +29,41 @@
         <%% if current_<%= devise_route[1]%>.blank? %>
           <li class="nav-item">
             <a href="/<%= devise_route[1].pluralize %>/sign_in" class="nav-link">
-              <% if devise_routes.size > 1 %>
+<% if devise_routes.size > 1 -%>
               <%= devise_route[1].classify %> sign in
-              <% else %>
+<% else -%>
               Sign in
-              <% end %>
+<% end -%>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="/<%= devise_route[1].pluralize %>/sign_up" class="nav-link">
-              <% if devise_routes.size > 1 %>
+<% if devise_routes.size > 1 -%>
               <%= devise_route[1].classify %> sign up
-              <% else %>
+<% else -%>
               Sign up
-              <% end %>
+<% end -%>
             </a>
           </li>
         <%% else %>
           <li class="nav-item">
             <a href="/<%= devise_route[1].pluralize %>/edit" class="nav-link">
-              <% if devise_routes.size > 1 %>
+<% if devise_routes.size > 1 -%>
               <%= devise_route[1].classify %> edit profile
-              <% else %>
+<% else -%>
               Edit profile
-              <% end %>
+<% end -%>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="/<%= devise_route[1].pluralize %>/sign_out" data-method="delete" class="nav-link">
-              <% if devise_routes.size > 1 %>
+<% if devise_routes.size > 1 -%>
               <%= devise_route[1].classify %> sign out
-              <% else %>
+<% else -%>
               Sign out
-              <% end %>
+<% end -%>
             </a>
           </li>
         <%% end %>
