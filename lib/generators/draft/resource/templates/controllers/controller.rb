@@ -28,7 +28,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     if @<%= singular_table_name.underscore %>.valid?
       @<%= singular_table_name.underscore %>.save
 
-      redirect_to("/<%= @plural_table_name.underscore %>", :notice => "<%= singular_table_name.humanize %> created successfully.")
+      redirect_back(:fallback_location => "/<%= @plural_table_name.underscore %>", :notice => "<%= singular_table_name.humanize %> created successfully.")
     else
       render("<%= singular_table_name.underscore %>_templates/new_form.html.erb")
     end
