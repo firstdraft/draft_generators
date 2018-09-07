@@ -1,10 +1,14 @@
-<h1>
-  All <%= plural_table_name.humanize.downcase %>
-</h1>
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      All <%= plural_table_name.humanize.downcase %>
+    </h1>
 
-<a href="/<%= plural_table_name %>/new">
-  Add a new <%= singular_table_name.humanize.downcase %>
-</a>
+    <a href="/<%= plural_table_name %>/new">
+      Add a new <%= singular_table_name.humanize.downcase %>
+    </a>
+  </div>
+</div>
 
 <% if with_sentinels? -%>
 <!-- Ransack Code start -->
@@ -17,6 +21,7 @@
 <% end -%>
 
 <hr>
+
 <div class="row mb-3">
   <div class="col-md-12">
     <table class="table">
