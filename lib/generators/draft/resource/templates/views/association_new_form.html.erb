@@ -14,7 +14,7 @@
 <% if with_sentinels? -%>
   <!-- Input for <%= attribute.column_name %> start -->
 <% end -%>
-  <input type="hidden" name="<%= attribute.column_name %>" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+  <input type="hidden" name="<%= attribute.column_name %>" value="<%%= <%= new_form_hidden_variable %> %>">
 <% if with_sentinels? -%>
   <!-- Input for <%= attribute.column_name %> end -->
 <% end -%>
