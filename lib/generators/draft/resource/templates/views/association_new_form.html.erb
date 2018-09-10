@@ -10,7 +10,15 @@
 <% if with_sentinels? -%>
   <!-- Label and input for <%= attribute.column_name %> start -->
 <% end -%>
-<% if attribute.field_type == :check_box -%>
+<% if attribute.type == :hidden -%>
+<% if with_sentinels? -%>
+  <!-- Input for <%= attribute.column_name %> start -->
+<% end -%>
+  <input type="hidden" name="<%= attribute.column_name %>" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+<% if with_sentinels? -%>
+  <!-- Input for <%= attribute.column_name %> end -->
+<% end -%>
+<% elsif attribute.field_type == :check_box -%>
   <div class="form-group">
     <label for="<%= attribute.column_name %>">
       <%= attribute.column_name.humanize %>
