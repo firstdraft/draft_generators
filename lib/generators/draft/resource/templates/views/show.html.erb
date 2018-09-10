@@ -3,16 +3,39 @@
     <h1>
       <%= singular_table_name.humanize %> #<%%= @<%= singular_table_name %>.id %> details
     </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/<%= plural_table_name %>" class="btn btn-block btn-sm btn-outline-secondary">
+          Go back
+        </a>
+      </div>
 <% if with_sentinels? -%>
     <!-- Edit link <%= singular_table_name %> start -->
 <% end -%>
-    <a href="/<%= plural_table_name %>/<%%= @<%= singular_table_name %>.id %>/edit">
-      Edit <%= singular_table_name.humanize.downcase %>
-    </a>
+      <div class="col">
+        <a href="/<%= plural_table_name %>/<%%= @<%= singular_table_name %>.id %>/edit" class="btn btn-block btn-sm btn-outline-secondary">
+          Edit <%= singular_table_name.humanize.downcase %>
+        </a>
+      </div>
 <% if with_sentinels? -%>
     <!-- Edit link <%= singular_table_name %> end -->
 <% end -%>
-    <hr>
+
+<% unless read_only? -%>
+<% if with_sentinels? -%>
+      <!-- Delete link <%= singular_table_name %> start -->
+<% end -%>
+      <div class="col">
+        <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-block btn-sm btn-outline-secondary">
+          Delete <%= singular_table_name.humanize.downcase %>
+        </a>
+      </div>
+<% if with_sentinels? -%>
+      <!-- Delete link <%= singular_table_name %> end -->
+<% end -%>
+<% end -%>
+    </div>
 
     <dl>
 <% attributes.each do |attribute| -%>
@@ -56,24 +79,6 @@
       <!-- Display updated_at end -->
 <% end -%>
     </dl>
-
-<% unless read_only? -%>
-<% if with_sentinels? -%>
-    <!-- Delete link <%= singular_table_name %> start -->
-<% end -%>
-    <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>">
-      Delete <%= singular_table_name.humanize.downcase %>
-    </a>
-<% if with_sentinels? -%>
-    <!-- Delete link <%= singular_table_name %> end -->
-<% end -%>
-<% end -%>
-
-    <hr>
-
-    <a href="/<%= plural_table_name %>">
-      Go back
-    </a>
   </div>
 </div>
 
