@@ -11,7 +11,7 @@ module Draft
     class_option :skip_redirect, type: :boolean, default: false, desc: "Skip redirecting after create, update, and destroy"
     class_option :only_new_form, type: :boolean, default: false, desc: "Generate association new form"
     class_option :new_form_name, type: :string, default: "", desc: "Partial name"
-    class_option :new_form_hidden_variable, type: :string, default: "", desc: "Association new form hidden variable name"
+    class_option :associated_table_name, type: :string, default: "", desc: "Associatiated table name"
     class_option :with_sentinels, type: :boolean, default: false, desc: "Skip adding comments to generated files"
 
     def generate_controller
@@ -135,7 +135,11 @@ module Draft
     end
 
     def new_form_hidden_variable
-      options[:new_form_hidden_variable]
+      "@#{options[:associated_table_name].singularize}.id"
+    end
+
+    def new_form_create_path
+      "create_#{singular_table_name}_from_#{options[:associated_table_name].singularize}"
     end
 
     def route(routing_code)

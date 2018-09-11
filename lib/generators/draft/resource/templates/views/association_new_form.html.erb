@@ -1,7 +1,7 @@
 <% if with_sentinels? -%>
 <!-- Form <%= singular_table_name %> start -->
 <% end -%>
-<form action="/create_<%= singular_table_name %>"<% unless skip_post? -%> method="post"<% end -%>>
+<form action="/<%= new_form_create_path %>"<% unless skip_post? -%> method="post"<% end -%>>
 <% if with_sentinels? -%>
 <!-- Form <%= singular_table_name %> end -->
 <% end -%>
