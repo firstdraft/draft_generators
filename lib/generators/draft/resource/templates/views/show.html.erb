@@ -12,7 +12,7 @@
       </div>
 
 <% if with_sentinels? -%>
-    <!-- Edit link <%= singular_table_name %> start -->
+      <!-- Edit link <%= singular_table_name %> start -->
 <% end -%>
       <div class="col">
         <a href="/<%= plural_table_name %>/<%%= @<%= singular_table_name %>.id %>/edit" class="btn btn-block btn-sm btn-outline-secondary">
@@ -20,7 +20,7 @@
         </a>
       </div>
 <% if with_sentinels? -%>
-    <!-- Edit link <%= singular_table_name %> end -->
+      <!-- Edit link <%= singular_table_name %> end -->
 <% end -%>
 
 <% unless read_only? -%>
