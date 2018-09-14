@@ -6,7 +6,7 @@
 
     <div class="row mb-3">
       <div class="col">
-        <a href="/<%= plural_table_name %>" class="btn btn-block btn-sm btn-outline-secondary">
+        <a href="/<%= plural_table_name %>" class="btn btn-block btn-outline-secondary">
           Go back
         </a>
       </div>
@@ -15,7 +15,7 @@
       <!-- Edit link <%= singular_table_name %> start -->
 <% end -%>
       <div class="col">
-        <a href="/<%= plural_table_name %>/<%%= @<%= singular_table_name %>.id %>/edit" class="btn btn-block btn-sm btn-outline-secondary">
+        <a href="/<%= plural_table_name %>/<%%= @<%= singular_table_name %>.id %>/edit" class="btn btn-block btn-outline-secondary">
           Edit <%= singular_table_name.humanize.downcase %>
         </a>
       </div>
@@ -28,7 +28,7 @@
       <!-- Delete link <%= singular_table_name %> start -->
 <% end -%>
       <div class="col">
-        <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-block btn-sm btn-outline-secondary">
+        <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-block btn-outline-secondary">
           Delete <%= singular_table_name.humanize.downcase %>
         </a>
       </div>
