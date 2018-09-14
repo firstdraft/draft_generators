@@ -62,7 +62,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 
       redirect_to("/<%= @plural_table_name.underscore %>/#{@<%= singular_table_name.underscore %>.id}", :notice => "<%= singular_table_name.humanize %> updated successfully.")
     else
-      render("<%= singular_table_name.underscore %>_templates/edit_form.html.erb")
+      render("<%= singular_table_name.underscore %>_templates/edit_form_with_errors.html.erb")
     end
 <% else -%>
     @<%= singular_table_name.underscore %>.save

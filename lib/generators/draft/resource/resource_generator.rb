@@ -158,7 +158,7 @@ module Draft
       elsif only_new_form?
         %w(association_new_form)
       else
-        %w(index new_form new_form_with_errors edit_form show)
+        %w(index new_form new_form_with_errors edit_form edit_form_with_errors show)
       end
     end
 

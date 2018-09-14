@@ -1,3 +1,16 @@
+<% unless skip_validation_alerts? -%>
+<% if with_sentinels? -%>
+<!-- Validation failure messages -->
+<% end -%>
+<%% if @<%= singular_table_name %>.errors.any? %>
+  <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%%= message %>
+    </div>
+  <%% end %>
+<%% end %>
+
+<% end -%>
 <h1>
   Edit <%= singular_table_name.humanize.downcase %> #<%%= @<%= singular_table_name %>.id %>
 </h1>
