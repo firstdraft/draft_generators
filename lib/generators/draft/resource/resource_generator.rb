@@ -154,7 +154,7 @@ module Draft
       if read_only?
         %w(index show)
       elsif skip_redirect?
-        %w(index show new_form create_row edit_form update_row destroy_row)
+        %w(index show new_form new_form_with_errors create_row edit_form update_row destroy_row)
       elsif only_new_form?
         %w(association_new_form)
       else
