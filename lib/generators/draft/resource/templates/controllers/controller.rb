@@ -12,8 +12,6 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def new_form
-    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
-
     render("<%= singular_table_name.underscore %>_templates/new_form.html.erb")
   end
 
@@ -30,7 +28,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 
       redirect_back(:fallback_location => "/<%= @plural_table_name.underscore %>", :notice => "<%= singular_table_name.humanize %> created successfully.")
     else
-      render("<%= singular_table_name.underscore %>_templates/new_form.html.erb")
+      render("<%= singular_table_name.underscore %>_templates/new_form_with_errors.html.erb")
     end
 <% else -%>
     @<%= singular_table_name.underscore %>.save
