@@ -25,11 +25,6 @@
 <!-- Form <%= singular_table_name %> end -->
 <% end -%>
 
-<% if with_sentinels? -%>
-  <!-- Hidden input for authenticity token to protect from forgery -->
-<% end -%>
-  <input name="authenticity_token" type="hidden" value="<%%= form_authenticity_token %>">
-
 <% attributes.each do |attribute| -%>
 <% if with_sentinels? -%>
   <!-- Label and input for <%= attribute.column_name %> start -->
