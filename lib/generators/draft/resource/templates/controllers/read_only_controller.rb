@@ -6,8 +6,8 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def show
-    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch("id"))
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch("id_to_display"))
 
-    render("<%= singular_table_name.underscore %>_templates/index.html.erb")
+    render("<%= singular_table_name.underscore %>_templates/show.html.erb")
   end
 end

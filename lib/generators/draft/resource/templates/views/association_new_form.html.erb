@@ -1,0 +1,67 @@
+<% if with_sentinels? -%>
+<!-- Form <%= singular_table_name %> start -->
+<% end -%>
+<form action="/<%= new_form_create_path %>"<% unless skip_post? -%> method="post"<% end -%>>
+<% if with_sentinels? -%>
+<!-- Form <%= singular_table_name %> end -->
+<% end -%>
+
+<% attributes.each do |attribute| -%>
+<% if with_sentinels? -%>
+  <!-- Label and input for <%= attribute.column_name %> start -->
+<% end -%>
+<% if attribute.type == :hidden -%>
+<% if with_sentinels? -%>
+  <!-- Input for <%= attribute.column_name %> start -->
+<% end -%>
+  <input type="hidden" name="<%= attribute.column_name %>" value="<%%= <%= new_form_hidden_variable %> %>">
+<% if with_sentinels? -%>
+  <!-- Input for <%= attribute.column_name %> end -->
+<% end -%>
+<% elsif attribute.field_type == :check_box -%>
+  <div class="form-group">
+    <label for="<%= attribute.column_name %>">
+      <%= attribute.column_name.humanize %>
+    </label>
+<% if with_sentinels? -%>
+    <!-- Input for <%= attribute.column_name %> start -->
+<% end -%>
+    <input id="<%= attribute.column_name %>" class="form-check-input" name="<%= attribute.column_name %>" type="checkbox" <% unless skip_validation_alerts? -%><%%= "checked" if @<%= singular_table_name %>.<%= attribute.column_name %> %><% end -%>>
+<% if with_sentinels? -%>
+    <!-- Input for <%= attribute.column_name %> end -->
+<% end -%>
+  </div>
+<% else -%>
+  <div class="form-group">
+    <label for="<%= attribute.column_name %>">
+      <%= attribute.column_name.humanize %>
+    </label>
+
+<% if attribute.field_type == :text_area -%>
+<% if with_sentinels? -%>
+    <!-- Input for <%= attribute.column_name %> start -->
+<% end -%>
+    <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"><% unless skip_validation_alerts? -%><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %><% end -%></textarea>
+<% if with_sentinels? -%>
+    <!-- Input for <%= attribute.column_name %> end -->
+<% end -%>
+<% else -%>
+<% if with_sentinels? -%>
+    <!-- Input for <%= attribute.column_name %> start -->
+<% end -%>
+    <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control"<% unless skip_validation_alerts? -%> value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>"<% end -%>>
+<% if with_sentinels? -%>
+    <!-- Input for <%= attribute.column_name %> end -->
+<% end -%>
+<% end -%>
+  </div>
+<% if with_sentinels? -%>
+  <!-- Label and input for <%= attribute.column_name %> end -->
+<% end -%>
+<% end -%>
+
+<% end -%>
+  <button class="btn btn-block btn-outline-secondary">
+    Create <%= singular_table_name.humanize.downcase %>
+  </button>
+</form>

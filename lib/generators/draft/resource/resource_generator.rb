@@ -9,6 +9,10 @@ module Draft
     class_option :skip_validation_alerts, type: :boolean, default: false, desc: "Skip validation failure alerts"
     class_option :skip_post, type: :boolean, default: false, desc: "Skip HTTP POST verb"
     class_option :skip_redirect, type: :boolean, default: false, desc: "Skip redirecting after create, update, and destroy"
+    class_option :only_new_form, type: :boolean, default: false, desc: "Generate association new form"
+    class_option :new_form_name, type: :string, default: "", desc: "Partial name"
+    class_option :associated_table_name, type: :string, default: "", desc: "Associatiated table name"
+    class_option :with_sentinels, type: :boolean, default: false, desc: "Skip adding comments to generated files"
 
     def generate_controller
       return if skip_controller?
@@ -32,7 +36,7 @@ module Draft
     def generate_view_files
       available_views.each do |view|
         filename = view_filename_with_extensions(view)
-        template filename, File.join("app/views", "#{singular_table_name}_templates", File.basename(filename))
+        template filename, File.join("app/views", "#{singular_table_name}_templates", File.basename(options[:new_form_name].presence || filename))
       end
     end
 
@@ -87,6 +91,7 @@ module Draft
       log :route, "Index and show routes"
 
       route <<-RUBY.gsub(/^      /, "")
+      
         # Routes for the #{singular_table_name.humanize} resource:
 
         # READ
@@ -98,11 +103,11 @@ module Draft
     end
 
     def skip_controller?
-      options[:skip_controller]
+      options[:skip_controller] || options[:only_new_form]
     end
 
     def skip_model?
-      options[:skip_model]
+      options[:skip_model] || options[:only_new_form]
     end
 
     def read_only?
@@ -121,6 +126,22 @@ module Draft
       options[:skip_redirect]
     end
 
+    def only_new_form?
+      options[:only_new_form]
+    end
+
+    def with_sentinels?
+      options[:with_sentinels]
+    end
+
+    def new_form_hidden_variable
+      "@#{options[:associated_table_name].singularize}.id"
+    end
+
+    def new_form_create_path
+      "create_#{singular_table_name}_from_#{options[:associated_table_name].singularize}"
+    end
+
     def route(routing_code)
       sentinel = /\.routes\.draw do(?:\s*\|map\|)?\s*$/
 
@@ -134,8 +155,10 @@ module Draft
         %w(index show)
       elsif skip_redirect?
         %w(index show new_form create_row edit_form update_row destroy_row)
+      elsif only_new_form?
+        %w(association_new_form)
       else
-        %w(index new_form edit_form show)
+        %w(index new_form new_form_with_errors edit_form edit_form_with_errors show)
       end
     end
 

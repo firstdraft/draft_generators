@@ -1,3 +1,16 @@
+<% unless skip_validation_alerts? -%>
+<!-- Validation failure messages -->
+<%% if @<%= singular_table_name %>.present? %>
+  <%% if @<%= singular_table_name %>.errors.any? %>
+    <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%%= message %>
+      </div>
+    <%% end %>
+  <%% end %>
+<%% end %>
+
+<% end -%>
 <h1>
   Add a new <%= singular_table_name.humanize.downcase %>
 </h1>
@@ -23,7 +36,7 @@
 <% if with_sentinels? -%>
     <!-- Input for <%= attribute.column_name %> start -->
 <% end -%>
-    <input id="<%= attribute.column_name %>" class="form-check-input" name="<%= attribute.column_name %>" type="checkbox">
+    <input id="<%= attribute.column_name %>" class="form-check-input" name="<%= attribute.column_name %>" type="checkbox" <% unless skip_validation_alerts? -%><%%= "checked" if @<%= singular_table_name %>.<%= attribute.column_name %> %><% end -%>>
 <% if with_sentinels? -%>
     <!-- Input for <%= attribute.column_name %> end -->
 <% end -%>
@@ -41,7 +54,7 @@
 <% if with_sentinels? -%>
     <!-- Input for <%= attribute.column_name %> start -->
 <% end -%>
-    <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"></textarea>
+    <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"><% unless skip_validation_alerts? -%><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %><% end -%></textarea>
 <% if with_sentinels? -%>
     <!-- Input for <%= attribute.column_name %> end -->
 <% end -%>
@@ -49,7 +62,7 @@
 <% if with_sentinels? -%>
     <!-- Input for <%= attribute.column_name %> start -->
 <% end -%>
-    <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
+    <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control"<% unless skip_validation_alerts? -%> value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>"<% end -%>>
 <% if with_sentinels? -%>
     <!-- Input for <%= attribute.column_name %> end -->
 <% end -%>
