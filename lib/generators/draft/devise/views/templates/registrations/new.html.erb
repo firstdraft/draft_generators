@@ -6,6 +6,18 @@
       </h5>
 
       <div class="card-body">
+        <% if flash[:notice].present? %>
+          <div class="alert alert-info" role="alert">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
+
+        <% if flash[:alert].present? %>
+          <div class="alert alert-danger" role="alert">
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
+        
         <% was_validated = resource.errors.any? %>
 
         <% form_html_options = { novalidate: true, class: "mb-3" } %>
