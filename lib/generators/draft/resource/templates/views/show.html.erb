@@ -45,7 +45,7 @@
       <% if with_sentinels? -%>
       <!-- Form <%= singular_table_name %> start -->
       <% end -%>
-      <form action="/patch_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>"<% unless skip_post? -%> method="post"<% end -%>>
+      <form action="/modify_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>"<% unless skip_post? -%> method="post"<% end -%>>
       <% if with_sentinels? -%>
       <!-- Form <%= singular_table_name %> end -->
       <% end -%>

@@ -10,7 +10,7 @@
 
     <hr>
 
-    <form action="/post_<%= singular_table_name %>"<% unless skip_post? -%> method="post"<% end -%>>
+    <form action="/insert_<%= singular_table_name %>"<% unless skip_post? -%> method="post"<% end -%>>
   
     <% attributes.each do |attribute| -%>
 
