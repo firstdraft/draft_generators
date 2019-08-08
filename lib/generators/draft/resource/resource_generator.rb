@@ -71,7 +71,7 @@ module Draft
         # CREATE
         match("/post_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create", :via => "post"})
         
-        #{skip_post? ? "get" : "post"}("/create_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create_row" })
+        #{skip_post? ? "get" : "post"}#("/create_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create_row" })
         
         # READ
         match("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index", :via => "get"})
