@@ -37,7 +37,7 @@
 
       <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :datetime -%>
 
-        <input type="datetime" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
+        <input type="datetime-local" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
 
       <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :date -%>
 
