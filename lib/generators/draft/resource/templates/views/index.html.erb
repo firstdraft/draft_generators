@@ -35,7 +35,7 @@
 
           <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"></textarea>
 
-      <% elsif attribute.field_type == :datetime -%>
+      <% elsif attribute.field_type.to_s.gsub("_select") == :datetime -%>
 
         <input type="datetime" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
 
@@ -52,7 +52,7 @@
           <input type="number" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
 
       <% else -%>
-          <input type="<%= attribute.field_type %>" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
+          <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
       <% end -%>
         </div>
 
