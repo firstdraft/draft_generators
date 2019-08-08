@@ -44,10 +44,10 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
         end
   
         format.html do
-          redirect_back({ :fallback_location => "/<%= plural_table_name.underscore %>", :notice => "<%= singular_table_name.humanize %> created successfully."})
+          redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> created successfully."})
         end
       end
-      redirect_back({ :fallback_location => "/<%= @plural_table_name.underscore %>", :notice => "<%= singular_table_name.humanize %> created successfully."})
+
     else
       respond_to do |format|
         format.json do
@@ -55,7 +55,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
         end
   
         format.html do
-          redirect_back({ :fallback_location => "/<%= plural_table_name.underscore %>", :notice => "<%= singular_table_name.humanize %> failed to create successfully."})
+          redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> failed to create successfully."})
         end
       end
     end
