@@ -35,25 +35,25 @@
 
           <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"></textarea>
 
-      <% elsif attribute.field_type.to_s.gsub("_select") == :datetime -%>
+      <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :datetime -%>
 
         <input type="datetime" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
 
-      <% elsif attribute.field_type == :date -%>
+      <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :date -%>
 
         <input type="date" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
 
-      <% elsif attribute.field_type == :time -%>
+      <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :time -%>
 
             <input type="time" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
 
-      <% elsif attribute.field_type == :integer -%>
+      <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :integer -%>
 
           <input type="number" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
 
       <% else -%>
           <%= attribute.field_type.to_s %>
-          <%= attribute.field_type.to_s.gsub("_select") %>
+          <%= attribute.field_type.to_s.gsub(/_.*/, "").to_sym %>
           <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
       <% end -%>
         </div>
