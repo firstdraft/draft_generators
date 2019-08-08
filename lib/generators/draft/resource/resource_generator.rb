@@ -69,18 +69,16 @@ module Draft
         # Routes for the #{singular_table_name.humanize} resource:
 
         # CREATE
-        match("/post_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create", :via => "post"})
-        
-        #{skip_post? ? "get" : "post"}#("/create_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create_row" })
-        
+        match("/post_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create", :via => "#{skip_post? ? "get" : "post"}"})
+                
         # READ
         match("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index", :via => "get"})
         
         match("/#{plural_table_name}/:rt_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "show", :via => "get"})
         
         # UPDATE
-        match("/patch_#{singular_table_name}/:rt_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "update", :via => "post"})
-        #{skip_post? ? "get" : "post"}("/update_#{singular_table_name}/:id_to_modify", { :controller => "#{plural_table_name}", :action => "update_row" })
+        
+        match("/patch_#{singular_table_name}/:rt_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "update", :via => "#{skip_post? ? "get" : "post"}"})
         
         # DELETE
         match("/delete_#{singular_table_name}/:rt_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "destroy", :via => "get"})
