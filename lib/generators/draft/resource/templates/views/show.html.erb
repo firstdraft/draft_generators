@@ -75,57 +75,29 @@
           </label>
 
       <% if attribute.field_type == :text_area -%>
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> start -->
-        <% end -%>
-            <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> end -->
-        <% end -%>
+
+        <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
+
       <% elsif attribute.field_type == :datetime -%>
 
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> start -->
-        <% end -%>
-          <input type="datetime" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> end -->
-        <% end -%>
+        <input type="datetime" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+
       <% elsif attribute.field_type == :date -%>
 
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> start -->
-        <% end -%>
-          <input type="date" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> end -->
-        <% end -%>
+        <input type="date" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+        
       <% elsif attribute.field_type == :time -%>
 
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> start -->
-        <% end -%>
-          <input type="time" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> end -->
-        <% end -%>
+        <input type="time" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+
       <% elsif attribute.field_type == :integer -%>
 
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> start -->
-        <% end -%>
-          <input type="number" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> end -->
-        <% end -%>
+          <input type="number" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+ 
       <% else -%>
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> start -->
-        <% end -%>
-            <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> end -->
-        <% end -%>
+
+        <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+
       <% end -%>
         </div>
       <% if with_sentinels? -%>
