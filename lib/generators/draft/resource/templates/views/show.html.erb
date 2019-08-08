@@ -78,6 +78,22 @@
 
         <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
 
+      <% elsif attribute.field_type == :datetime -%>
+
+        <input type="datetime" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+
+      <% elsif attribute.field_type == :date -%>
+
+        <input type="date" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+        
+      <% elsif attribute.field_type == :time -%>
+
+        <input type="time" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+
+      <% elsif attribute.field_type == :integer -%>
+
+          <input type="number" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+ 
       <% else -%>
 
         <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
