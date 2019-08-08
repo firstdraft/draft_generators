@@ -52,6 +52,8 @@
           <input type="number" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
 
       <% else -%>
+          <%= attribute.field_type.to_s %>
+          <%= attribute.field_type.to_s.gsub("_select") %>
           <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
       <% end -%>
         </div>
