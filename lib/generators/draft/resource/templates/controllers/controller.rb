@@ -32,7 +32,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 
 <% attributes.each do |attribute| -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>", nil)
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch(:<%= attribute.column_name %>, nil)
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
@@ -44,12 +44,20 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
         end
   
         format.html do
-          redirect_back({ :fallback_location => "/<%= plural_table_name.underscore %>/<%= singular_table_name %>", :notice => "<%= singular_table_name.humanize %> created successfully."})
+          redirect_back({ :fallback_location => "/<%= plural_table_name.underscore %>", :notice => "<%= singular_table_name.humanize %> created successfully."})
         end
       end
-      redirect_back(:fallback_location => "/<%= @plural_table_name.underscore %>", {:notice => "<%= singular_table_name.humanize %> created successfully."})
+      redirect_back({ :fallback_location => "/<%= @plural_table_name.underscore %>", :notice => "<%= singular_table_name.humanize %> created successfully."})
     else
-      render("<%= singular_table_name.underscore %>_templates/new_form_with_errors.html.erb")
+      respond_to do |format|
+        format.json do
+          render({ :json => @<%= singular_table_name.underscore %>.as_json })
+        end
+  
+        format.html do
+          redirect_back({ :fallback_location => "/<%= plural_table_name.underscore %>", :notice => "<%= singular_table_name.humanize %> failed to create successfully."})
+        end
+      end
     end
 <% else -%>
     @<%= singular_table_name.underscore %>.save
@@ -69,7 +77,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where(:id => the_id).at(0)
 
 <% attributes.each do |attribute| -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch(:<%= attribute.column_name %>, @<%= singular_table_name.underscore %><.%= attribute.column_name %>)
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch(:<%= attribute.column_name %>, @<%= singular_table_name.underscore %>.<%= attribute.column_name %>)
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
@@ -84,7 +92,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
           redirect_to("/<%= @plural_table_name.underscore %>/#{@<%= singular_table_name.underscore %>.id}", {:notice => "<%= singular_table_name.humanize %> updated successfully."})
         end
     else
-      # render("<%= singular_table_name.underscore %>_templates/edit_form_with_errors.html.erb")
+      # render({:template => "/<%= @plural_table_name.underscore %>/edit_form_with_errors.html.erb"})
       respond_to do |format|
         format.json do
           render({ :json => @<%= singular_table_name.underscore %>.as_json })
@@ -112,12 +120,20 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def destroy
-    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch("rt_<%= singular_table_name %>_id"))
+    the_id = params.fetch(:rt_<%= singular_table_name %>_id)
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).first
 
     @<%= singular_table_name.underscore %>.destroy
 
 <% unless skip_validation_alerts? -%>
-    redirect_to("/<%= @plural_table_name.underscore %>", {:notice => "<%= singular_table_name.humanize %> deleted successfully."})
+  respond_to do |format|
+    format.json do
+      render({ :json => @<%= singular_table_name.underscore %>.as_json })
+    end
+
+    format.html do
+      redirect_to("/<%= @plural_table_name.underscore %>", {:notice => "<%= singular_table_name.humanize %> deleted successfully."})
+    end
 <% else -%>
 <% unless skip_redirect? -%>
     redirect_to("/<%= @plural_table_name.underscore %>")
