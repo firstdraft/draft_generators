@@ -14,51 +14,50 @@
   
     <% attributes.each do |attribute| -%>
 
-    <% if attribute.field_type == :check_box -%>
-      <div class="form-check">
-        <input type="hidden" value="0" name="<%= attribute.column_name %>">
+      <% if attribute.field_type == :check_box -%>
+        <div class="form-check">
+          <input type="hidden" value="0" name="<%= attribute.column_name %>">
 
-        <input id="<%= attribute.column_name %>" class="form-check-input" name="<%= attribute.column_name %>" type="checkbox">
+          <input id="<%= attribute.column_name %>" class="form-check-input" name="<%= attribute.column_name %>" type="checkbox">
 
-        <label for="<%= attribute.column_name %>" class="form-check-label">
-          <%= attribute.column_name.humanize %>
-        </label>
-      </div>
-    <% else -%>
-      <div class="form-group">
-        <label for="<%= attribute.column_name %>">
-          <%= attribute.column_name.humanize %>
-        </label>
+          <label for="<%= attribute.column_name %>" class="form-check-label">
+            <%= attribute.column_name.humanize %>
+          </label>
+        </div>
+      <% else -%>
+        <div class="form-group">
+          <label for="<%= attribute.column_name %>">
+            <%= attribute.column_name.humanize %>
+          </label>
 
-    <% end -%>
-    <% if attribute.field_type == :text_area -%>
+      <% end -%>
+      <% if attribute.field_type == :text_area -%>
 
-        <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"></textarea>
+          <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"></textarea>
 
-    <% elsif attribute.field_type == :datetime -%>
+      <% elsif attribute.field_type == :datetime -%>
 
-      <input type="datetime" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
+        <input type="datetime" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
 
-    <% elsif attribute.field_type == :date -%>
+      <% elsif attribute.field_type == :date -%>
 
-      <input type="date" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
+        <input type="date" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
 
-    <% elsif attribute.field_type == :time -%>
+      <% elsif attribute.field_type == :time -%>
 
-          <input type="time" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
+            <input type="time" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
 
-    <% elsif attribute.field_type == :integer -%>
+      <% elsif attribute.field_type == :integer -%>
 
-        <input type="number" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
+          <input type="number" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
 
-    <% else -%>
-        <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
-    <% end -%>
-      </div>
-
-    <% end -%>
+      <% else -%>
+          <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control">
+      <% end -%>
+        </div>
 
     <% end -%>
+
       <button class="btn btn-block btn-outline-secondary">
         Create <%= singular_table_name.humanize.downcase %>
       </button>
