@@ -91,6 +91,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
         format.html do
           redirect_to("/<%= @plural_table_name.underscore %>/#{@<%= singular_table_name.underscore %>.id}", {:notice => "<%= singular_table_name.humanize %> updated successfully."})
         end
+      end
     else
       # render({:template => "/<%= @plural_table_name.underscore %>/edit_form_with_errors.html.erb"})
       respond_to do |format|
@@ -101,6 +102,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
         format.html do
           render({ :template => "<%= plural_table_name.underscore %>/show.html.erb" })
         end
+      end
     end
 <% else -%>
     @<%= singular_table_name.underscore %>.save
@@ -134,6 +136,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     format.html do
       redirect_to("/<%= @plural_table_name.underscore %>", {:notice => "<%= singular_table_name.humanize %> deleted successfully."})
     end
+  end
 <% else -%>
 <% unless skip_redirect? -%>
     redirect_to("/<%= @plural_table_name.underscore %>")
@@ -148,6 +151,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
       format.html do
         redirect_to("/<%= @plural_table_name.underscore %>", {:notice => "<%= singular_table_name.humanize %> deleted successfully."})
       end
+    end
     render("<%= singular_table_name.underscore %>_templates/destroy_row.html.erb")
 <% end -%>
 <% end -%>
