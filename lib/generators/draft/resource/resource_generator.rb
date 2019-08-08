@@ -69,7 +69,7 @@ module Draft
         # Routes for the #{singular_table_name.humanize} resource:
 
         # CREATE
-        match("/post_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create", :via => "#{skip_post? ? "get" : "post"}"})
+        match("/insert_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create", :via => "#{skip_post? ? "get" : "post"}"})
                 
         # READ
         match("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index", :via => "get"})
@@ -78,7 +78,7 @@ module Draft
         
         # UPDATE
         
-        match("/patch_#{singular_table_name}/:rt_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "update", :via => "#{skip_post? ? "get" : "post"}"})
+        match("/modify_#{singular_table_name}/:rt_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "update", :via => "#{skip_post? ? "get" : "post"}"})
         
         # DELETE
         match("/delete_#{singular_table_name}/:rt_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "destroy", :via => "get"})
