@@ -77,7 +77,11 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where(:id => the_id).at(0)
 
 <% attributes.each do |attribute| -%>
+<% if attribute.field_type == :check_box -%>
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch(:<%= attribute.column_name %>, false)
+<% else %>
     @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch(:<%= attribute.column_name %>, @<%= singular_table_name.underscore %>.<%= attribute.column_name %>)
+<% end %>
 <% end -%>
 
 <% unless skip_validation_alerts? -%>

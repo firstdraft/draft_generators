@@ -11,16 +11,6 @@
         </a>
       </div>
 
-<% if with_sentinels? -%>
-      <!-- Edit link <%= singular_table_name %> start -->
-<% end -%>
-      <div class="col">
-
-      </div>
-<% if with_sentinels? -%>
-      <!-- Edit link <%= singular_table_name %> end -->
-<% end -%>
-
 <% unless read_only? -%>
 <% if with_sentinels? -%>
       <!-- Delete link <%= singular_table_name %> start -->
@@ -35,84 +25,7 @@
 <% end -%>
 <% end -%>
     </div>
-    <div>
-      <h1>
-        Edit <%= singular_table_name.humanize.downcase %> #<%%= @<%= singular_table_name %>.id %>
-      </h1>
 
-      <hr>
-
-      <% if with_sentinels? -%>
-      <!-- Form <%= singular_table_name %> start -->
-      <% end -%>
-      <form action="/modify_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>"<% unless skip_post? -%> method="post"<% end -%>>
-      <% if with_sentinels? -%>
-      <!-- Form <%= singular_table_name %> end -->
-      <% end -%>
-
-      <% attributes.each do |attribute| -%>
-      <% if with_sentinels? -%>
-        <!-- Label and input for <%= attribute.column_name %> start -->
-      <% end -%>
-      <% if attribute.field_type == :check_box -%>
-        <div class="form-check">
-          <input type="hidden" value="0" name="<%= attribute.column_name %>">
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> start -->
-        <% end -%>
-          <input id="<%= attribute.column_name %>" class="form-check-input" name="<%= attribute.column_name %>" type="checkbox" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.column_name %> %>>
-        <% if with_sentinels? -%>
-            <!-- Input for <%= attribute.column_name %> end -->
-        <% end -%>
-          <label for="<%= attribute.column_name %>" class="form-check-label">
-            <%= attribute.column_name.humanize %>
-          </label>
-        </div>
-      <% else -%>
-        <div class="form-group">
-          <label for="<%= attribute.column_name %>">
-            <%= attribute.column_name.humanize %>
-          </label>
-
-      <% if attribute.field_type == :text_area -%>
-
-        <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
-
-      <% elsif attribute.field_type == :datetime -%>
-
-        <input type="datetime" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
-
-      <% elsif attribute.field_type == :date -%>
-
-        <input type="date" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
-        
-      <% elsif attribute.field_type == :time -%>
-
-        <input type="time" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
-
-      <% elsif attribute.field_type == :integer -%>
-
-          <input type="number" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
- 
-      <% else -%>
-
-        <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
-
-      <% end -%>
-        </div>
-      <% if with_sentinels? -%>
-        <!-- Label and input for <%= attribute.column_name %> end -->
-      <% end -%>
-      <% end -%>
-
-      <% end -%>
-        <button class="btn btn-block btn-outline-secondary">
-          Update <%= singular_table_name.humanize.downcase %>
-        </button>
-      </form>
-
-      <hr>
-    </div>
     <dl>
 <% attributes.each do |attribute| -%>
       <dt>
@@ -158,8 +71,60 @@
   </div>
 </div>
 
+<hr>
+
 <% if with_sentinels? -%>
 <!-- Show Page Customization starts -->
 
 <!-- Show Page Customization end -->
 <% end -%>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h2>
+      Edit <%= singular_table_name.humanize.downcase %>
+    </h2>
+
+    <form action="/modify_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" <% unless skip_post? -%> method="post" <% end -%>>
+<% attributes.each do |attribute| -%>
+<% if attribute.field_type == :check_box -%>
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.column_name %> %>>
+
+        <label class="custom-control-label"
+          for="<%= attribute.column_name %>"><%= attribute.column_name.humanize %></label>
+      </div>
+
+<% else -%>
+      <div class="form-group">
+        <label for="<%= attribute.column_name %>">
+          <%= attribute.column_name.humanize %>
+        </label>
+
+<% if attribute.field_type == :text_area -%>
+        <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control"
+          rows="3"><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
+<% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :datetime -%>
+        <input type="datetime-local" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>"
+          class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+<% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :date -%>
+        <input type="date" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+<% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :time -%>
+        <input type="time" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+<% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :integer -%>
+        <input type="number" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+<% else -%>
+        <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+<% end -%>
+      </div>
+
+<% end -%>
+<% end -%>
+      <button class="btn btn-block btn-outline-secondary">
+        Create <%= singular_table_name.humanize.downcase %>
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
