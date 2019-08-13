@@ -1,6 +1,6 @@
 class <%= plural_table_name.camelize %>Controller < ApplicationController
   def index
-    @<%= plural_table_name.underscore %> = <%= class_name.singularize %>.all
+    @<%= plural_table_name.underscore %> = <%= class_name.singularize %>.all.order({ :created_at => :desc })
     
     respond_to do |format|
       format.json do
