@@ -128,15 +128,15 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     @<%= singular_table_name.underscore %>.destroy
 
 <% unless skip_validation_alerts? -%>
-  respond_to do |format|
-    format.json do
-      render({ :json => @<%= singular_table_name.underscore %>.as_json })
-    end
+    respond_to do |format|
+      format.json do
+        render({ :json => @<%= singular_table_name.underscore %>.as_json })
+      end
 
-    format.html do
-      redirect_to("/<%= @plural_table_name.underscore %>", {:notice => "<%= singular_table_name.humanize %> deleted successfully."})
+      format.html do
+        redirect_to("/<%= @plural_table_name.underscore %>", {:notice => "<%= singular_table_name.humanize %> deleted successfully."})
+      end
     end
-  end
 <% else -%>
 <% unless skip_redirect? -%>
     redirect_to("/<%= @plural_table_name.underscore %>")
