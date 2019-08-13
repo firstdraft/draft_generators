@@ -14,7 +14,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def show
-    the_id = params.fetch(:rt_<%= singular_table_name %>_id)
+    the_id = params.fetch(:route_<%= singular_table_name %>_id)
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({:id => the_id }).first
 
     respond_to do |format|
@@ -73,7 +73,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def update
-    the_id = params.fetch(:rt_<%= singular_table_name %>_id)
+    the_id = params.fetch(:route_<%= singular_table_name %>_id)
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where(:id => the_id).at(0)
 
 <% attributes.each do |attribute| -%>
@@ -122,7 +122,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def destroy
-    the_id = params.fetch(:rt_<%= singular_table_name %>_id)
+    the_id = params.fetch(:route_<%= singular_table_name %>_id)
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).first
 
     @<%= singular_table_name.underscore %>.destroy
