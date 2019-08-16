@@ -29,6 +29,10 @@ module Draft
       invoke "draft:model"
     end
 
+    # def install_graphiti
+    #   invoke "graphiti:install"
+    # end
+
     def create_root_folder
       empty_directory File.join("app/views", "#{plural_table_name}")
     end
@@ -70,16 +74,16 @@ module Draft
 
         # CREATE
         match("/insert_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create", :via => "#{skip_post? ? "get" : "post"}"})
-                
+
         # READ
         match("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index", :via => "get"})
-        
+
         match("/#{plural_table_name}/:route_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "show", :via => "get"})
-        
+
         # UPDATE
-        
+
         match("/modify_#{singular_table_name}/:route_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "update", :via => "#{skip_post? ? "get" : "post"}"})
-        
+
         # DELETE
         match("/delete_#{singular_table_name}/:route_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "destroy", :via => "get"})
 
@@ -91,13 +95,13 @@ module Draft
       log :route, "Index and show routes"
 
       route <<-RUBY.gsub(/^      /, "")
-      
+
         # Routes for the #{singular_table_name.humanize} resource:
 
         # READ
         match("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index", :via => "get"})
         match("/#{plural_table_name}/:route_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "show", :via => "get"})
-        
+
         #------------------------------
       RUBY
     end
