@@ -14,3 +14,8 @@ group :development do
 end
 
 gem 'devise'
+gem "graphiti"
+gem "graphiti-rails"
+gem "kaminari", "~> 1.0"
+gem "responders", "~> 2.4"
+gem "vandal_ui"
