@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Raghu Betina".freeze]
-  s.date = "2019-05-01"
+  s.date = "2019-08-27"
   s.description = "This is a set of generators that help beginners learn to program. Primarily, they generate code that is more explicit and verbose and less idiomatic and \u201Cmagical\u201D than the built-in scaffold generator, which is helpful for beginners while they are learning how exactly things are wired together.".freeze
   s.email = "raghu@firstdraft.com".freeze
   s.extra_rdoc_files = [
@@ -87,7 +87,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/raghubetina/draft_generators".freeze
   s.licenses = ["MIT".freeze]
-  s.rubygems_version = "2.7.8".freeze
+  s.rubygems_version = "3.0.3".freeze
   s.summary = "Generators that help beginners learn to program.".freeze
 
   if s.respond_to? :specification_version then
@@ -95,6 +95,11 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<devise>.freeze, [">= 0"])
+      s.add_runtime_dependency(%q<graphiti>.freeze, [">= 0"])
+      s.add_runtime_dependency(%q<graphiti-rails>.freeze, [">= 0"])
+      s.add_runtime_dependency(%q<kaminari>.freeze, ["~> 1.0"])
+      s.add_runtime_dependency(%q<responders>.freeze, ["~> 2.4"])
+      s.add_runtime_dependency(%q<vandal_ui>.freeze, [">= 0"])
       s.add_development_dependency(%q<rspec>.freeze, ["~> 3.5.0"])
       s.add_development_dependency(%q<rdoc>.freeze, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>.freeze, ["~> 1.0"])
@@ -102,6 +107,11 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<simplecov>.freeze, [">= 0"])
     else
       s.add_dependency(%q<devise>.freeze, [">= 0"])
+      s.add_dependency(%q<graphiti>.freeze, [">= 0"])
+      s.add_dependency(%q<graphiti-rails>.freeze, [">= 0"])
+      s.add_dependency(%q<kaminari>.freeze, ["~> 1.0"])
+      s.add_dependency(%q<responders>.freeze, ["~> 2.4"])
+      s.add_dependency(%q<vandal_ui>.freeze, [">= 0"])
       s.add_dependency(%q<rspec>.freeze, ["~> 3.5.0"])
       s.add_dependency(%q<rdoc>.freeze, ["~> 3.12"])
       s.add_dependency(%q<bundler>.freeze, ["~> 1.0"])
@@ -110,6 +120,11 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<devise>.freeze, [">= 0"])
+    s.add_dependency(%q<graphiti>.freeze, [">= 0"])
+    s.add_dependency(%q<graphiti-rails>.freeze, [">= 0"])
+    s.add_dependency(%q<kaminari>.freeze, ["~> 1.0"])
+    s.add_dependency(%q<responders>.freeze, ["~> 2.4"])
+    s.add_dependency(%q<vandal_ui>.freeze, [">= 0"])
     s.add_dependency(%q<rspec>.freeze, ["~> 3.5.0"])
     s.add_dependency(%q<rdoc>.freeze, ["~> 3.12"])
     s.add_dependency(%q<bundler>.freeze, ["~> 1.0"])

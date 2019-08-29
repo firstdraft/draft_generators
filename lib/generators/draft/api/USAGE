@@ -1,0 +1,11 @@
+Description:
+
+    Blah blah blah:
+
+     - blah
+     - blah
+     - blah
+
+Examples:
+
+    rails generate draft:api post

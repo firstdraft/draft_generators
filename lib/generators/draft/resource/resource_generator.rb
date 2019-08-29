@@ -13,6 +13,7 @@ module Draft
     class_option :new_form_name, type: :string, default: "", desc: "Partial name"
     class_option :associated_table_name, type: :string, default: "", desc: "Associatiated table name"
     class_option :with_sentinels, type: :boolean, default: false, desc: "Skip adding comments to generated files"
+    class_option :with_api, type: :boolean, default: false, desc: "Generate API code for a resource"
 
     def generate_controller
       return if skip_controller?
@@ -28,10 +29,6 @@ module Draft
       return if skip_model?
       invoke "draft:model"
     end
-
-    # def install_graphiti
-    #   invoke "graphiti:install"
-    # end
 
     def create_root_folder
       empty_directory File.join("app/views", "#{plural_table_name}")
@@ -61,6 +58,10 @@ module Draft
 
       template "specs/crud_spec.rb", "spec/features/crud_#{plural_table_name.underscore}_spec.rb"
       template "specs/factories.rb", "spec/factories/#{plural_table_name.underscore}.rb"
+    end
+
+    def generate_api
+      invoke "draft:api" if with_api?
     end
 
   private
@@ -136,6 +137,10 @@ module Draft
 
     def with_sentinels?
       options[:with_sentinels]
+    end
+
+    def with_api?
+      options[:with_api]
     end
 
     def new_form_hidden_variable
