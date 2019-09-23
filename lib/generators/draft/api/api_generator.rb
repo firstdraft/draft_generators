@@ -1,12 +1,13 @@
 module Draft
   class ApiGenerator < Rails::Generators::NamedBase
+    class_option :'api-namespace', type: :string, default: "/api/v1", desc: "Override namespace for API controller & routes"
 
     def install_graphiti
       unless graphiti_config_exists?
         create_file ".graphiticfg.yml",
 <<-FILE
 ---
-namespace: "/api"
+namespace: #{@options["api-namespace"]}
         FILE
         puts "Installing Graphiti"
         invoke "graphiti:install"
