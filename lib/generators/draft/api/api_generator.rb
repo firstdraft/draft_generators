@@ -10,7 +10,7 @@ module Draft
 namespace: #{@options["api-namespace"]}
         FILE
         puts "Installing Graphiti"
-        invoke "graphiti:install"
+        generate "graphiti:install", "--namespace-controllers"
       end
 
     end
@@ -21,25 +21,33 @@ namespace: #{@options["api-namespace"]}
         rake("vandal:install")
       end
     end
-    #
-    # def generate_graphiti_resource
-    #   puts "Generating Graphiti Resource"
-    #   unless ActiveRecord::Base.connection.table_exists?(plural_table_name)
-    #     puts "Migrating..."
-    #     rake("db:migrate")
-    #   end
-    #   controller_backup = File.open(controller_path).read
-    #   invoke "graphiti:resource", [singular_table_name, "-m=#{singular_table_name}"], skip:true
-    #   unless controller_exists?
-    #     File.open(controller_path, "w") {|f| f.write(controller_backup) }
-    #   end
-    # end
+
+    def generate_graphiti_resource
+      puts "Generating Graphiti Resource"
+      unless ActiveRecord::Base.connection.table_exists?(plural_table_name)
+        puts "Migrating..."
+        rake("db:migrate")
+      end
+      controller_backup = File.open(controller_path).read
+
+      generate "graphiti:resource", "#{singular_table_name} -m=#{singular_table_name}"
+
+      # invoke "graphiti:resource", ["apple"], "-m=apple"
+    end
 
     def insert_controller_code
       insert_controller_index
     end
 
     private
+
+    def graphiti_config
+      File.exist?(".graphiticfg.yml") ? YAML.load_file(".graphiticfg.yml") : {}
+    end
+
+    def api_namespace
+      @api_namespace ||= graphiti_config["namespace"]
+    end
 
     def graphiti_config_exists?
       File.exist?(".graphiticfg.yml")
@@ -57,7 +65,13 @@ namespace: #{@options["api-namespace"]}
       matcher = /render\({ :template => "apples\/index.html.erb" }\)\s+end\n/
       code = "\nformat.jsonapi do\n  #{plural_table_name} = #{class_name}Resource.all(params)\n  respond_with(#{plural_table_name})\nend\n"
       inject_into_file controller_path, after: matcher, force: true do
-        indent(code, 6)
+        <<-RUBY
+
+      format.jsonapi do
+        apples = AppleResource.all(params)
+        respond_with(apples)
+      end
+        RUBY
       end
     end
 
