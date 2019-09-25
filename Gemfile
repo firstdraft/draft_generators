@@ -5,6 +5,7 @@ source "https://rubygems.org"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
+
 group :development do
   gem "rspec", "~> 3.5.0"
   gem "rdoc", "~> 3.12"
@@ -15,7 +16,7 @@ end
 
 gem 'devise'
 gem "graphiti"
-gem "graphiti-rails"
+gem "graphiti-rails", github: "firstdraft/graphiti-rails", branch: "prevent-responders-conflict-with-devise"
 gem "kaminari", "~> 1.0"
 gem "responders", "~> 2.4"
 gem "vandal_ui"

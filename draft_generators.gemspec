@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Raghu Betina".freeze]
-  s.date = "2019-08-27"
+  s.date = "2019-09-25"
   s.description = "This is a set of generators that help beginners learn to program. Primarily, they generate code that is more explicit and verbose and less idiomatic and \u201Cmagical\u201D than the built-in scaffold generator, which is helpful for beginners while they are learning how exactly things are wired together.".freeze
   s.email = "raghu@firstdraft.com".freeze
   s.extra_rdoc_files = [
@@ -31,6 +31,8 @@ Gem::Specification.new do |s|
     "draft_generators.gemspec",
     "lib/devise_customization_service.rb",
     "lib/draft_generators.rb",
+    "lib/generators/draft/api/USAGE",
+    "lib/generators/draft/api/api_generator.rb",
     "lib/generators/draft/devise/devise_generator.rb",
     "lib/generators/draft/devise/views/templates/confirmations/new.html.erb",
     "lib/generators/draft/devise/views/templates/mailer/confirmation_instructions.html.erb",
