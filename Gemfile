@@ -16,7 +16,7 @@ end
 
 gem 'devise'
 gem "graphiti"
-gem "graphiti-rails", github: "firstdraft/graphiti-rails", branch: "prevent-responders-conflict-with-devise"
+gem "graphiti-rails", git: "https://www.github.com/firstdraft/graphiti-rails.git", branch: "make-install-reversible"
 gem "kaminari", "~> 1.0"
 gem "responders", "~> 2.4"
 gem "vandal_ui"
