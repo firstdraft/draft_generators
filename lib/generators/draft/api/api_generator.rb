@@ -61,35 +61,5 @@ namespace: #{@options["api-namespace"]}
       File.exists?(controller_path)
     end
 
-    def insert_controller_index
-      matcher = /render\({ :template => "apples\/index.html.erb" }\)\s+end\n/
-      code = "\nformat.jsonapi do\n  #{plural_table_name} = #{class_name}Resource.all(params)\n  respond_with(#{plural_table_name})\nend\n"
-      inject_into_file controller_path, after: matcher, force: true do
-        <<-RUBY
-
-      format.jsonapi do
-        apples = AppleResource.all(params)
-        respond_with(apples)
-      end
-        RUBY
-      end
-    end
-
-    def insert_controller_show
-
-    end
-
-    def insert_controller_create
-
-    end
-
-    def insert_controller_update
-
-    end
-
-    def insert_controller_destroy
-
-    end
-
   end
 end
