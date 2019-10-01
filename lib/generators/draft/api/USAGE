@@ -1,10 +1,9 @@
 Description:
 
-    Blah blah blah:
+    Generates API endpoints for a pre-existing model:
 
-     - blah
-     - blah
-     - blah
+     - Installs Graphiti and VandalUI
+     - Namespaced controllers and routes
 
 Examples:
 
