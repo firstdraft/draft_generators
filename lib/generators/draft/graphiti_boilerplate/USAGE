@@ -1,0 +1,7 @@
+Description:
+
+    Installs Graphiti and VandalUI:
+
+Examples:
+
+    rails generate draft:graphiti_boilerplate
