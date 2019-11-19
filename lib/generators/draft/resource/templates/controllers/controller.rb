@@ -14,7 +14,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def show
-    the_id = params.fetch(:route_<%= singular_table_name %>_id)
+    the_id = params.fetch("the_<%= singular_table_name %>_id")
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({:id => the_id }).first
 
     respond_to do |format|
@@ -30,9 +30,8 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 
   def create
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
-
 <% attributes.each do |attribute| -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch(:<%= attribute.column_name %>, nil)
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("input_<%= attribute.column_name %>", nil)
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
@@ -73,15 +72,15 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def update
-    the_id = params.fetch(:route_<%= singular_table_name %>_id)
+    the_id = params.fetch("the_<%= singular_table_name %>_id")
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where(:id => the_id).at(0)
 
 <% attributes.each do |attribute| -%>
 <% if attribute.field_type == :check_box -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch(:<%= attribute.column_name %>, false)
-<% else %>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch(:<%= attribute.column_name %>, @<%= singular_table_name.underscore %>.<%= attribute.column_name %>)
-<% end %>
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("input_<%= attribute.column_name %>", false)
+<% else -%>
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("input_<%= attribute.column_name %>", @<%= singular_table_name.underscore %>.<%= attribute.column_name %>)
+<% end -%>
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
@@ -126,7 +125,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def destroy
-    the_id = params.fetch(:route_<%= singular_table_name %>_id)
+    the_id = params.fetch("the_<%= singular_table_name %>_id")
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).first
 
     @<%= singular_table_name.underscore %>.destroy
