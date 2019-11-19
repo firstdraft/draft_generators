@@ -74,14 +74,14 @@ module Draft
         # READ
         match("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index", :via => "get"})
         
-        match("/#{plural_table_name}/:route_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "show", :via => "get"})
+        match("/#{plural_table_name}/:id_from_path", { :controller => "#{plural_table_name}", :action => "show", :via => "get"})
         
         # UPDATE
         
-        match("/modify_#{singular_table_name}/:route_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "update", :via => "#{skip_post? ? "get" : "post"}"})
+        match("/modify_#{singular_table_name}/:id_from_path", { :controller => "#{plural_table_name}", :action => "update", :via => "#{skip_post? ? "get" : "post"}"})
         
         # DELETE
-        match("/delete_#{singular_table_name}/:route_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "destroy", :via => "get"})
+        match("/delete_#{singular_table_name}/:id_from_path", { :controller => "#{plural_table_name}", :action => "destroy", :via => "get"})
 
         #------------------------------
       RUBY
@@ -96,7 +96,7 @@ module Draft
 
         # READ
         match("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index", :via => "get"})
-        match("/#{plural_table_name}/:route_#{singular_table_name}_id", { :controller => "#{plural_table_name}", :action => "show", :via => "get"})
+        match("/#{plural_table_name}/:id_from_path", { :controller => "#{plural_table_name}", :action => "show", :via => "get"})
         
         #------------------------------
       RUBY
