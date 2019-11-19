@@ -15,13 +15,17 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   def create
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 <% attributes.each do |attribute| -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("input_<%= attribute.column_name %>", nil)
+<% if attribute.field_type == :check_box -%>
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("input_<%= attribute.column_name %>", false)
+<% else -%>
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("input_<%= attribute.column_name %>")
+<% end -%>
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
     if @<%= singular_table_name.underscore %>.valid?
       @<%= singular_table_name.underscore %>.save
-        redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> created successfully."})
+      redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> created successfully."})
     else
       redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> failed to create successfully."})
     end
