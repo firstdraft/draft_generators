@@ -50,7 +50,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% if attribute.field_type == :check_box -%>
     @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("input_<%= attribute.column_name %>", false)
 <% else -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("input_<%= attribute.column_name %>", @<%= singular_table_name.underscore %>.<%= attribute.column_name %>)
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("input_<%= attribute.column_name %>")
 <% end -%>
 <% end -%>
 
