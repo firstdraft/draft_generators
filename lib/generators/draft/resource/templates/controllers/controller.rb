@@ -6,8 +6,8 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def show
-    the_id = params.fetch("the_<%= singular_table_name %>_id")
-    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({:id => the_id }).first
+    the_id = params.fetch("id_from_path")
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({:id => the_id }).at(0)
 
     render({ :template => "<%= plural_table_name.underscore %>/show.html.erb" })
   end
@@ -43,7 +43,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def update
-    the_id = params.fetch("the_<%= singular_table_name %>_id")
+    the_id = params.fetch("id_from_path")
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where(:id => the_id).at(0)
 
 <% attributes.each do |attribute| -%>
@@ -73,8 +73,8 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def destroy
-    the_id = params.fetch("the_<%= singular_table_name %>_id")
-    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).first
+    the_id = params.fetch("id_from_path")
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).at(0)
 
     @<%= singular_table_name.underscore %>.destroy
 
