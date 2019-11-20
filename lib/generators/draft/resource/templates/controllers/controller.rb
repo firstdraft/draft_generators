@@ -16,9 +16,9 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 <% attributes.each do |attribute| -%>
 <% if attribute.field_type == :check_box -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("input_<%= attribute.column_name %>", false)
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_query", false)
 <% else -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("input_<%= attribute.column_name %>")
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_query")
 <% end -%>
 <% end -%>
 
@@ -48,9 +48,9 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 
 <% attributes.each do |attribute| -%>
 <% if attribute.field_type == :check_box -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("input_<%= attribute.column_name %>", false)
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_query", false)
 <% else -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("input_<%= attribute.column_name %>")
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_query")
 <% end -%>
 <% end -%>
 
