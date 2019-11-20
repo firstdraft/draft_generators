@@ -29,7 +29,7 @@ module Draft
       template "_flashes.html.erb", "app/views/shared/_flashes.html.erb"
 
       unless skip_cdn?
-        template "_bootstrapcdn_assets.html.erb", "app/views/shared/_bootstrapcdn_assets.html.erb"
+        template "_cdn_assets.html.erb", "app/views/shared/_cdn_assets.html.erb"
       end
     end
 
@@ -50,7 +50,7 @@ module Draft
     end
 
     def app_resources
-      route_names.reject { |name| /^rails_info.*/.match(name) || /^rails_mailers.*/.match(name) || name.pluralize != name }
+      route_names.reject { |name| /^rails_*/.match(name) || /batch_action*/.match(name) || /admin_*/.match(name) || name.pluralize != name }
     end
 
     def devise_routes
@@ -60,7 +60,7 @@ module Draft
     end
 
     def route_names
-      @route_names ||= Rails.application.routes.routes.map(&:name).uniq.compact
+      @route_names ||= Rails.application.routes.routes.reject { |route| route.verb != "GET" }.map(&:name).uniq.compact
     end
   end
 end
