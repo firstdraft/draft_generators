@@ -57,7 +57,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% unless skip_validation_alerts? -%>
     if @<%= singular_table_name.underscore %>.valid?
       @<%= singular_table_name.underscore %>.save
-      redirect_to("/<%= @plural_table_name.underscore %>/#{@<%= singular_table_name.underscore %>.id}", {:notice => "<%= singular_table_name.humanize %> updated successfully."})
+      redirect_to("/<%= @plural_table_name.underscore %>/#{@<%= singular_table_name.underscore %>.id}", { :notice => "<%= singular_table_name.humanize %> updated successfully."} )
     else
       render({ :template => "<%= plural_table_name.underscore %>/show.html.erb" })
     end
@@ -79,14 +79,14 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     @<%= singular_table_name.underscore %>.destroy
 
 <% unless skip_validation_alerts? -%>
-    redirect_to("/<%= @plural_table_name.underscore %>", {:notice => "<%= singular_table_name.humanize %> deleted successfully."})
+    redirect_to("/<%= @plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> deleted successfully."} )
 <% else -%>
 <% unless skip_redirect? -%>
     redirect_to("/<%= @plural_table_name.underscore %>")
 <% else -%>
     @remaining_count = <%= class_name.singularize %>.count
     
-    redirect_to("/<%= @plural_table_name.underscore %>", {:notice => "<%= singular_table_name.humanize %> deleted successfully."})    
+    redirect_to("/<%= @plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> deleted successfully."} )    
 <% end -%>
 <% end -%>
   end
