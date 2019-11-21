@@ -6,9 +6,9 @@ class <%= class_name.singularize %>SessionsController < ApplicationController
   end
 
   def add_cookie
-    <%=singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :email => params.fetch("email") }).at(0)
+    <%=singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :email => params.fetch("email_from_query") }).at(0)
     
-    the_supplied_password = params.fetch(:password)
+    the_supplied_password = params.fetch("password_from_query")
     
     if <%=singular_table_name.underscore %> != nil
       are_they_legit = <%=singular_table_name.underscore %>.authenticate(the_supplied_password)
