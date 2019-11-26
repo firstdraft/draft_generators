@@ -14,7 +14,7 @@ class <%= class_name.singularize %>SessionsController < ApplicationController
       are_they_legit = <%=singular_table_name.underscore %>.authenticate(the_supplied_password)
     
       if are_they_legit == false
-        redirect_to("/sign_in", { :alert => "Password incorrect." })
+        redirect_to("/<%=singular_table_name.underscore %>_sign_in", { :alert => "Password incorrect." })
       else
         session.store(:<%=singular_table_name.underscore %>_id, <%=singular_table_name.underscore %>.id)
       
