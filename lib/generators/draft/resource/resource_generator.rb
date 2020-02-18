@@ -69,19 +69,19 @@ module Draft
         # Routes for the #{singular_table_name.humanize} resource:
 
         # CREATE
-        match("/insert_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create", :via => "#{skip_post? ? "get" : "post"}"})
+        post("/insert_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create" })
                 
         # READ
-        match("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index", :via => "get"})
+        get("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index" })
         
-        match("/#{plural_table_name}/:id_from_path", { :controller => "#{plural_table_name}", :action => "show", :via => "get"})
+        get("/#{plural_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "show" })
         
         # UPDATE
         
-        match("/modify_#{singular_table_name}/:id_from_path", { :controller => "#{plural_table_name}", :action => "update", :via => "#{skip_post? ? "get" : "post"}"})
+        post("/modify_#{singular_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "update" })
         
         # DELETE
-        match("/delete_#{singular_table_name}/:id_from_path", { :controller => "#{plural_table_name}", :action => "destroy", :via => "get"})
+        get("/delete_#{singular_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "destroy" })
 
         #------------------------------
       RUBY
@@ -95,8 +95,8 @@ module Draft
         # Routes for the #{singular_table_name.humanize} resource:
 
         # READ
-        match("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index", :via => "get"})
-        match("/#{plural_table_name}/:id_from_path", { :controller => "#{plural_table_name}", :action => "show", :via => "get"})
+        get("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index", :via => "get"})
+        get("/#{plural_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "show", :via => "get"})
         
         #------------------------------
       RUBY

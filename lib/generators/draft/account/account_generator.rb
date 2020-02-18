@@ -62,34 +62,31 @@ module Draft
 
       route <<-RUBY.gsub(/^      /, "")
 
-        # Routes for signing up
+        # Routes for the #{singular_table_name.humanize} account:
 
-        match("/#{singular_table_name.underscore}_sign_up", { :controller => "#{plural_table_name.underscore}", :action => "new_registration_form", :via => "get"})
+        # SIGN UP FORM
+        get("/#{singular_table_name.underscore}_sign_up", { :controller => "#{plural_table_name.underscore}", :action => "new_registration_form" })        
+        # CREATE RECORD
+        post("/insert_#{singular_table_name.underscore}", { :controller => "#{plural_table_name.underscore}", :action => "create"  })
+            
+        # EDIT PROFILE FORM        
+        get("/edit_#{singular_table_name.underscore}_profile", { :controller => "#{plural_table_name.underscore}", :action => "edit_registration_form" })       
+        # UPDATE RECORD
+        post("/modify_#{singular_table_name.underscore}", { :controller => "#{plural_table_name.underscore}", :action => "update" })
         
-        # Routes for signing in
-        match("/#{singular_table_name.underscore}_sign_in", { :controller => "#{singular_table_name.underscore}_sessions", :action => "new_session_form", :via => "get"})
-        
-        match("/#{singular_table_name.underscore}_verify_credentials", { :controller => "#{singular_table_name.underscore}_sessions", :action => "add_cookie", :via => "post"})
-        
-        # Route for signing out
-        
-        match("/#{singular_table_name.underscore}_sign_out", { :controller => "#{singular_table_name.underscore}_sessions", :action => "remove_cookies", :via => "get"})
-        
-        # Route for creating account into database 
+        # DELETE RECORD
+        get("/cancel_#{singular_table_name.underscore}_account", { :controller => "#{plural_table_name.underscore}", :action => "destroy" })
 
-        match("/post_#{singular_table_name.underscore}", { :controller => "#{plural_table_name.underscore}", :action => "create", :via => "post" })
-        
-        # Route for editing account
-        
-        match("/edit_#{singular_table_name.underscore}", { :controller => "#{plural_table_name.underscore}", :action => "edit_registration_form", :via => "get"})
-        
-        match("/patch_#{singular_table_name.underscore}", { :controller => "#{plural_table_name.underscore}", :action => "update", :via => "post"})
-        
-        # Route for removing an account
-        
-        match("/cancel_#{singular_table_name.underscore}_account", { :controller => "#{plural_table_name.underscore}", :action => "destroy", :via => "get"})
+        # ------------------------------
 
-
+        # SIGN IN FORM
+        get("/#{singular_table_name.underscore}_sign_in", { :controller => "#{singular_table_name.underscore}_sessions", :action => "new_session_form" })
+        # AUTHENTICATE AND STORE COOKIE
+        post("/#{singular_table_name.underscore}_verify_credentials", { :controller => "#{singular_table_name.underscore}_sessions", :action => "create_cookie" })
+        
+        # SIGN OUT        
+        get("/#{singular_table_name.underscore}_sign_out", { :controller => "#{singular_table_name.underscore}_sessions", :action => "destroy_cookies" })
+                   
         #------------------------------
       RUBY
     end
@@ -100,7 +97,8 @@ module Draft
       application_controller <<-RUBY.gsub(/^      /, "")
 
         before_action(:load_current_#{singular_table_name.underscore})
-        before_action(:force_#{singular_table_name.underscore}_sign_in)
+        
+        # before_action(:force_#{singular_table_name.underscore}_sign_in)
         
         def load_current_#{singular_table_name.underscore}
           the_id = session.fetch(:#{singular_table_name.underscore}_id)
