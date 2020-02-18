@@ -1,5 +1,5 @@
 class <%= class_name.pluralize %>Controller < ApplicationController
-  skip_before_action(:force_<%= singular_table_name.underscore %>_sign_in, { :only => [:new_registration_form, :create] })
+  # skip_before_action(:force_<%= singular_table_name.underscore %>_sign_in, { :only => [:new_registration_form, :create] })
   
   def new_registration_form
     render({ :template => "<%=singular_table_name.underscore %>_sessions/sign_up.html.erb" })
@@ -9,12 +9,12 @@ class <%= class_name.pluralize %>Controller < ApplicationController
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 <% attributes.each do |attribute| -%>
 <% if attribute.field_type == :check_box -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_query", false)
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>", false)
 <% elsif attribute.column_name != "password_digest" -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_query")
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>")
 <% else -%>
-    @<%= singular_table_name.underscore %>.password = params.fetch("password_from_query")
-    @<%= singular_table_name.underscore %>.password_confirmation = params.fetch("password_confirmation_from_query")
+    @<%= singular_table_name.underscore %>.password = params.fetch("query_password")
+    @<%= singular_table_name.underscore %>.password_confirmation = params.fetch("query_password_confirmation")
 <% end -%>
 <% end -%>
 
@@ -37,12 +37,12 @@ class <%= class_name.pluralize %>Controller < ApplicationController
     @<%= singular_table_name.underscore %> = @current_<%= singular_table_name.underscore %>
 <% attributes.each do |attribute| -%>
 <% if attribute.field_type == :check_box -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_query", false)
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>", false)
 <% elsif attribute.column_name != "password_digest" -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_query")
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>")
 <% else -%>
-    @<%= singular_table_name.underscore %>.password = params.fetch("password_from_query")
-    @<%= singular_table_name.underscore %>.password_confirmation = params.fetch("password_confirmation_from_query")
+    @<%= singular_table_name.underscore %>.password = params.fetch("query_password")
+    @<%= singular_table_name.underscore %>.password_confirmation = params.fetch("query_password_confirmation")
 <% end -%>
 <% end -%>
     

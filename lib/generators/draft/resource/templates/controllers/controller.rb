@@ -6,7 +6,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def show
-    the_id = params.fetch("id_from_path")
+    the_id = params.fetch("path_id")
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({:id => the_id }).at(0)
 
     render({ :template => "<%= plural_table_name.underscore %>/show.html.erb" })
@@ -16,9 +16,9 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 <% attributes.each do |attribute| -%>
 <% if attribute.field_type == :check_box -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_query", false)
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>", false)
 <% else -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_query")
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>")
 <% end -%>
 <% end -%>
 
@@ -43,14 +43,14 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def update
-    the_id = params.fetch("id_from_path")
+    the_id = params.fetch("path_id")
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).at(0)
 
 <% attributes.each do |attribute| -%>
 <% if attribute.field_type == :check_box -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_query", false)
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>", false)
 <% else -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_from_query")
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>")
 <% end -%>
 <% end -%>
 
@@ -73,7 +73,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def destroy
-    the_id = params.fetch("id_from_path")
+    the_id = params.fetch("path_id")
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).at(0)
 
     @<%= singular_table_name.underscore %>.destroy
