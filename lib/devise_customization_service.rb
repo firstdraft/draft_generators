@@ -16,7 +16,7 @@ module DraftGenerators
 
     def input_field_block(column)
       column_name = column.name
-      %{          
+      %{
           <!-- Devise Input for #{column_name} start -->
           <div class="form-group">
             <% #{column_name}_was_invalid = resource.errors.include?(:#{column_name}) %>
@@ -78,8 +78,8 @@ module DraftGenerators
       ":" + column_names.join(", :").to_s
     end
 
-    def protect_from_forgery_code
-      "protect_from_forgery with: :exception"
+    def application_controller_class_code
+      /\bclass ApplicationController.*/
     end
 
     def columns

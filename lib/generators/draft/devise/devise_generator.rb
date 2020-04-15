@@ -49,13 +49,13 @@ module Draft
     def add_additional_views_through_security(devise_service)
       inject_into_file("app/controllers/application_controller.rb",
                        devise_service.security_field_block,
-                       after: devise_service.protect_from_forgery_code)
+                       after: devise_service.application_controller_class_code)
     end
 
     def add_additional_fields_for_registration(devise_service)
       scope = name.underscore.pluralize
       form_fields_to_add = devise_service.form_fields_to_add
-      
+
       if File.exist?("app/views/#{scope}/registrations/new.html.erb")
         inject_into_file("app/views/#{scope}/registrations/new.html.erb",
                          form_fields_to_add,
@@ -68,7 +68,7 @@ module Draft
                          before: devise_service.update_resource_button_block)
       end
     end
-    
+
     def with_sentinels?
       options[:with_sentinels]
     end
