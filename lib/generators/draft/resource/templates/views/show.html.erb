@@ -11,6 +11,7 @@
         </a>
       </div>
 
+<% unless read_only? -%>
 <% if with_sentinels? -%>
       <!-- Edit link <%= singular_table_name %> start -->
 <% end -%>
@@ -23,7 +24,6 @@
       <!-- Edit link <%= singular_table_name %> end -->
 <% end -%>
 
-<% unless read_only? -%>
 <% if with_sentinels? -%>
       <!-- Delete link <%= singular_table_name %> start -->
 <% end -%>

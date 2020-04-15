@@ -4,9 +4,11 @@
       All <%= plural_table_name.humanize.downcase %>
     </h1>
 
-    <a href="/<%= plural_table_name %>/new" class="btn btn-block btn-outline-secondary">
-      Add a new <%= singular_table_name.humanize.downcase %>
-    </a>
+    <% unless read_only? %>
+      <a href="/<%= plural_table_name %>/new" class="btn btn-block btn-outline-secondary">
+        Add a new <%= singular_table_name.humanize.downcase %>
+      </a>
+    <% end %>
   </div>
 </div>
 
