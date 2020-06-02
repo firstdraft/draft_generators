@@ -16,7 +16,7 @@
 
   <!-- Helper methods that create <link>s and <script>s for all of the stylesheets and javascript files in the non-`/public/` assets folders. -->
   <%%= stylesheet_link_tag    'application', media: 'all' %>
-  <%%= javascript_pack_tag  'application' %>
+  <%%# javascript_pack_tag  'application' %>
 
   <!-- Rendering a partial that has all the <link>s and <script>s for assets we are pulling from content-delivery networks. -->
   <%%= render "shared/cdn_assets" %>
