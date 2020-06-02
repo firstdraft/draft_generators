@@ -13,4 +13,5 @@ group :development do
   gem "simplecov", ">= 0"
 end
 
+gem 'indefinite_article'
 gem 'devise'
