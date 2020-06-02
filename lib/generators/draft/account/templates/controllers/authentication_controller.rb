@@ -1,8 +1,39 @@
-class <%= class_name.pluralize %>Controller < ApplicationController
-  # skip_before_action(:force_<%= singular_table_name.underscore %>_sign_in, { :only => [:new_registration_form, :create] })
-  
-  def new_registration_form
-    render({ :template => "<%=singular_table_name.underscore %>_sessions/sign_up.html.erb" })
+class <%= class_name.singularize %>AuthenticationController < ApplicationController
+  # Uncomment this if you want to force <%= plural_table_name %> to sign in before any other actions
+  # skip_before_action(:force_<%= singular_table_name.underscore %>_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] })
+
+  def sign_in_form
+    render({ :template => "<%= singular_table_name.underscore %>_authentication/sign_in.html.erb" })
+  end
+
+  def create_cookie
+    <%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :email => params.fetch("query_email") }).first
+    
+    the_supplied_password = params.fetch("query_password")
+    
+    if <%= singular_table_name.underscore %> != nil
+      are_they_legit = <%= singular_table_name.underscore %>.authenticate(the_supplied_password)
+    
+      if are_they_legit == false
+        redirect_to("/<%= singular_table_name.underscore %>_sign_in", { :alert => "Incorrect password." })
+      else
+        session[:<%= singular_table_name.underscore %>_id] = <%= singular_table_name.underscore %>.id
+      
+        redirect_to("/", { :notice => "Signed in successfully." })
+      end
+    else
+      redirect_to("/<%= singular_table_name.underscore %>_sign_in", { :alert => "No <%= singular_table_name.underscore %> with that email address." })
+    end
+  end
+
+  def destroy_cookies
+    reset_session
+
+    redirect_to("/", { :notice => "Signed out successfully." })
+  end
+
+  def sign_up_form
+    render({ :template => "<%= singular_table_name.underscore %>_authentication/sign_up.html.erb" })
   end
 
   def create
@@ -21,16 +52,16 @@ class <%= class_name.pluralize %>Controller < ApplicationController
     save_status = @<%= singular_table_name.underscore %>.save
 
     if save_status == true
-      session.store(:<%= singular_table_name.underscore %>_id,  @<%= singular_table_name.underscore %>.id)
+      session[:<%= singular_table_name.underscore %>_id] = @<%= singular_table_name.underscore %>.id
    
       redirect_to("/", { :notice => "<%= singular_table_name.humanize %> account created successfully."})
     else
-      redirect_to("/<%=singular_table_name.underscore %>_sign_up", { :alert => "<%= singular_table_name.humanize %> account failed to create successfully."})
+      redirect_to("/<%= singular_table_name.underscore %>_sign_up", { :alert => "<%= singular_table_name.humanize %> account failed to create successfully."})
     end
   end
     
-  def edit_registration_form
-    render({ :template => "<%= plural_table_name.underscore %>/edit_profile.html.erb" })
+  def edit_profile_form
+    render({ :template => "<%= singular_table_name.underscore %>_authentication/edit_profile.html.erb" })
   end
 
   def update
@@ -51,7 +82,7 @@ class <%= class_name.pluralize %>Controller < ApplicationController
 
       redirect_to("/", { :notice => "<%= singular_table_name.humanize %> account updated successfully."})
     else
-      render({ :template => "<%= plural_table_name.underscore %>/edit_profile_with_errors.html.erb" })
+      render({ :template => "<%= singular_table_name.underscore %>_authentication/edit_profile_with_errors.html.erb" })
     end
   end
 
@@ -61,5 +92,5 @@ class <%= class_name.pluralize %>Controller < ApplicationController
     
     redirect_to("/", { :notice => "<%= class_name.singularize %> account cancelled" })
   end
-  
+ 
 end
