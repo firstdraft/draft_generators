@@ -7,7 +7,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 
   def show
     the_id = params.fetch("path_id")
-    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({:id => the_id }).at(0)
+    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).at(0)
 
     render({ :template => "<%= plural_table_name.underscore %>/show.html.erb" })
   end
