@@ -48,7 +48,7 @@
         </th>
       </tr>
 
-      <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+      <%% @list_of_<%= plural_table_name %>.each do |one_<%= singular_table_name %>| %>
       <tr>
 <% if with_sentinels? -%>
         <!-- Display <%= singular_table_name %>.id start -->
