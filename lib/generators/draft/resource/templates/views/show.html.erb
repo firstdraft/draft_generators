@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h1>
-      <%= singular_table_name.humanize %> #<%%= @<%= singular_table_name %>.id %> details
+      <%= singular_table_name.humanize %> #<%%= @the_<%= singular_table_name %>.id %> details
     </h1>
 
     <div class="row mb-3">
@@ -15,7 +15,7 @@
       <!-- Edit link <%= singular_table_name %> start -->
 <% end -%>
       <div class="col">
-        <a href="/<%= plural_table_name %>/<%%= @<%= singular_table_name %>.id %>/edit" class="btn btn-block btn-outline-secondary">
+        <a href="/<%= plural_table_name %>/<%%= @the_<%= singular_table_name %>.id %>/edit" class="btn btn-block btn-outline-secondary">
           Edit <%= singular_table_name.humanize.downcase %>
         </a>
       </div>
@@ -28,7 +28,7 @@
       <!-- Delete link <%= singular_table_name %> start -->
 <% end -%>
       <div class="col">
-        <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-block btn-outline-secondary">
+        <a href="/delete_<%= singular_table_name %>/<%%= @the_<%= singular_table_name %>.id %>" class="btn btn-block btn-outline-secondary">
           Delete <%= singular_table_name.humanize.downcase %>
         </a>
       </div>
@@ -61,7 +61,7 @@
       <!-- Display created_at start -->
 <% end -%>
       <dd>
-        <%%= time_ago_in_words(@<%= singular_table_name %>.created_at) %> ago
+        <%%= time_ago_in_words(@the_<%= singular_table_name %>.created_at) %> ago
       </dd>
 <% if with_sentinels? -%>
       <!-- Display created_at end -->
@@ -74,7 +74,7 @@
       <!-- Display updated_at start -->
 <% end -%>
       <dd>
-        <%%= time_ago_in_words(@<%= singular_table_name %>.updated_at) %> ago
+        <%%= time_ago_in_words(@the_<%= singular_table_name %>.updated_at) %> ago
       </dd>
 <% if with_sentinels? -%>
       <!-- Display updated_at end -->
