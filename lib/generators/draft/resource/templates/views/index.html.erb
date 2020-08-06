@@ -51,13 +51,13 @@
       <%% @list_of_<%= plural_table_name %>.each do |one_<%= singular_table_name %>| %>
       <tr>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.id start -->
+        <!-- Display one_<%= singular_table_name %>.id start -->
 <% end -%>
         <td>
-          <%%= <%= singular_table_name %>.id %>
+          <%%= one_<%= singular_table_name %>.id %>
         </td>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.id end -->
+        <!-- Display one_<%= singular_table_name %>.id end -->
 <% end -%>
 
 <% attributes.each do |attribute| -%>
