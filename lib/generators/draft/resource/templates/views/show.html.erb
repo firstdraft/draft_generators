@@ -44,13 +44,13 @@
         <%= attribute.human_name %>
       </dt>
 <% if with_sentinels? -%>
-      <!-- Display <%= attribute.column_name %> start -->
+      <!-- Display the_<%= attribute.column_name %> start -->
 <% end -%>
       <dd>
-        <%%= @the<%= singular_table_name %>.<%= attribute.column_name %> %>
+        <%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>
       </dd>
 <% if with_sentinels? -%>
-      <!-- Display <%= attribute.column_name %> end -->
+      <!-- Display the_<%= attribute.column_name %> end -->
 <% end -%>
 
 <% end -%>

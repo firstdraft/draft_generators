@@ -59,10 +59,10 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
-    if @<%= singular_table_name.underscore %>.valid?
-      @<%= singular_table_name.underscore %>.save
+    if @the_<%= singular_table_name.underscore %>.valid?
+      @the_<%= singular_table_name.underscore %>.save
 
-      redirect_to("/<%= @plural_table_name.underscore %>/#{@<%= singular_table_name.underscore %>.id}", :notice => "<%= singular_table_name.humanize %> updated successfully.")
+      redirect_to("/<%= @plural_table_name.underscore %>/#{@the_<%= singular_table_name.underscore %>.id}", :notice => "<%= singular_table_name.humanize %> updated successfully.")
     else
       render("<%= singular_table_name.underscore %>_templates/edit_form_with_errors.html.erb")
     end
@@ -78,9 +78,9 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def destroy_row
-    @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch("id_to_remove"))
+    @the_<%= singular_table_name.underscore %> = <%= class_name.singularize %>.find(params.fetch("id_to_remove"))
 
-    @<%= singular_table_name.underscore %>.destroy
+    @the_<%= singular_table_name.underscore %>.destroy
 
 <% unless skip_validation_alerts? -%>
     redirect_to("/<%= @plural_table_name.underscore %>", :notice => "<%= singular_table_name.humanize %> deleted successfully.")
