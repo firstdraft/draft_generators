@@ -92,7 +92,7 @@
         <th>
         </th>
       </tr>
-
+<% require 'indefinite_article' %>
       <%% @list_of_<%= plural_table_name %>.each do |<%= singular_table_name.indefinitize.gsub(" ", "_") %>| %>
       <tr>
 <% if with_sentinels? -%>
