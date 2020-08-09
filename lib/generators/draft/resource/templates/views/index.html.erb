@@ -92,51 +92,51 @@
         <th>
         </th>
       </tr>
-<% require 'indefinite_article' %>
+
       <%% @list_of_<%= plural_table_name %>.each do |<%= singular_table_name.indefinitize.gsub(" ", "_") %>| %>
       <tr>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.id start -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.id start -->
 <% end -%>
         <td>
-          <%%= <%= singular_table_name %>.id %>
+          <%%= <%= singular_table_name.indefinitize.gsub(" ", "_") %>.id %>
         </td>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.id end -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.id end -->
 <% end -%>
 
 <% attributes.each do |attribute| -%>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.<%= attribute.column_name %> start -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.<%= attribute.column_name %> start -->
 <% end -%>
         <td>
-          <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
+          <%%= <%= singular_table_name.indefinitize.gsub(" ", "_") %>.<%= attribute.column_name %> %>
         </td>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.<%= attribute.column_name %> end -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.<%= attribute.column_name %> end -->
 <% end -%>
 
 <% end -%>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.created_at start -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.created_at start -->
 <% end -%>
         <td>
-          <%%= time_ago_in_words(<%= singular_table_name %>.created_at) %> ago
+          <%%= time_ago_in_words(<%= singular_table_name.indefinitize.gsub(" ", "_") %>.created_at) %> ago
         </td>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.created_at end -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.created_at end -->
 
-        <!-- Display <%= singular_table_name %>.updated_at start -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.updated_at start -->
 <% end -%>
         <td>
-          <%%= time_ago_in_words(<%= singular_table_name %>.updated_at) %> ago
+          <%%= time_ago_in_words(<%= singular_table_name.indefinitize.gsub(" ", "_") %>.updated_at) %> ago
         </td>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.updated_at end -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.updated_at end -->
 <% end -%>
 
         <td>
-          <a href="/<%= plural_table_name %>/<%%= <%= singular_table_name %>.id %>">
+          <a href="/<%= plural_table_name %>/<%%= <%= singular_table_name.indefinitize.gsub(" ", "_") %>.id %>">
             Show details
           </a>
         </td>
