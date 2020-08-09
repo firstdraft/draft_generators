@@ -57,15 +57,15 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% unless skip_validation_alerts? -%>
     if @the_<%= singular_table_name.underscore %>.valid?
       @the_<%= singular_table_name.underscore %>.save
-      redirect_to("/<%= @plural_table_name.underscore %>/#{@<%= singular_table_name.underscore %>.id}", { :notice => "<%= singular_table_name.humanize %> updated successfully."} )
+      redirect_to("/<%= @plural_table_name.underscore %>/#{@the<%= singular_table_name.underscore %>.id}", { :notice => "<%= singular_table_name.humanize %> updated successfully."} )
     else
-      redirect_to("/<%= @plural_table_name.underscore %>/#{@<%= singular_table_name.underscore %>.id}", { :alert => "<%= singular_table_name.humanize %> failed to update successfully." })
+      redirect_to("/<%= @plural_table_name.underscore %>/#{@the<%= singular_table_name.underscore %>.id}", { :alert => "<%= singular_table_name.humanize %> failed to update successfully." })
     end
 <% else -%>
     @the_<%= singular_table_name.underscore %>.save
 
 <% unless skip_redirect? -%>
-    redirect_to("/<%= @plural_table_name.underscore %>/#{@<%= singular_table_name.underscore %>.id}")
+    redirect_to("/<%= @plural_table_name.underscore %>/#{@the<%= singular_table_name.underscore %>.id}")
 <% else -%>
       render({ :template => "<%= plural_table_name.underscore %>/show.html.erb" })
   <% end -%>
