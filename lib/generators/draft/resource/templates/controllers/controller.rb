@@ -1,13 +1,18 @@
 class <%= plural_table_name.camelize %>Controller < ApplicationController
   def index
-    @list_of_<%= plural_table_name.underscore %> = <%= class_name.singularize %>.all.order({ :created_at => :desc })
+    matching_<%= plural_table_name.underscore %> = <%= class_name.singularize %>.all
+
+    @list_of_<%= plural_table_name.underscore %> = matching_<%= plural_table_name.underscore %>.order({ :created_at => :desc })
 
     render({ :template => "<%= plural_table_name.underscore %>/index.html.erb" })
   end
 
   def show
     the_id = params.fetch("path_id")
-    @the_<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).at(0)
+
+    matching_<%= plural_table_name.underscore.downcase %> = <%= class_name.singularize %>.where({ :id => the_id })
+
+    @the_<%= singular_table_name.underscore %> = matching_<%= plural_table_name.underscore.downcase %>.at(0)
 
     render({ :template => "<%= plural_table_name.underscore %>/show.html.erb" })
   end
