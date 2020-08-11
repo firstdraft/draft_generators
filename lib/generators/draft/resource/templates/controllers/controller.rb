@@ -13,24 +13,24 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   end
 
   def create
-    @the_<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
+    the_<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 <% attributes.each do |attribute| -%>
 <% if attribute.field_type == :check_box -%>
-    @the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>", false)
+    the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>", false)
 <% else -%>
-    @the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>")
+    the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>")
 <% end -%>
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
-    if @the_<%= singular_table_name.underscore %>.valid?
-      @the_<%= singular_table_name.underscore %>.save
+    if the_<%= singular_table_name.underscore %>.valid?
+      the_<%= singular_table_name.underscore %>.save
       redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> created successfully." })
     else
       redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> failed to create successfully." })
     end
 <% else -%>
-    @the_<%= singular_table_name.underscore %>.save
+    the_<%= singular_table_name.underscore %>.save
 
 <% unless skip_redirect? -%>
     redirect_to("/<%= @plural_table_name.underscore %>")
@@ -44,28 +44,28 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 
   def update
     the_id = params.fetch("path_id")
-    @the_<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).at(0)
+    the_<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).at(0)
 
 <% attributes.each do |attribute| -%>
 <% if attribute.field_type == :check_box -%>
-    @the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>", false)
+    the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>", false)
 <% else -%>
-    @the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>")
+    the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>")
 <% end -%>
 <% end -%>
 
 <% unless skip_validation_alerts? -%>
-    if @the_<%= singular_table_name.underscore %>.valid?
-      @the_<%= singular_table_name.underscore %>.save
-      redirect_to("/<%= @plural_table_name.underscore %>/#{@the_<%= singular_table_name.underscore %>.id}", { :notice => "<%= singular_table_name.humanize %> updated successfully."} )
+    if the_<%= singular_table_name.underscore %>.valid?
+      the_<%= singular_table_name.underscore %>.save
+      redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}", { :notice => "<%= singular_table_name.humanize %> updated successfully."} )
     else
-      redirect_to("/<%= @plural_table_name.underscore %>/#{@the_<%= singular_table_name.underscore %>.id}", { :alert => "<%= singular_table_name.humanize %> failed to update successfully." })
+      redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}", { :alert => "<%= singular_table_name.humanize %> failed to update successfully." })
     end
 <% else -%>
-    @the_<%= singular_table_name.underscore %>.save
+    the_<%= singular_table_name.underscore %>.save
 
 <% unless skip_redirect? -%>
-    redirect_to("/<%= @plural_table_name.underscore %>/#{@the_<%= singular_table_name.underscore %>.id}")
+    redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}")
 <% else -%>
       render({ :template => "<%= plural_table_name.underscore %>/show.html.erb" })
   <% end -%>
@@ -74,19 +74,19 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 
   def destroy
     the_id = params.fetch("path_id")
-    @the_<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).at(0)
+    the_<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).at(0)
 
-    @the_<%= singular_table_name.underscore %>.destroy
+    the_<%= singular_table_name.underscore %>.destroy
 
 <% unless skip_validation_alerts? -%>
-    redirect_to("/<%= @plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> deleted successfully."} )
+    redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> deleted successfully."} )
 <% else -%>
 <% unless skip_redirect? -%>
-    redirect_to("/<%= @plural_table_name.underscore %>")
+    redirect_to("/<%= plural_table_name.underscore %>")
 <% else -%>
     @remaining_count = <%= class_name.singularize %>.count
     
-    redirect_to("/<%= @plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> deleted successfully."} )    
+    redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> deleted successfully."} )    
 <% end -%>
 <% end -%>
   end
