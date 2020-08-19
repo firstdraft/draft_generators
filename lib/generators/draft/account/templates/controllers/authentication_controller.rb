@@ -56,7 +56,7 @@ class <%= class_name.singularize %>AuthenticationController < ApplicationControl
    
       redirect_to("/", { :notice => "<%= singular_table_name.humanize %> account created successfully."})
     else
-      redirect_to("/<%= singular_table_name.underscore %>_sign_up", { :alert => "<%= singular_table_name.humanize %> account failed to create successfully."})
+      redirect_to("/<%= singular_table_name.underscore %>_sign_up", { :alert => @<%= singular_table_name%>.errors.full_messages.to_sentence })
     end
   end
     
@@ -82,7 +82,7 @@ class <%= class_name.singularize %>AuthenticationController < ApplicationControl
 
       redirect_to("/", { :notice => "<%= singular_table_name.humanize %> account updated successfully."})
     else
-      render({ :template => "<%= singular_table_name.underscore %>_authentication/edit_profile_with_errors.html.erb" })
+      render({ :template => "<%= singular_table_name.underscore %>_authentication/edit_profile_with_errors.html.erb" , :alert => @<%= singular_table_name%>.errors.full_messages.to_sentence })
     end
   end
 
