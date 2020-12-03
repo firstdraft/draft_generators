@@ -1,0 +1,44 @@
+<div >
+  <h5>
+    Edit <%= class_name.titleize %> Account
+  </h5>
+
+  <%% if @<%= singular_table_name %>.errors.any? %>
+  <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%%= message %>
+    </div>
+  <%% end %>
+  <%% end %>
+  <div>
+    <form action="/modify_<%= singular_table_name.underscore %>" method="post">
+      <% attributes.each do |attribute| -%>
+        <% if attribute.column_name != "password_digest" %>
+      <div>
+        <label for="<%= attribute.column_name %>_box"><%= attribute.column_name.humanize %></label>
+          <% if attribute.field_type == :text_area %>
+        <textarea id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" rows="3"><%%= @current_<%= singular_table_name %>.<%= attribute.column_name %> %></textarea> 
+          <% elsif attribute.field_type == :check_box %>
+        <input id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" type="checkbox" value="1" <%%= "checked" if @current_<%= singular_table_name %>.<%= attribute.column_name %> %>>
+          <% else %>
+        <input id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="<%%= @current_<%= singular_table_name.underscore %>.<%= attribute.column_name %> %>">
+          <% end %>
+      </div>
+        <% end -%>
+      <% end %>
+      <div>
+        <label for="password_box">Password</label>
+        <input id="password_box" name="query_password" placeholder="Choose a new password..." type="password">
+      </div>
+    
+      <div>
+        <label for="password_confirmation_box">Password Confirmation</label>
+        <input id="password_confirmation_box" name="query_password_confirmation" placeholder="Confirm your new password..." type="password">
+      </div>
+
+      <button>
+        Update account
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<h1>Sign up</h1>
+
+<form action="/insert_<%= singular_table_name.underscore %>" method="post">
+
+  <div>
+    <label for="email_box">Email</label>
+    <input id="email_box" name="query_email" placeholder="Choose a email..." type="text">
+  </div>
+  <% attributes.each do |attribute| -%>
+  <% if attribute.column_name != "password_digest" && attribute.column_name != "email" -%>     
+  <div>
+    <label for="<%= attribute.column_name %>_box"><%= attribute.column_name.humanize %></label>
+  <%- if attribute.field_type == :check_box -%>
+    <input id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" type="checkbox">
+  <%- elsif attribute.field_type == :text_area -%>
+    <textarea id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" rows="3"></textarea>
+  <%- else -%>      
+    <input type="text" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>">
+  <%- end -%>
+  </div>
+  <%- end -%>
+  <% end -%>
+  
+  <div>
+    <label for="password_box">Password</label>
+    <input id="password_box" name="query_password" placeholder="Choose a password..." type="password">
+  </div>
+
+  <div>
+    <label for="password_confirmation_box">Password Confirmation</label>
+    <input id="password_confirmation_box" name="query_password_confirmation" placeholder="Confirm your password..." type="password">
+  </div>
+
+  <button>
+    Sign up
+  </button>
+</form>
+
+<hr>
+
+<p>
+  Or, <a href="/<%= singular_table_name.underscore %>_sign_in">Sign in</a> instead.
+</p>

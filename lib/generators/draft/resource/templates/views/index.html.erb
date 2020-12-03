@@ -1,15 +1,53 @@
-<div class="row mb-3">
-  <div class="col-md-12">
-    <h1>
-      All <%= plural_table_name.humanize.downcase %>
-    </h1>
+<h1>
+   List of all <%= plural_table_name.humanize.downcase %>
+</h1>
+ 
 
-    <a href="/<%= plural_table_name %>/new" class="btn btn-block btn-outline-secondary">
+<hr>
+
+    <h2>
       Add a new <%= singular_table_name.humanize.downcase %>
-    </a>
-  </div>
-</div>
+    </h2>
 
+    <form action="/insert_<%= singular_table_name %>"<% unless skip_post? -%> method="post"<% end -%>>
+<% attributes.each do |attribute| -%>
+<% if attribute.field_type == :check_box -%>
+      <div>
+        <input type="checkbox" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="1">
+
+        <label for="<%= attribute.column_name %>_box"><%= attribute.column_name.humanize %></label>
+      </div>
+
+<% else -%>
+      <div>
+        <label for="<%= attribute.column_name %>_box">
+          <%= attribute.column_name.humanize %>
+        </label>
+
+<% if attribute.field_type == :text_area -%>
+        <textarea id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" rows="3"></textarea>
+<% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :datetime -%>
+        <input type="datetime-local" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>">
+<% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :date -%>
+        <input type="date" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>">
+<% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :time -%>
+        <input type="time" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>">
+<% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :integer -%>
+        <input type="number" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>">
+<% else -%>
+        <input type="text" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>">
+<% end -%>
+      </div>
+
+<% end -%>
+<% end -%>
+      <button>
+        Create <%= singular_table_name.humanize.downcase %>
+      </button>
+    </form>
+ 
+
+<hr>
 <% if with_sentinels? -%>
 <!-- Ransack Code start -->
 
@@ -18,13 +56,12 @@
 <!-- Location Map Code start -->
 
 <!-- Location Map Code end -->
-<% end -%>
 
 <hr>
 
-<div class="row mb-3">
-  <div class="col-md-12">
-    <table class="table">
+<% end -%>
+
+    <table>
       <tr>
         <th>
           ID
@@ -48,55 +85,55 @@
         </th>
       </tr>
 
-      <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+      <%% @list_of_<%= plural_table_name %>.each do |<%= singular_table_name.indefinitize.gsub(" ", "_") %>| %>
       <tr>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.id start -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.id start -->
 <% end -%>
         <td>
-          <%%= <%= singular_table_name %>.id %>
+          <%%= <%= singular_table_name.indefinitize.gsub(" ", "_") %>.id %>
         </td>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.id end -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.id end -->
 <% end -%>
 
 <% attributes.each do |attribute| -%>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.<%= attribute.column_name %> start -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.<%= attribute.column_name %> start -->
 <% end -%>
         <td>
-          <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
+          <%%= <%= singular_table_name.indefinitize.gsub(" ", "_") %>.<%= attribute.column_name %> %>
         </td>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.<%= attribute.column_name %> end -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.<%= attribute.column_name %> end -->
 <% end -%>
 
 <% end -%>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.created_at start -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.created_at start -->
 <% end -%>
         <td>
-          <%%= time_ago_in_words(<%= singular_table_name %>.created_at) %> ago
+          <%%= time_ago_in_words(<%= singular_table_name.indefinitize.gsub(" ", "_") %>.created_at) %> ago
         </td>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.created_at end -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.created_at end -->
 
-        <!-- Display <%= singular_table_name %>.updated_at start -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.updated_at start -->
 <% end -%>
         <td>
-          <%%= time_ago_in_words(<%= singular_table_name %>.updated_at) %> ago
+          <%%= time_ago_in_words(<%= singular_table_name.indefinitize.gsub(" ", "_") %>.updated_at) %> ago
         </td>
 <% if with_sentinels? -%>
-        <!-- Display <%= singular_table_name %>.updated_at end -->
+        <!-- Display <%= singular_table_name.indefinitize.gsub(" ", "_") %>.updated_at end -->
 <% end -%>
 
         <td>
-          <a href="/<%= plural_table_name %>/<%%= <%= singular_table_name %>.id %>">
+          <a href="/<%= plural_table_name %>/<%%= <%= singular_table_name.indefinitize.gsub(" ", "_") %>.id %>">
             Show details
           </a>
         </td>
       </tr>
       <%% end %>
     </table>
-  </div>
-</div>
+
+<hr>

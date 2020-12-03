@@ -1,3 +1,5 @@
+require 'indefinite_article'
+
 module Draft
   class ResourceGenerator < Rails::Generators::NamedBase
     source_root File.expand_path("../templates", __FILE__)
@@ -30,13 +32,13 @@ module Draft
     end
 
     def create_root_folder
-      empty_directory File.join("app/views", "#{singular_table_name}_templates")
+      empty_directory File.join("app/views", "#{plural_table_name}")
     end
 
     def generate_view_files
       available_views.each do |view|
         filename = view_filename_with_extensions(view)
-        template filename, File.join("app/views", "#{singular_table_name}_templates", File.basename(options[:new_form_name].presence || filename))
+        template filename, File.join("app/views", "#{plural_table_name}", File.basename(options[:new_form_name].presence || filename))
       end
     end
 
@@ -46,7 +48,7 @@ module Draft
       if read_only?
         read_only_routes
       else
-        golden_seven_routes
+        golden_five_routes
       end
     end
 
@@ -61,7 +63,7 @@ module Draft
 
   private
 
-    def golden_seven_routes
+    def golden_five_routes
       log :route, "RESTful routes"
 
       route <<-RUBY.gsub(/^      /, "")
@@ -69,19 +71,19 @@ module Draft
         # Routes for the #{singular_table_name.humanize} resource:
 
         # CREATE
-        get("/#{plural_table_name}/new", { :controller => "#{plural_table_name}", :action => "new_form" })
-        #{skip_post? ? "get" : "post"}("/create_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create_row" })
-
+        post("/insert_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create" })
+                
         # READ
         get("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index" })
-        get("/#{plural_table_name}/:id_to_display", { :controller => "#{plural_table_name}", :action => "show" })
-
+        
+        get("/#{plural_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "show" })
+        
         # UPDATE
-        get("/#{plural_table_name}/:prefill_with_id/edit", { :controller => "#{plural_table_name}", :action => "edit_form" })
-        #{skip_post? ? "get" : "post"}("/update_#{singular_table_name}/:id_to_modify", { :controller => "#{plural_table_name}", :action => "update_row" })
-
+        
+        post("/modify_#{singular_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "update" })
+        
         # DELETE
-        get("/delete_#{singular_table_name}/:id_to_remove", { :controller => "#{plural_table_name}", :action => "destroy_row" })
+        get("/delete_#{singular_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "destroy" })
 
         #------------------------------
       RUBY
@@ -95,9 +97,9 @@ module Draft
         # Routes for the #{singular_table_name.humanize} resource:
 
         # READ
-        get("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index" })
-        get("/#{plural_table_name}/:id_to_display", { :controller => "#{plural_table_name}", :action => "show" })
-
+        get("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index", :via => "get"})
+        get("/#{plural_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "show", :via => "get"})
+        
         #------------------------------
       RUBY
     end
@@ -158,7 +160,7 @@ module Draft
       elsif only_new_form?
         %w(association_new_form)
       else
-        %w(index new_form new_form_with_errors edit_form edit_form_with_errors show)
+        %w(index show)
       end
     end
 
