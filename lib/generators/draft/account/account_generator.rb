@@ -92,7 +92,7 @@ module Draft
         before_action(:load_current_#{singular_table_name.underscore})
         
         # Uncomment the "before_action" if you want to force #{plural_table_name} to sign in before any other actions
-        # Remember to also uncomment the "skip_before_action" in the corresponding account controller
+        # Remember to also uncomment the "skip_before_action" in the corresponding authentication controller
         # before_action(:force_#{singular_table_name.underscore}_sign_in)
         
         def load_current_#{singular_table_name.underscore}
