@@ -1,15 +1,10 @@
-<div>
-  <div>
-    <h1>
-      List of all <%= plural_table_name.humanize.downcase %>
-    </h1>
-  </div>
-</div>
+<h1>
+   List of all <%= plural_table_name.humanize.downcase %>
+</h1>
+ 
 
 <hr>
 
-<div>
-  <div>
     <h2>
       Add a new <%= singular_table_name.humanize.downcase %>
     </h2>
@@ -50,8 +45,7 @@
         Create <%= singular_table_name.humanize.downcase %>
       </button>
     </form>
-  </div>
-</div>
+ 
 
 <hr>
 <% if with_sentinels? -%>
@@ -66,8 +60,7 @@
 <hr>
 
 <% end -%>
-<div>
-  <div>
+
     <table>
       <tr>
         <th>
@@ -142,7 +135,5 @@
       </tr>
       <%% end %>
     </table>
-  </div>
-</div>
 
 <hr>

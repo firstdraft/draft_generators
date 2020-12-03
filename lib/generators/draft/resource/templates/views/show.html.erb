@@ -1,10 +1,9 @@
-<div>
-  <div>
-    <h1>
-      <%= singular_table_name.humanize %> #<%%= @the_<%= singular_table_name %>.id %> details
-    </h1>
 
-    <div>
+ <h1>
+  <%= singular_table_name.humanize %> #<%%= @the_<%= singular_table_name %>.id %> details
+ </h1>
+
+   
       <div>
         <a href="/<%= plural_table_name %>">
           Go back
@@ -24,7 +23,6 @@
       <!-- Delete link <%= singular_table_name %> end -->
 <% end -%>
 <% end -%>
-    </div>
 
     <dl>
 <% attributes.each do |attribute| -%>
@@ -68,8 +66,6 @@
       <!-- Display updated_at end -->
 <% end -%>
     </dl>
-  </div>
-</div>
 
 <hr>
 
@@ -79,11 +75,9 @@
 <!-- Show Page Customization end -->
 <% end -%>
 
-<div>
-  <div>
-    <h2>
-      Edit <%= singular_table_name.humanize.downcase %>
-    </h2>
+ <h2>
+   Edit <%= singular_table_name.humanize.downcase %>
+ </h2>
 
     <form action="/modify_<%= singular_table_name %>/<%%= @the_<%= singular_table_name %>.id %>" <% unless skip_post? -%> method="post" <% end -%>>
 <% attributes.each do |attribute| -%>
@@ -124,7 +118,5 @@
         Update <%= singular_table_name.humanize.downcase %>
       </button>
     </form>
-  </div>
-</div>
 
 <hr>

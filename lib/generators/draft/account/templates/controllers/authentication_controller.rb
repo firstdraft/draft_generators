@@ -1,7 +1,8 @@
 class <%= class_name.singularize %>AuthenticationController < ApplicationController
   # Uncomment this if you want to force <%= plural_table_name %> to sign in before any other actions
   # skip_before_action(:force_<%= singular_table_name.underscore %>_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] })
-
+  # Remember to also uncomment the "before_action" in the ApplicationController
+  
   def sign_in_form
     render({ :template => "<%= singular_table_name.underscore %>_authentication/sign_in.html.erb" })
   end
