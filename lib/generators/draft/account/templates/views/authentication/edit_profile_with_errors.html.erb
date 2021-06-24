@@ -19,7 +19,7 @@
           <% if attribute.field_type == :text_area %>
         <textarea id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" rows="3"><%%= @current_<%= singular_table_name %>.<%= attribute.column_name %> %></textarea> 
           <% elsif attribute.field_type == :check_box %>
-        <input id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" type="checkbox" value="1">
+        <input id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" type="checkbox" value="1" <%%= "checked" if @current_<%= singular_table_name %>.<%= attribute.column_name %> %>>
           <% else %>
         <input id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="<%%= @current_<%= singular_table_name.underscore %>.<%= attribute.column_name %> %>">
           <% end %>
