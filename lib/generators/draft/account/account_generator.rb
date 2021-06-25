@@ -34,24 +34,17 @@ module Draft
     end
 
     def generate_controller
-      template "controllers/sessions_controller.rb", "app/controllers/#{singular_table_name.underscore}_sessions_controller.rb"
-      template "controllers/controller.rb", "app/controllers/#{plural_table_name.underscore}_controller.rb"
+      template "controllers/authentication_controller.rb", "app/controllers/#{singular_table_name.underscore}_authentication_controller.rb"
     end
 
     def create_root_folder
-      empty_directory File.join("app/views", "#{singular_table_name.underscore}_sessions")
-      empty_directory File.join("app/views", "#{plural_table_name.underscore}")
+      empty_directory File.join("app/views", "#{singular_table_name.underscore}_authentication")
     end
     
     def generate_view_files
-      available_views.select{|filename| filename.include?("sign")}.each do |view|
-        filename = view_sessions_filename_with_extensions(view)
-        template filename, File.join("app/views/#{singular_table_name.underscore}_sessions", File.basename(filename))
-      end
-
-      available_views.reject{|filename| filename.include?("sign")}.each do |view|
-        filename = view_filename_with_extensions(view)
-        template filename, File.join("app/views/#{plural_table_name.underscore}", File.basename(filename))
+      available_views.each do |view|
+        filename = view_authentication_filename_with_extensions(view)
+        template filename, File.join("app/views/#{singular_table_name.underscore}_authentication", File.basename(filename))
       end
     end
     
@@ -62,34 +55,31 @@ module Draft
 
       route <<-RUBY.gsub(/^      /, "")
 
-        # Routes for signing up
+        # Routes for the #{singular_table_name.humanize} account:
 
-        match("/#{singular_table_name.underscore}_sign_up", { :controller => "#{plural_table_name.underscore}", :action => "new_registration_form", :via => "get"})
+        # SIGN UP FORM
+        get("/#{singular_table_name.underscore}_sign_up", { :controller => "#{singular_table_name.underscore}_authentication", :action => "sign_up_form" })        
+        # CREATE RECORD
+        post("/insert_#{singular_table_name.underscore}", { :controller => "#{singular_table_name.underscore}_authentication", :action => "create"  })
+            
+        # EDIT PROFILE FORM        
+        get("/edit_#{singular_table_name.underscore}_profile", { :controller => "#{singular_table_name.underscore}_authentication", :action => "edit_profile_form" })       
+        # UPDATE RECORD
+        post("/modify_#{singular_table_name.underscore}", { :controller => "#{singular_table_name.underscore}_authentication", :action => "update" })
         
-        # Routes for signing in
-        match("/#{singular_table_name.underscore}_sign_in", { :controller => "#{singular_table_name.underscore}_sessions", :action => "new_session_form", :via => "get"})
-        
-        match("/#{singular_table_name.underscore}_verify_credentials", { :controller => "#{singular_table_name.underscore}_sessions", :action => "add_cookie", :via => "post"})
-        
-        # Route for signing out
-        
-        match("/#{singular_table_name.underscore}_sign_out", { :controller => "#{singular_table_name.underscore}_sessions", :action => "remove_cookies", :via => "get"})
-        
-        # Route for creating account into database 
+        # DELETE RECORD
+        get("/cancel_#{singular_table_name.underscore}_account", { :controller => "#{singular_table_name.underscore}_authentication", :action => "destroy" })
 
-        match("/post_#{singular_table_name.underscore}", { :controller => "#{plural_table_name.underscore}", :action => "create", :via => "post" })
-        
-        # Route for editing account
-        
-        match("/edit_#{singular_table_name.underscore}", { :controller => "#{plural_table_name.underscore}", :action => "edit_registration_form", :via => "get"})
-        
-        match("/patch_#{singular_table_name.underscore}", { :controller => "#{plural_table_name.underscore}", :action => "update", :via => "post"})
-        
-        # Route for removing an account
-        
-        match("/cancel_#{singular_table_name.underscore}_account", { :controller => "#{plural_table_name.underscore}", :action => "destroy", :via => "get"})
+        # ------------------------------
 
-
+        # SIGN IN FORM
+        get("/#{singular_table_name.underscore}_sign_in", { :controller => "#{singular_table_name.underscore}_authentication", :action => "sign_in_form" })
+        # AUTHENTICATE AND STORE COOKIE
+        post("/#{singular_table_name.underscore}_verify_credentials", { :controller => "#{singular_table_name.underscore}_authentication", :action => "create_cookie" })
+        
+        # SIGN OUT        
+        get("/#{singular_table_name.underscore}_sign_out", { :controller => "#{singular_table_name.underscore}_authentication", :action => "destroy_cookies" })
+                   
         #------------------------------
       RUBY
     end
@@ -100,11 +90,13 @@ module Draft
       application_controller <<-RUBY.gsub(/^      /, "")
 
         before_action(:load_current_#{singular_table_name.underscore})
-        before_action(:force_#{singular_table_name.underscore}_sign_in)
+        
+        # Uncomment this if you want to force #{plural_table_name} to sign in before any other actions
+        # before_action(:force_#{singular_table_name.underscore}_sign_in)
         
         def load_current_#{singular_table_name.underscore}
-          the_id = session.fetch(:#{singular_table_name.underscore}_id)
-          @current_#{singular_table_name.underscore} = #{class_name.singularize}.where({ :id => the_id }).at(0)
+          the_id = session[:#{singular_table_name.underscore}_id]
+          @current_#{singular_table_name.underscore} = #{class_name.singularize}.where({ :id => the_id }).first
         end
         
         def force_#{singular_table_name.underscore}_sign_in
@@ -154,9 +146,9 @@ module Draft
       filename
     end
 
-    def view_sessions_filename_with_extensions(name)
+    def view_authentication_filename_with_extensions(name)
       filename = [name, :html, :erb].compact.join(".")
-      folders = ["views", "sessions"]
+      folders = ["views", "authentication"]
       filename = File.join(folders, filename) if folders.any?
       filename
     end

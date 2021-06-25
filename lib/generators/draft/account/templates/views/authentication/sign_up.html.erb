@@ -1,21 +1,21 @@
 <h1>Sign up</h1>
 
-<form action="/post_<%= singular_table_name.underscore %>" method="post">
+<form action="/insert_<%= singular_table_name.underscore %>" method="post">
 
   <div>
     <label for="email_box">Email</label>
-    <input id="email_box" name="email_from_query" placeholder="Choose a email..." type="text">
+    <input id="email_box" name="query_email" placeholder="Choose a email..." type="text">
   </div>
   <% attributes.each do |attribute| -%>
   <% if attribute.column_name != "password_digest" && attribute.column_name != "email" -%>     
   <div>
     <label for="<%= attribute.column_name %>_box"><%= attribute.column_name.humanize %></label>
   <%- if attribute.field_type == :check_box -%>
-    <input id="<%= attribute.column_name %>_box" name="<%= attribute.column_name %>_from_query" type="checkbox">
+    <input id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" type="checkbox">
   <%- elsif attribute.field_type == :text_area -%>
-    <textarea id="<%= attribute.column_name %>_box" name="<%= attribute.column_name %>_from_query" rows="3"></textarea>
+    <textarea id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" rows="3"></textarea>
   <%- else -%>      
-    <input type="text" id="<%= attribute.column_name %>_box" name="<%= attribute.column_name %>_from_query">
+    <input type="text" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>">
   <%- end -%>
   </div>
   <%- end -%>
@@ -23,12 +23,12 @@
   
   <div>
     <label for="password_box">Password</label>
-    <input id="password_box" name="password_from_query" placeholder="Choose a password..." type="password">
+    <input id="password_box" name="query_password" placeholder="Choose a password..." type="password">
   </div>
 
   <div>
     <label for="password_confirmation_box">Password Confirmation</label>
-    <input id="password_confirmation_box" name="password_confirmation_from_query" placeholder="Confirm your password..." type="password">
+    <input id="password_confirmation_box" name="query_password_confirmation" placeholder="Confirm your password..." type="password">
   </div>
 
   <button>
