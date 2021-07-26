@@ -50,7 +50,9 @@ module Draft
     end
 
     def app_resources
-      route_names.reject { |name| /^rails_info.*/.match(name) || /^rails_mailers.*/.match(name) || name.pluralize != name }
+      route_names.reject do |name|
+        /^rails_info.*/.match(name) || /^rails_mailers.*/.match(name) || /^rails_direct_uploads/.match(name) || name.pluralize != name
+      end
     end
 
     def devise_routes
