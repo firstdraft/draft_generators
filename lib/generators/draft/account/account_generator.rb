@@ -96,6 +96,7 @@ module Draft
         
         def load_current_#{singular_table_name.underscore}
           the_id = session[:#{singular_table_name.underscore}_id]
+          
           @current_#{singular_table_name.underscore} = #{class_name.singularize}.where({ :id => the_id }).first
         end
         
