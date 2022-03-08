@@ -91,7 +91,7 @@ module Draft
 
         before_action(:load_current_#{singular_table_name.underscore})
         
-        # Uncomment this if you want to force #{plural_table_name} to sign in before any other actions
+        # Uncomment line 5 in this file and line 3 in #{class_name.singularize}AuthenticationController if you want to force #{plural_table_name} to sign in before any other actions.
         # before_action(:force_#{singular_table_name.underscore}_sign_in)
         
         def load_current_#{singular_table_name.underscore}
