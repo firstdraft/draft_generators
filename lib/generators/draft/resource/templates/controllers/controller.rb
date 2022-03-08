@@ -32,7 +32,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
       the_<%= singular_table_name.underscore %>.save
       redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> created successfully." })
     else
-      redirect_to("/<%= plural_table_name.underscore %>", { :alert => <%= singular_table_name.underscore %>.errors.full_messages.to_sentence })
+      redirect_to("/<%= plural_table_name.underscore %>", { :alert => the_<%= singular_table_name.underscore %>.errors.full_messages.to_sentence })
     end
 <% else -%>
     the_<%= singular_table_name.underscore %>.save
@@ -64,7 +64,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
       the_<%= singular_table_name.underscore %>.save
       redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}", { :notice => "<%= singular_table_name.humanize %> updated successfully."} )
     else
-      redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}", { :alert => <%= singular_table_name.underscore %>.errors.full_messages.to_sentence })
+      redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}", { :alert => the_<%= singular_table_name.underscore %>.errors.full_messages.to_sentence })
     end
 <% else -%>
     the_<%= singular_table_name.underscore %>.save
