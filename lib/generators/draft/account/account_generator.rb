@@ -95,7 +95,7 @@ module Draft
         # before_action(:force_#{singular_table_name.underscore}_sign_in)
         
         def load_current_#{singular_table_name.underscore}
-          the_id = session[:#{singular_table_name.underscore}_id]
+          the_id = session.fetch(:#{singular_table_name.underscore}_id, nil)
           
           @current_#{singular_table_name.underscore} = #{class_name.singularize}.where({ :id => the_id }).first
         end
