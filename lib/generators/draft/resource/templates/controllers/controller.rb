@@ -4,7 +4,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 
     @list_of_<%= plural_table_name.underscore %> = matching_<%= plural_table_name.underscore %>.order({ :created_at => :desc })
 
-    render({ :template => "<%= plural_table_name.underscore %>/index.html.erb" })
+    render({ :template => "<%= plural_table_name.underscore %>/index" })
   end
 
   def show
@@ -14,7 +14,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 
     @the_<%= singular_table_name.underscore %> = matching_<%= plural_table_name.underscore.downcase %>.at(0)
 
-    render({ :template => "<%= plural_table_name.underscore %>/show.html.erb" })
+    render({ :template => "<%= plural_table_name.underscore %>/show" })
   end
 
   def create
@@ -42,7 +42,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% else -%>
     @current_count = <%= class_name.singularize %>.count
 
-    render("<%= singular_table_name.underscore %>_templates/create_row.html.erb")
+    render("<%= singular_table_name.underscore %>_templates/create_row")
 <% end -%>
 <% end -%>
   end
@@ -72,7 +72,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% unless skip_redirect? -%>
     redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}")
 <% else -%>
-      render({ :template => "<%= plural_table_name.underscore %>/show.html.erb" })
+      render({ :template => "<%= plural_table_name.underscore %>/show" })
   <% end -%>
 <% end -%>
   end
