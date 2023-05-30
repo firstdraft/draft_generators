@@ -17,7 +17,7 @@ class <%= class_name.singularize %>AuthenticationController < ApplicationControl
       if are_they_legit == false
         redirect_to("/<%= singular_table_name.underscore %>_sign_in", { :alert => "Incorrect password." })
       else
-        session[:<%= singular_table_name.underscore %>_id] = <%= singular_table_name.underscore %>.id
+        session.store(:<%= singular_table_name.underscore %>_id, <%= singular_table_name.underscore %>.id)
       
         redirect_to("/", { :notice => "Signed in successfully." })
       end
@@ -52,7 +52,7 @@ class <%= class_name.singularize %>AuthenticationController < ApplicationControl
     save_status = @<%= singular_table_name.underscore %>.save
 
     if save_status == true
-      session[:<%= singular_table_name.underscore %>_id] = @<%= singular_table_name.underscore %>.id
+      session.store(:<%= singular_table_name.underscore %>_id, @<%= singular_table_name.underscore %>.id)
    
       redirect_to("/", { :notice => "<%= singular_table_name.humanize %> account created successfully."})
     else
