@@ -3,7 +3,7 @@ class <%= class_name.singularize %>AuthenticationController < ApplicationControl
   # skip_before_action(:force_<%= singular_table_name.underscore %>_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] })
 
   def sign_in_form
-    render({ :template => "<%= singular_table_name.underscore %>_authentication/sign_in.html.erb" })
+    render({ :template => "<%= singular_table_name.underscore %>_authentication/sign_in" })
   end
 
   def create_cookie
@@ -33,7 +33,7 @@ class <%= class_name.singularize %>AuthenticationController < ApplicationControl
   end
 
   def sign_up_form
-    render({ :template => "<%= singular_table_name.underscore %>_authentication/sign_up.html.erb" })
+    render({ :template => "<%= singular_table_name.underscore %>_authentication/sign_up" })
   end
 
   def create
@@ -61,7 +61,7 @@ class <%= class_name.singularize %>AuthenticationController < ApplicationControl
   end
     
   def edit_profile_form
-    render({ :template => "<%= singular_table_name.underscore %>_authentication/edit_profile.html.erb" })
+    render({ :template => "<%= singular_table_name.underscore %>_authentication/edit_profile" })
   end
 
   def update
@@ -82,7 +82,7 @@ class <%= class_name.singularize %>AuthenticationController < ApplicationControl
 
       redirect_to("/", { :notice => "<%= singular_table_name.humanize %> account updated successfully."})
     else
-      render({ :template => "<%= singular_table_name.underscore %>_authentication/edit_profile_with_errors.html.erb" , :alert => @<%= singular_table_name%>.errors.full_messages.to_sentence })
+      render({ :template => "<%= singular_table_name.underscore %>_authentication/edit_profile_with_errors" , :alert => @<%= singular_table_name%>.errors.full_messages.to_sentence })
     end
   end
 
