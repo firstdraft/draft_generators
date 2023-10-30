@@ -33,14 +33,6 @@ module Draft
       gsub_file(path, code_to_replace, replace_with)
     end
 
-    def enable_scoped_views
-      path = "config/initializers/devise.rb"
-      uncomment_lines(path, /.*config.scoped_views = false/)
-      code_to_replace = "config.scoped_views = false"
-      replace_with = "config.scoped_views = true"
-      gsub_file(path, code_to_replace, replace_with)
-    end
-
     def generate_devise_model
       invoke "devise"
     end
