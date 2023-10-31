@@ -25,6 +25,14 @@ module Draft
       end
     end
 
+    def enable_get_sign_out
+      path = "config/initializers/devise.rb"
+      uncomment_lines(path, /.*config.sign_out_via = :delete/)
+      code_to_replace = "config.sign_out_via = :delete"
+      replace_with = "config.sign_out_via = :get"
+      gsub_file(path, code_to_replace, replace_with)
+    end
+
     def enable_scoped_views
       path = "config/initializers/devise.rb"
       uncomment_lines(path, /.*config.scoped_views = false/)
