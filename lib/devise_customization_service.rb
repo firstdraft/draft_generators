@@ -79,7 +79,7 @@ module DraftGenerators
     end
 
     def protect_from_forgery_code
-      "protect_from_forgery with: :exception"
+      "skip_forgery_protection"
     end
 
     def columns
