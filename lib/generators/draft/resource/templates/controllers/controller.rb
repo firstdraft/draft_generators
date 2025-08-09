@@ -62,7 +62,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% unless skip_validation_alerts? -%>
     if the_<%= singular_table_name.underscore %>.valid?
       the_<%= singular_table_name.underscore %>.save
-      redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}", { :notice => "<%= singular_table_name.humanize %> updated successfully."} )
+      redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}", { :notice => "<%= singular_table_name.humanize %> updated successfully." } )
     else
       redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}", { :alert => the_<%= singular_table_name.underscore %>.errors.full_messages.to_sentence })
     end
@@ -84,7 +84,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     the_<%= singular_table_name.underscore %>.destroy
 
 <% unless skip_validation_alerts? -%>
-    redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> deleted successfully."} )
+    redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> deleted successfully." } )
 <% else -%>
 <% unless skip_redirect? -%>
     redirect_to("/<%= plural_table_name.underscore %>")

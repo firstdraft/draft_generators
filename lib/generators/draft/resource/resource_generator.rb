@@ -72,16 +72,16 @@ module Draft
 
         # CREATE
         post("/insert_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create" })
-                
+
         # READ
         get("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index" })
-        
+
         get("/#{plural_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "show" })
-        
+
         # UPDATE
-        
+
         post("/modify_#{singular_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "update" })
-        
+
         # DELETE
         get("/delete_#{singular_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "destroy" })
 
