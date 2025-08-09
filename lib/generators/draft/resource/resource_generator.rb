@@ -32,13 +32,13 @@ module Draft
     end
 
     def create_root_folder
-      empty_directory File.join("app/views", "#{plural_table_name}")
+      empty_directory File.join("app/views", "#{singular_table_name}_templates")
     end
 
     def generate_view_files
       available_views.each do |view|
         filename = view_filename_with_extensions(view)
-        template filename, File.join("app/views", "#{plural_table_name}", File.basename(options[:new_form_name].presence || filename))
+        template filename, File.join("app/views", "#{singular_table_name}_templates", File.basename(options[:new_form_name].presence || filename))
       end
     end
 

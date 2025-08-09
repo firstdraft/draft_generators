@@ -1,75 +1,70 @@
-<div>
-  <div>
-    <h1>
-      <%= singular_table_name.humanize %> #<%%= @the_<%= singular_table_name %>.id %> details
-    </h1>
+<h1>
+  <%= singular_table_name.humanize %> #<%%= @the_<%= singular_table_name %>.id %> details
+</h1>
 
-    <div>
-      <div>
-        <a href="/<%= plural_table_name %>">
-          Go back
-        </a>
-      </div>
+<article>
+  <div>
+    <a href="/<%= plural_table_name %>">
+      Go back
+    </a>
+  </div>
 
 <% unless read_only? -%>
 <% if with_sentinels? -%>
       <!-- Delete link <%= singular_table_name %> start -->
 <% end -%>
-      <div>
-        <a href="/delete_<%= singular_table_name %>/<%%= @the_<%= singular_table_name %>.id %>">
-          Delete <%= singular_table_name.humanize.downcase %>
-        </a>
-      </div>
+  <div>
+    <a href="/delete_<%= singular_table_name %>/<%%= @the_<%= singular_table_name %>.id %>">
+      Delete <%= singular_table_name.humanize.downcase %>
+    </a>
+  </div>
 <% if with_sentinels? -%>
       <!-- Delete link <%= singular_table_name %> end -->
 <% end -%>
 <% end -%>
-    </div>
-
-    <dl>
+  <dl>
 <% attributes.each do |attribute| -%>
-      <dt>
-        <%= attribute.human_name %>
-      </dt>
+    <dt>
+      <%= attribute.human_name %>
+    </dt>
 <% if with_sentinels? -%>
       <!-- Display the_<%= attribute.column_name %> start -->
 <% end -%>
-      <dd>
-        <%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>
-      </dd>
+    <dd>
+      <%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>
+    </dd>
 <% if with_sentinels? -%>
       <!-- Display the_<%= attribute.column_name %> end -->
 <% end -%>
 
 <% end -%>
-      <dt>
-        Created at
-      </dt>
+    <dt>
+      Created at
+    </dt>
 <% if with_sentinels? -%>
       <!-- Display created_at start -->
 <% end -%>
-      <dd>
-        <%%= time_ago_in_words(@the_<%= singular_table_name %>.created_at) %> ago
-      </dd>
+    <dd>
+      <%%= time_ago_in_words(@the_<%= singular_table_name %>.created_at) %> ago
+    </dd>
 <% if with_sentinels? -%>
       <!-- Display created_at end -->
 <% end -%>
 
-      <dt>
-        Updated at
-      </dt>
+    <dt>
+      Updated at
+    </dt>
 <% if with_sentinels? -%>
       <!-- Display updated_at start -->
 <% end -%>
-      <dd>
-        <%%= time_ago_in_words(@the_<%= singular_table_name %>.updated_at) %> ago
-      </dd>
+    <dd>
+      <%%= time_ago_in_words(@the_<%= singular_table_name %>.updated_at) %> ago
+    </dd>
 <% if with_sentinels? -%>
       <!-- Display updated_at end -->
 <% end -%>
-    </dl>
-  </div>
-</div>
+  </dl>
+</article>
 
 <hr>
 
@@ -79,52 +74,52 @@
 <!-- Show Page Customization end -->
 <% end -%>
 
-<div>
-  <div>
+<article>
+  <header>
     <h2>
       Edit <%= singular_table_name.humanize.downcase %>
     </h2>
+  </header>
 
-    <form action="/modify_<%= singular_table_name %>/<%%= @the_<%= singular_table_name %>.id %>" <% unless skip_post? -%> method="post" <% end -%>>
+  <form action="/modify_<%= singular_table_name %>/<%%= @the_<%= singular_table_name %>.id %>" <% unless skip_post? -%> method="post" <% end -%>>
 <% attributes.each do |attribute| -%>
 <% if attribute.field_type == :check_box -%>
-      <div>
-        <input type="checkbox" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="1" <%%= "checked" if @the_<%= singular_table_name %>.<%= attribute.column_name %> %>>
+    <div>
+      <input type="checkbox" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="1" <%%= "checked" if @the_<%= singular_table_name %>.<%= attribute.column_name %> %>>
 
-        <label for="<%= attribute.column_name %>_box">
-            <%= attribute.column_name.humanize %>
-        </label>
-      </div>
+      <label for="<%= attribute.column_name %>_box">
+          <%= attribute.column_name.humanize %>
+      </label>
+    </div>
 
 <% else -%>
-      <div>
-        <label for="<%= attribute.column_name %>_box">
-          <%= attribute.column_name.humanize %>
-        </label>
+    <div>
+      <label for="<%= attribute.column_name %>_box">
+        <%= attribute.column_name.humanize %>
+      </label>
 
 <% if attribute.field_type == :text_area -%>
-        <textarea id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>"><%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
+      <textarea id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>"><%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
 <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :datetime -%>
-        <input type="datetime-local" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>"
+      <input type="datetime-local" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>"
          value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
 <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :date -%>
-        <input type="date" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
+      <input type="date" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
 <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :time -%>
-        <input type="time" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
+      <input type="time" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
 <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :integer -%>
-        <input type="number" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
+      <input type="number" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
 <% else -%>
-        <input type="text" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
+      <input type="text" id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
 <% end -%>
-      </div>
+    </div>
 
 <% end -%>
 <% end -%>
-      <button>
-        Update <%= singular_table_name.humanize.downcase %>
-      </button>
-    </form>
-  </div>
-</div>
+    <button type="submit">
+      Update <%= singular_table_name.humanize.downcase %>
+    </button>
+  </form>
+</article>
 
 <hr>
