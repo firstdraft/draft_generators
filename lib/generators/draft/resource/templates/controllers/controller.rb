@@ -4,7 +4,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 
     @list_of_<%= plural_table_name.underscore %> = matching_<%= plural_table_name.underscore %>.order({ :created_at => :desc })
 
-    render({ :template => "<%= plural_table_name.underscore %>/index" })
+    render({ :template => "<%= singular_table_name.underscore %>_templates/index" })
   end
 
   def show
@@ -14,7 +14,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 
     @the_<%= singular_table_name.underscore %> = matching_<%= plural_table_name.underscore.downcase %>.at(0)
 
-    render({ :template => "<%= plural_table_name.underscore %>/show" })
+    render({ :template => "<%= singular_table_name.underscore %>_templates/show" })
   end
 
   def create
@@ -62,7 +62,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% unless skip_validation_alerts? -%>
     if the_<%= singular_table_name.underscore %>.valid?
       the_<%= singular_table_name.underscore %>.save
-      redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}", { :notice => "<%= singular_table_name.humanize %> updated successfully."} )
+      redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}", { :notice => "<%= singular_table_name.humanize %> updated successfully." } )
     else
       redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}", { :alert => the_<%= singular_table_name.underscore %>.errors.full_messages.to_sentence })
     end
@@ -72,7 +72,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
 <% unless skip_redirect? -%>
     redirect_to("/<%= plural_table_name.underscore %>/#{the_<%= singular_table_name.underscore %>.id}")
 <% else -%>
-      render({ :template => "<%= plural_table_name.underscore %>/show" })
+      render({ :template => "<%= singular_table_name.underscore %>_templates/show" })
   <% end -%>
 <% end -%>
   end
@@ -84,7 +84,7 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     the_<%= singular_table_name.underscore %>.destroy
 
 <% unless skip_validation_alerts? -%>
-    redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> deleted successfully."} )
+    redirect_to("/<%= plural_table_name.underscore %>", { :notice => "<%= singular_table_name.humanize %> deleted successfully." } )
 <% else -%>
 <% unless skip_redirect? -%>
     redirect_to("/<%= plural_table_name.underscore %>")

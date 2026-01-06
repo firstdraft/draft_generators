@@ -32,13 +32,13 @@ module Draft
     end
 
     def create_root_folder
-      empty_directory File.join("app/views", "#{plural_table_name}")
+      empty_directory File.join("app/views", "#{singular_table_name}_templates")
     end
 
     def generate_view_files
       available_views.each do |view|
         filename = view_filename_with_extensions(view)
-        template filename, File.join("app/views", "#{plural_table_name}", File.basename(options[:new_form_name].presence || filename))
+        template filename, File.join("app/views", "#{singular_table_name}_templates", File.basename(options[:new_form_name].presence || filename))
       end
     end
 
@@ -72,16 +72,16 @@ module Draft
 
         # CREATE
         post("/insert_#{singular_table_name}", { :controller => "#{plural_table_name}", :action => "create" })
-                
+
         # READ
         get("/#{plural_table_name}", { :controller => "#{plural_table_name}", :action => "index" })
-        
+
         get("/#{plural_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "show" })
-        
+
         # UPDATE
-        
+
         post("/modify_#{singular_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "update" })
-        
+
         # DELETE
         get("/delete_#{singular_table_name}/:path_id", { :controller => "#{plural_table_name}", :action => "destroy" })
 
