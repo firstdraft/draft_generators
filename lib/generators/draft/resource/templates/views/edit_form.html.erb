@@ -18,21 +18,21 @@
 <% end -%>
 <% if attribute.field_type == :check_box -%>
   <div>
-    <input type="hidden" value="0" name="<%= attribute.column_name %>">
+    <input type="hidden" value="0" name="<%= attribute.column_name %>_param">
 <% if with_sentinels? -%>
     <!-- Input for <%= attribute.column_name %> start -->
 <% end -%>
-    <input id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" type="checkbox" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.column_name %> %>>
+    <input id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" type="checkbox" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.column_name %> %>>
 <% if with_sentinels? -%>
     <!-- Input for <%= attribute.column_name %> end -->
 <% end -%>
-    <label for="<%= attribute.column_name %>">
+    <label for="<%= attribute.column_name %>_field">
       <%= attribute.column_name.humanize %>
     </label>
   </div>
 <% else -%>
   <div>
-    <label for="<%= attribute.column_name %>">
+    <label for="<%= attribute.column_name %>_field">
       <%= attribute.column_name.humanize %>
     </label>
 
@@ -40,7 +40,7 @@
 <% if with_sentinels? -%>
     <!-- Input for <%= attribute.column_name %> start -->
 <% end -%>
-    <textarea id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
+    <textarea id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
 <% if with_sentinels? -%>
     <!-- Input for <%= attribute.column_name %> end -->
 <% end -%>
@@ -48,7 +48,7 @@
 <% if with_sentinels? -%>
     <!-- Input for <%= attribute.column_name %> start -->
 <% end -%>
-    <input type="text" id="<%= attribute.column_name %>" name="<%= attribute.column_name %>" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
+    <input type="text" id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" value="<%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>">
 <% if with_sentinels? -%>
     <!-- Input for <%= attribute.column_name %> end -->
 <% end -%>
