@@ -7,9 +7,9 @@ class <%= class_name.singularize %>AuthenticationController < ApplicationControl
   end
 
   def create_cookie
-    <%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :email => params.fetch("query_email") }).first
+    <%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :email => params.fetch("email_param") }).first
     
-    the_supplied_password = params.fetch("query_password")
+    the_supplied_password = params.fetch("password_param")
     
     if <%= singular_table_name.underscore %> != nil
       are_they_legit = <%= singular_table_name.underscore %>.authenticate(the_supplied_password)
@@ -39,13 +39,13 @@ class <%= class_name.singularize %>AuthenticationController < ApplicationControl
   def create
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 <% attributes.each do |attribute| -%>
-<% if attribute.field_type == :check_box -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>", false)
+<% if [:check_box, :checkbox].include?(attribute.field_type) -%>
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_param", false)
 <% elsif attribute.column_name != "password_digest" -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>")
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_param")
 <% else -%>
-    @<%= singular_table_name.underscore %>.password = params.fetch("query_password")
-    @<%= singular_table_name.underscore %>.password_confirmation = params.fetch("query_password_confirmation")
+    @<%= singular_table_name.underscore %>.password = params.fetch("password_param")
+    @<%= singular_table_name.underscore %>.password_confirmation = params.fetch("password_confirmation_param")
 <% end -%>
 <% end -%>
 
@@ -67,13 +67,13 @@ class <%= class_name.singularize %>AuthenticationController < ApplicationControl
   def update
     @<%= singular_table_name.underscore %> = @current_<%= singular_table_name.underscore %>
 <% attributes.each do |attribute| -%>
-<% if attribute.field_type == :check_box -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>", false)
+<% if [:check_box, :checkbox].include?(attribute.field_type) -%>
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_param", false)
 <% elsif attribute.column_name != "password_digest" -%>
-    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>")
+    @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_param")
 <% else -%>
-    @<%= singular_table_name.underscore %>.password = params.fetch("query_password")
-    @<%= singular_table_name.underscore %>.password_confirmation = params.fetch("query_password_confirmation")
+    @<%= singular_table_name.underscore %>.password = params.fetch("password_param")
+    @<%= singular_table_name.underscore %>.password_confirmation = params.fetch("password_confirmation_param")
 <% end -%>
 <% end -%>
     

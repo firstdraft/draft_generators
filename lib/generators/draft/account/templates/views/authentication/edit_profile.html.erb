@@ -8,26 +8,26 @@
 <% attributes.each do |attribute| -%>
 <% if attribute.column_name != "password_digest" -%>
       <div>
-        <label for="<%= attribute.column_name %>_box"><%= attribute.column_name.humanize %></label>
-<% if attribute.field_type == :text_area -%>
-        <textarea id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" rows="3"><%%= @current_<%= singular_table_name %>.<%= attribute.column_name %> %></textarea> 
-<% elsif attribute.field_type == :check_box -%>
-        <input id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" type="checkbox" value="1" <%%= "checked" if @current_<%= singular_table_name %>.<%= attribute.column_name %> %>>
+        <label for="<%= attribute.column_name %>_field"><%= attribute.column_name.humanize %></label>
+<% if [:text_area, :textarea].include?(attribute.field_type) -%>
+        <textarea id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" rows="3"><%%= @current_<%= singular_table_name %>.<%= attribute.column_name %> %></textarea> 
+<% elsif [:check_box, :checkbox].include?(attribute.field_type) -%>
+        <input id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" type="checkbox" value="1" <%%= "checked" if @current_<%= singular_table_name %>.<%= attribute.column_name %> %>>
 <% else -%>
-        <input id="<%= attribute.column_name %>_box" name="query_<%= attribute.column_name %>" value="<%%= @current_<%= singular_table_name.underscore %>.<%= attribute.column_name %> %>">
+        <input id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" value="<%%= @current_<%= singular_table_name.underscore %>.<%= attribute.column_name %> %>">
 <% end -%>
       </div>
 <% end -%>
 <% end -%>
 
       <div>
-        <label for="password_box">Password</label>
-        <input id="password_box" name="query_password" placeholder="Choose a password..." type="password">
+        <label for="password_field">Password</label>
+        <input id="password_field" name="password_param" placeholder="Choose a password..." type="password">
       </div>
     
       <div>
-        <label for="password_confirmation_box">Password Confirmation</label>
-        <input id="password_confirmation_box" name="query_password_confirmation" placeholder="Confirm your password..." type="password">
+        <label for="password_confirmation_field">Password Confirmation</label>
+        <input id="password_confirmation_field" name="password_confirmation_param" placeholder="Confirm your password..." type="password">
       </div>
 
       <button>

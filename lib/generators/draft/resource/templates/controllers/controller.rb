@@ -20,10 +20,10 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
   def create
     the_<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 <% attributes.each do |attribute| -%>
-<% if attribute.field_type == :check_box -%>
-    the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>", false)
+<% if [:check_box, :checkbox].include?(attribute.field_type) -%>
+    the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_param", false)
 <% else -%>
-    the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>")
+    the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_param")
 <% end -%>
 <% end -%>
 
@@ -52,10 +52,10 @@ class <%= plural_table_name.camelize %>Controller < ApplicationController
     the_<%= singular_table_name.underscore %> = <%= class_name.singularize %>.where({ :id => the_id }).at(0)
 
 <% attributes.each do |attribute| -%>
-<% if attribute.field_type == :check_box -%>
-    the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>", false)
+<% if [:check_box, :checkbox].include?(attribute.field_type) -%>
+    the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_param", false)
 <% else -%>
-    the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("query_<%= attribute.column_name %>")
+    the_<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_param")
 <% end -%>
 <% end -%>
 
