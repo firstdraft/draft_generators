@@ -9,9 +9,9 @@
 <% if attribute.column_name != "password_digest" -%>
       <div>
         <label for="<%= attribute.column_name %>_field"><%= attribute.column_name.humanize %></label>
-<% if attribute.field_type == :text_area -%>
+<% if [:text_area, :textarea].include?(attribute.field_type) -%>
         <textarea id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" rows="3"><%%= @current_<%= singular_table_name %>.<%= attribute.column_name %> %></textarea> 
-<% elsif attribute.field_type == :check_box -%>
+<% elsif [:check_box, :checkbox].include?(attribute.field_type) -%>
         <input id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" type="checkbox" value="1" <%%= "checked" if @current_<%= singular_table_name %>.<%= attribute.column_name %> %>>
 <% else -%>
         <input id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" value="<%%= @current_<%= singular_table_name.underscore %>.<%= attribute.column_name %> %>">

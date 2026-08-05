@@ -10,9 +10,9 @@
   <% if attribute.column_name != "password_digest" && attribute.column_name != "email" -%>     
   <div>
     <label for="<%= attribute.column_name %>_field"><%= attribute.column_name.humanize %></label>
-  <%- if attribute.field_type == :check_box -%>
+  <%- if [:check_box, :checkbox].include?(attribute.field_type) -%>
     <input id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" type="checkbox">
-  <%- elsif attribute.field_type == :text_area -%>
+  <%- elsif [:text_area, :textarea].include?(attribute.field_type) -%>
     <textarea id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" rows="3"></textarea>
   <%- else -%>      
     <input type="text" id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param">

@@ -199,8 +199,8 @@ feature "<%= plural_table_name.humanize.upcase %>" do
       click_on "Edit <%= singular_table_name.humanize.downcase %>"
 
 <% case attribute.field_type -%>
-<% when :check_box -%>
-<% when :text_area -%>
+<% when :check_box, :checkbox -%>
+<% when :text_area, :textarea -%>
       expect(page).to have_content(<%= singular_table_name %>_to_edit.<%= attribute.column_name %>)
 <% else -%>
       expect(page).to have_css("input[value='#{<%= singular_table_name %>_to_edit.<%= attribute.column_name %>}']")

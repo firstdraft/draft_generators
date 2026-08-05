@@ -83,7 +83,7 @@
 
   <form action="/modify_<%= singular_table_name %>/<%%= @the_<%= singular_table_name %>.id %>" <% unless skip_post? -%> method="post" <% end -%>>
 <% attributes.each do |attribute| -%>
-<% if attribute.field_type == :check_box -%>
+<% if [:check_box, :checkbox].include?(attribute.field_type) -%>
     <div>
       <input type="checkbox" id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" value="1" <%%= "checked" if @the_<%= singular_table_name %>.<%= attribute.column_name %> %>>
 
@@ -98,7 +98,7 @@
         <%= attribute.column_name.humanize %>
       </label>
 
-<% if attribute.field_type == :text_area -%>
+<% if [:text_area, :textarea].include?(attribute.field_type) -%>
       <textarea id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param"><%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
 <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :datetime -%>
       <input type="datetime-local" id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param"
@@ -107,7 +107,7 @@
       <input type="date" id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
 <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :time -%>
       <input type="time" id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
-<% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :integer -%>
+<% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :number -%>
       <input type="number" id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
 <% else -%>
       <input type="text" id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">

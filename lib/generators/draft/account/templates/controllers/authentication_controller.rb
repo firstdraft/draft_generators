@@ -39,7 +39,7 @@ class <%= class_name.singularize %>AuthenticationController < ApplicationControl
   def create
     @<%= singular_table_name.underscore %> = <%= class_name.singularize %>.new
 <% attributes.each do |attribute| -%>
-<% if attribute.field_type == :check_box -%>
+<% if [:check_box, :checkbox].include?(attribute.field_type) -%>
     @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_param", false)
 <% elsif attribute.column_name != "password_digest" -%>
     @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_param")
@@ -67,7 +67,7 @@ class <%= class_name.singularize %>AuthenticationController < ApplicationControl
   def update
     @<%= singular_table_name.underscore %> = @current_<%= singular_table_name.underscore %>
 <% attributes.each do |attribute| -%>
-<% if attribute.field_type == :check_box -%>
+<% if [:check_box, :checkbox].include?(attribute.field_type) -%>
     @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_param", false)
 <% elsif attribute.column_name != "password_digest" -%>
     @<%= singular_table_name.underscore %>.<%= attribute.column_name %> = params.fetch("<%= attribute.column_name %>_param")

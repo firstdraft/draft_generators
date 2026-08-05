@@ -29,7 +29,7 @@
 <% if with_sentinels? -%>
   <!-- Label and input for <%= attribute.column_name %> start -->
 <% end -%>
-<% if attribute.field_type == :check_box -%>
+<% if [:check_box, :checkbox].include?(attribute.field_type) -%>
   <div>
     <input type="hidden" value="0" name="<%= attribute.column_name %>_param">
 <% if with_sentinels? -%>
@@ -49,7 +49,7 @@
       <%= attribute.column_name.humanize %>
     </label>
 
-<% if attribute.field_type == :text_area -%>
+<% if [:text_area, :textarea].include?(attribute.field_type) -%>
 <% if with_sentinels? -%>
     <!-- Input for <%= attribute.column_name %> start -->
 <% end -%>
