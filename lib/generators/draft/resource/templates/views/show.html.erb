@@ -1,40 +1,30 @@
-<h1>
-  <%= singular_table_name.humanize %> #<%%= @the_<%= singular_table_name %>.id %> details
-</h1>
+<nav aria-label="breadcrumb">
+  <ul>
+    <li><a href="/<%= plural_table_name %>"><%= plural_table_name.humanize %></a></li>
+    <li><%= singular_table_name.humanize %> #<%%= @the_<%= singular_table_name %>.id %></li>
+  </ul>
+</nav>
 
-<article>
-  <div>
-    <a href="/<%= plural_table_name %>">
-      Go back
-    </a>
-  </div>
+<div class="card">
+  <header>
+    <h1>
+      <%= singular_table_name.humanize %> #<%%= @the_<%= singular_table_name %>.id %> details
+    </h1>
+  </header>
 
-<% unless read_only? -%>
-<% if with_sentinels? -%>
-      <!-- Delete link <%= singular_table_name %> start -->
-<% end -%>
-  <div>
-    <a href="/delete_<%= singular_table_name %>/<%%= @the_<%= singular_table_name %>.id %>">
-      Delete <%= singular_table_name.humanize.downcase %>
-    </a>
-  </div>
-<% if with_sentinels? -%>
-      <!-- Delete link <%= singular_table_name %> end -->
-<% end -%>
-<% end -%>
   <dl>
 <% attributes.each do |attribute| -%>
     <dt>
       <%= attribute.human_name %>
     </dt>
 <% if with_sentinels? -%>
-      <!-- Display the_<%= attribute.column_name %> start -->
+    <!-- Display the_<%= attribute.column_name %> start -->
 <% end -%>
     <dd>
       <%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>
     </dd>
 <% if with_sentinels? -%>
-      <!-- Display the_<%= attribute.column_name %> end -->
+    <!-- Display the_<%= attribute.column_name %> end -->
 <% end -%>
 
 <% end -%>
@@ -42,53 +32,66 @@
       Created at
     </dt>
 <% if with_sentinels? -%>
-      <!-- Display created_at start -->
+    <!-- Display created_at start -->
 <% end -%>
     <dd>
       <%%= time_ago_in_words(@the_<%= singular_table_name %>.created_at) %> ago
     </dd>
 <% if with_sentinels? -%>
-      <!-- Display created_at end -->
+    <!-- Display created_at end -->
 <% end -%>
 
     <dt>
       Updated at
     </dt>
 <% if with_sentinels? -%>
-      <!-- Display updated_at start -->
+    <!-- Display updated_at start -->
 <% end -%>
     <dd>
       <%%= time_ago_in_words(@the_<%= singular_table_name %>.updated_at) %> ago
     </dd>
 <% if with_sentinels? -%>
-      <!-- Display updated_at end -->
+    <!-- Display updated_at end -->
 <% end -%>
   </dl>
-</article>
-
-<hr>
+<% unless read_only? -%>
 
 <% if with_sentinels? -%>
+  <!-- Delete link <%= singular_table_name %> start -->
+<% end -%>
+  <p>
+    <a href="/delete_<%= singular_table_name %>/<%%= @the_<%= singular_table_name %>.id %>" class="btn btn-outline">
+      Delete <%= singular_table_name.humanize.downcase %>
+    </a>
+  </p>
+<% if with_sentinels? -%>
+  <!-- Delete link <%= singular_table_name %> end -->
+<% end -%>
+<% end -%>
+</div>
+<% if with_sentinels? -%>
+
 <!-- Show Page Customization starts -->
 
 <!-- Show Page Customization end -->
 <% end -%>
+<% unless read_only? -%>
 
-<article>
+<div class="card">
   <header>
     <h2>
       Edit <%= singular_table_name.humanize.downcase %>
     </h2>
   </header>
 
-  <form action="/modify_<%= singular_table_name %>/<%%= @the_<%= singular_table_name %>.id %>" <% unless skip_post? -%> method="post" <% end -%>>
+  <form action="/modify_<%= singular_table_name %>/<%%= @the_<%= singular_table_name %>.id %>"<% unless skip_post? -%> method="post"<% end -%>>
 <% attributes.each do |attribute| -%>
 <% if [:check_box, :checkbox].include?(attribute.field_type) -%>
     <div>
       <input type="checkbox" id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" value="1" <%%= "checked" if @the_<%= singular_table_name %>.<%= attribute.column_name %> %>>
 
       <label for="<%= attribute.column_name %>_field">
-          <%= attribute.column_name.humanize %>
+        <%= attribute.column_name.humanize %>
       </label>
     </div>
 
@@ -101,8 +104,7 @@
 <% if [:text_area, :textarea].include?(attribute.field_type) -%>
       <textarea id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param"><%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %></textarea>
 <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :datetime -%>
-      <input type="datetime-local" id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param"
-         value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
+      <input type="datetime-local" id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
 <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :date -%>
       <input type="date" id="<%= attribute.column_name %>_field" name="<%= attribute.column_name %>_param" value="<%%= @the_<%= singular_table_name %>.<%= attribute.column_name %> %>">
 <% elsif attribute.field_type.to_s.gsub(/_.*/, "").to_sym == :time -%>
@@ -120,6 +122,5 @@
       Update <%= singular_table_name.humanize.downcase %>
     </button>
   </form>
-</article>
-
-<hr>
+</div>
+<% end -%>

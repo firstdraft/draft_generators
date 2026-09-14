@@ -1,10 +1,22 @@
-<h1>
-  List of all <%= plural_table_name.humanize.downcase %>
-</h1>
+<div class="card">
+  <header>
+    <h1>
+      List of all <%= plural_table_name.humanize.downcase %>
+    </h1>
+  </header>
 
-<hr>
+  <ul>
+    <%% @list_of_<%= plural_table_name %>.each do |<%= singular_table_name.indefinitize.gsub(" ", "_") %>| %>
+      <li>
+        <a href="/<%= plural_table_name.underscore %>/<%%= <%= singular_table_name.indefinitize.gsub(" ", "_") %>.id %>">
+          <%= singular_table_name.humanize %> #<%%= <%= singular_table_name.indefinitize.gsub(" ", "_") %>.id %>
+        </a>
+      </li>
+    <%% end %>
+  </ul>
+</div>
 
-<article>
+<div class="card">
   <header>
     <h2>
       Add a new <%= singular_table_name.humanize.downcase %>
@@ -47,20 +59,4 @@
       Create <%= singular_table_name.humanize.downcase %>
     </button>
   </form>
-</article>
-
-<hr>
-
-<article>
-  <ul>
-    <%% @list_of_<%= plural_table_name %>.each do |<%= singular_table_name.indefinitize.gsub(" ", "_") %>| %>
-      <li>
-        <a href="/<%= plural_table_name.underscore %>/<%%= <%= singular_table_name.indefinitize.gsub(" ", "_") %>.id %>">
-          <%= singular_table_name.humanize %> #<%%= <%= singular_table_name.indefinitize.gsub(" ", "_") %>.id %>
-        </a>
-      </li>
-    <%% end %>
-  </ul>
-</article>
-
-<hr>
+</div>
