@@ -1,13 +1,26 @@
-<h1>You deleted <%= singular_table_name.humanize.downcase %> #<%%= @<%= singular_table_name %>.id %>!</h1>
+<nav aria-label="breadcrumb">
+  <ul>
+    <li><a href="/<%= plural_table_name.underscore %>"><%= plural_table_name.humanize %></a></li>
+    <li><%= singular_table_name.humanize %> #<%%= @<%= singular_table_name %>.id %></li>
+  </ul>
+</nav>
 
-<p>
-  There are now <%%= @remaining_count %> <%= plural_table_name.humanize.downcase %>.
-</p>
+<div class="card">
+  <header>
+    <h1>
+      You deleted <%= singular_table_name.humanize.downcase %> #<%%= @<%= singular_table_name %>.id %>!
+    </h1>
+  </header>
 
-<p>
-  <a href="/<%= @plural_table_name.underscore %>">
-    Click here
-  </a>
+  <p>
+    There are now <%%= @remaining_count %> <%= plural_table_name.humanize.downcase %>.
+  </p>
 
-  to go back.
-</p>
+  <p>
+    <a href="/<%= plural_table_name.underscore %>">
+      Click here
+    </a>
+
+    to go back.
+  </p>
+</div>

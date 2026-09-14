@@ -1,9 +1,22 @@
-<h1>You updated <%= singular_table_name.humanize.downcase %> #<%%= @<%= singular_table_name %>.id %>!</h1>
+<nav aria-label="breadcrumb">
+  <ul>
+    <li><a href="/<%= plural_table_name.underscore %>"><%= plural_table_name.humanize %></a></li>
+    <li><%= singular_table_name.humanize %> #<%%= @<%= singular_table_name %>.id %></li>
+  </ul>
+</nav>
 
-<p>
-  <a href="/<%= plural_table_name.underscore %>/<%%= @<%= singular_table_name.underscore %>.id %>">
-    Click here
-  </a>
+<div class="card">
+  <header>
+    <h1>
+      You updated <%= singular_table_name.humanize.downcase %> #<%%= @<%= singular_table_name %>.id %>!
+    </h1>
+  </header>
 
-  to check it out.
-</p>
+  <p>
+    <a href="/<%= plural_table_name.underscore %>/<%%= @<%= singular_table_name.underscore %>.id %>">
+      Click here
+    </a>
+
+    to check it out.
+  </p>
+</div>
